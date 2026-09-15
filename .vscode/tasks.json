@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Orbinex: automatisch publiceren",
+      "type": "process",
+      "command": "git",
+      "args": [
+        "-c",
+        "alias.orbinex-autosync=!bash .vscode/orbinex-auto-sync.sh",
+        "orbinex-autosync"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen",
+        "instanceLimit": 1
+      },
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": false
+      }
+    }
+  ]
+}

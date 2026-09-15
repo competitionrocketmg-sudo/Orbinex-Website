@@ -1,0 +1,2 @@
+# Keep the Bash task runnable when Git for Windows checks out the project.
+.vscode/*.sh text eol=lf
