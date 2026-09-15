@@ -4,9 +4,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orbinex Security — Protecting What Connects Us</title>
+
+<!-- SEO -->
+<title>Website Security Checks for Businesses | Orbinex Security Belgium</title>
+
+<meta name="description"
+      content="Orbinex Security provides clear website security checks for businesses in Belgium, with practical findings, risk priorities and understandable reporting.">
+
+<meta name="robots" content="index, follow">
+
+<!-- PRIMARY DOMAIN -->
+<link rel="canonical" href="https://orbinexsecurity.com/">
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="favicon.png">
+
+<!-- SOCIAL / GOOGLE PREVIEW -->
+<meta property="og:title"
+      content="Orbinex Security | Website Security Checks">
+
+<meta property="og:description"
+      content="Clear website security checks, practical findings and understandable reporting for businesses.">
+
+<meta property="og:type" content="website">
+
+<meta property="og:url" content="https://orbinexsecurity.com/">
+
+<meta property="og:site_name" content="Orbinex Security">
+
+<meta name="twitter:card" content="summary">
+
+<meta name="theme-color" content="#060D1F">
+
+<!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet">
+
 <style>
 /* ─── RESET & BASE ─────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,43 +57,39 @@ body {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* ─── CSS VARIABLES ─────────────────────────────────────────────── */ {--bg-deep:     #060D1F;--bg-card:     #0A1628;--bg-elevated: #0F1E38;--cyan:        #00C2FF;--violet:      #7B2FFF;--cyan-dim:    rgba(0,194,255,0.12);--violet-dim:  rgba(123,47,255,0.12);--text-primary:#E8F4FD;--text-muted:  #6B8BAE;--text-subtle: #3A5070;--border:      rgba(0,194,255,0.1);--border-glow: rgba(0,194,255,0.3);--radius-sm:   6px;--radius-md:   12px;--radius-lg:   20px;--transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);}
+/* ─── CSS VARIABLES ─────────────────────────────────────────────── */ :root {--bg-deep:     #060D1F;--bg-card:     #0A1628;--bg-elevated: #0F1E38;--cyan:        #00C2FF;--violet:      #7B2FFF;--cyan-dim:    rgba(0,194,255,0.12);--violet-dim:  rgba(123,47,255,0.12);--text-primary:#E8F4FD;--text-muted:  #6B8BAE;--text-subtle: #3A5070;--border:      rgba(0,194,255,0.1);--border-glow: rgba(0,194,255,0.3);--radius-sm:   6px;--radius-md:   12px;--radius-lg:   20px;--transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);}
 
-/* ─── TYPOGRAPHY ─────────────────────────────────────────────────── */h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; letter-spacing: -0.02em; }h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 700; }h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; }h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }p  { font-size: 1.0625rem; line-height: 1.75; color: var(--text-muted); }a  { color: var(--cyan); text-decoration: none; transition: opacity var(--transition); }a { opacity: 0.8; }
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────────── */h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; letter-spacing: -0.02em; }h1 { font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 700; }h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; }h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }p  { font-size: 1.0625rem; line-height: 1.75; color: var(--text-muted); }a  { color: var(--cyan); text-decoration: none; transition: opacity var(--transition); }a:hover { opacity: 0.8; }
 
 /* ─── LAYOUT UTILITIES ──────────────────────────────────────────── */.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }.section    { padding: 100px 0; position: relative; }.section--alt { background: var(--bg-card); }.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }@media (max-width: 900px) {.grid-2 { grid-template-columns: 1fr; }.grid-3 { grid-template-columns: 1fr 1fr; }}@media (max-width: 600px) {.grid-3, .grid-4 { grid-template-columns: 1fr; }.section { padding: 70px 0; }}
 
 /* ─── EYEBROW LABEL ─────────────────────────────────────────────── */.eyebrow {display: inline-flex;align-items: center;gap: 8px;font-family: 'Space Grotesk', sans-serif;font-size: 0.75rem;font-weight: 600;letter-spacing: 0.15em;text-transform: uppercase;color: var(--cyan);margin-bottom: 18px;}.eyebrow::before {content: '';display: inline-block;width: 20px;height: 1.5px;background: var(--cyan);flex-shrink: 0;}
 
-/* ─── BUTTONS ───────────────────────────────────────────────────── */.btn {display: inline-flex;align-items: center;gap: 8px;padding: 13px 28px;border-radius: var(--radius-sm);font-family: 'Space Grotesk', sans-serif;font-size: 0.9375rem;font-weight: 600;cursor: pointer;transition: all var(--transition);border: none;}.btn-primary {background: linear-gradient(135deg, var(--cyan), #0088cc);color: #fff;box-shadow: 0 0 28px rgba(0,194,255,0.25);}.btn-primary {transform: translateY(-2px);box-shadow: 0 0 40px rgba(0,194,255,0.45);opacity: 1;}.btn-outline {background: transparent;color: var(--text-primary);border: 1.5px solid var(--border-glow);}.btn-outline {background: var(--cyan-dim);border-color: var(--cyan);color: var(--cyan);opacity: 1;}.btn-violet {background: linear-gradient(135deg, var(--violet), #5518cc);color: #fff;box-shadow: 0 0 28px rgba(123,47,255,0.25);}.btn-violet {transform: translateY(-2px);box-shadow: 0 0 40px rgba(123,47,255,0.45);opacity: 1;}
+/* ─── BUTTONS ───────────────────────────────────────────────────── */.btn {display: inline-flex;align-items: center;gap: 8px;padding: 13px 28px;border-radius: var(--radius-sm);font-family: 'Space Grotesk', sans-serif;font-size: 0.9375rem;font-weight: 600;cursor: pointer;transition: all var(--transition);border: none;}.btn-primary {background: linear-gradient(135deg, var(--cyan), #0088cc);color: #fff;box-shadow: 0 0 28px rgba(0,194,255,0.25);}.btn-primary:hover {transform: translateY(-2px);box-shadow: 0 0 40px rgba(0,194,255,0.45);opacity: 1;}.btn-outline {background: transparent;color: var(--text-primary);border: 1.5px solid var(--border-glow);}.btn-outline:hover {background: var(--cyan-dim);border-color: var(--cyan);color: var(--cyan);opacity: 1;}.btn-violet {background: linear-gradient(135deg, var(--violet), #5518cc);color: #fff;box-shadow: 0 0 28px rgba(123,47,255,0.25);}.btn-violet:hover {transform: translateY(-2px);box-shadow: 0 0 40px rgba(123,47,255,0.45);opacity: 1;}
 
-/* ─── CARD ──────────────────────────────────────────────────────── */.card {background: var(--bg-card);border: 1px solid var(--border);border-radius: var(--radius-lg);padding: 36px 32px;transition: all var(--transition);position: relative;overflow: hidden;}.card::before {content: '';position: absolute;top: 0; left: 0; right: 0;height: 2px;background: linear-gradient(90deg, transparent, var(--cyan), transparent);opacity: 0;transition: opacity var(--transition);}.card {border-color: var(--border-glow);transform: translateY(-4px);box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,194,255,0.06);}.card:hover::before { opacity: 1; }
+/* ─── CARD ──────────────────────────────────────────────────────── */.card {background: var(--bg-card);border: 1px solid var(--border);border-radius: var(--radius-lg);padding: 36px 32px;transition: all var(--transition);position: relative;overflow: hidden;}.card::before {content: '';position: absolute;top: 0; left: 0; right: 0;height: 2px;background: linear-gradient(90deg, transparent, var(--cyan), transparent);opacity: 0;transition: opacity var(--transition);}.card:hover {border-color: var(--border-glow);transform: translateY(-4px);box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,194,255,0.06);}.card:hover::before { opacity: 1; }
 
-/* ─── NAV ───────────────────────────────────────────────────────── */.nav {position: fixed;top: 0; left: 0; right: 0;z-index: 100;padding: 18px 0;transition: all 0.4s ease;}.nav.scrolled {background: rgba(6,13,31,0.92);backdrop-filter: blur(16px);-webkit-backdrop-filter: blur(16px);border-bottom: 1px solid var(--border);padding: 12px 0;}.nav-inner {display: flex;align-items: center;justify-content: space-between;}.nav-logo {display: flex;align-items: center;gap: 12px;font-family: 'Space Grotesk', sans-serif;font-weight: 700;font-size: 1.25rem;color: var(--text-primary);text-decoration: none;}.nav-logo svg { flex-shrink: 0; }.nav-links {display: flex;align-items: center;gap: 36px;list-style: none;}.nav-links a {font-family: 'Space Grotesk', sans-serif;font-size: 0.9rem;font-weight: 500;color: var(--text-muted);transition: color var(--transition);}.nav-links a { color: var(--text-primary); opacity: 1; }.nav-cta { margin-left: 12px; }.hamburger {display: none;flex-direction: column;gap: 5px;cursor: pointer;padding: 4px;background: none;border: none;}.hamburger span {display: block;width: 24px;height: 2px;background: var(--text-primary);transition: all var(--transition);}.mobile-menu {display: none;position: fixed;inset: 0;background: var(--bg-deep);z-index: 99;padding: 100px 24px 40px;flex-direction: column;gap: 32px;}.mobile-menu.open { display: flex; }.mobile-menu a {font-family: 'Space Grotesk', sans-serif;font-size: 1.5rem;font-weight: 600;color: var(--text-primary);}@media (max-width: 768px) {.hamburger { display: flex; }.nav-links, .nav-cta { display: none; }}
+/* ─── NAV ───────────────────────────────────────────────────────── */.nav {position: fixed;top: 0; left: 0; right: 0;z-index: 100;padding: 18px 0;transition: all 0.4s ease;}.nav.scrolled {background: rgba(6,13,31,0.92);backdrop-filter: blur(16px);-webkit-backdrop-filter: blur(16px);border-bottom: 1px solid var(--border);padding: 12px 0;}.nav-inner {display: flex;align-items: center;justify-content: space-between;}.nav-logo {display: flex;align-items: center;gap: 12px;font-family: 'Space Grotesk', sans-serif;font-weight: 700;font-size: 1.25rem;color: var(--text-primary);text-decoration: none;}.nav-logo svg { flex-shrink: 0; }.nav-links {display: flex;align-items: center;gap: 36px;list-style: none;}.nav-links a {font-family: 'Space Grotesk', sans-serif;font-size: 0.9rem;font-weight: 500;color: var(--text-muted);transition: color var(--transition);}.nav-links a:hover { color: var(--text-primary); opacity: 1; }.nav-cta { margin-left: 12px; }.hamburger {display: none;flex-direction: column;gap: 5px;cursor: pointer;padding: 4px;background: none;border: none;}.hamburger span {display: block;width: 24px;height: 2px;background: var(--text-primary);transition: all var(--transition);}.mobile-menu {display: none;position: fixed;inset: 0;background: var(--bg-deep);z-index: 99;padding: 100px 24px 40px;flex-direction: column;gap: 32px;}.mobile-menu.open { display: flex; }.mobile-menu a {font-family: 'Space Grotesk', sans-serif;font-size: 1.5rem;font-weight: 600;color: var(--text-primary);}@media (max-width: 768px) {.hamburger { display: flex; }.nav-links, .nav-cta { display: none; }}
 
 /* ─── HERO ──────────────────────────────────────────────────────── */.hero {min-height: 100vh;display: flex;align-items: center;position: relative;padding: 120px 0 80px;overflow: hidden;}.hero-bg {position: absolute;inset: 0;background:radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,194,255,0.055) 0%, transparent 60%),radial-gradient(ellipse 40% 40% at 30% 70%, rgba(123,47,255,0.06) 0%, transparent 50%);}.hex-grid {position: absolute;inset: 0;opacity: 0.045;background-image: url("data/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpath d='M28 66L0 50V18L28 2l28 16v32z' fill='none' stroke='%2300C2FF' stroke-width='0.8'/%3E%3Cpath d='M28 100L0 84V52l28-16 28 16v32z' fill='none' stroke='%2300C2FF' stroke-width='0.8'/%3E%3Cpath d='M84 66L56 50V18L84 2l28 16v32z' fill='none' stroke='%2300C2FF' stroke-width='0.8'/%3E%3C/svg%3E");background-size: 56px 100px;}.hero-content { position: relative; z-index: 2; }.hero-content .grid-2 { gap: 64px; }.hero-tag {display: inline-flex;align-items: center;gap: 8px;padding: 6px 14px;border-radius: 100px;border: 1px solid rgba(0,194,255,0.2);background: rgba(0,194,255,0.06);font-size: 0.8125rem;font-weight: 500;color: var(--cyan);margin-bottom: 24px;}.pulse-dot {width: 7px;height: 7px;border-radius: 50%;background: var(--cyan);animation: pulse-dot 2s ease-in-out infinite;}@keyframes pulse-dot {0%, 100% { opacity: 1; transform: scale(1); }50% { opacity: 0.5; transform: scale(0.75); }}.hero h1 { margin-bottom: 24px; }.hero h1 span.accent { color: var(--cyan); }.hero h1 span.accent-v { color: var(--violet); }.hero p.lead {font-size: 1.125rem;line-height: 1.8;color: var(--text-muted);max-width: 480px;margin-bottom: 36px;}.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }.hero-stats {display: flex;gap: 36px;margin-top: 52px;padding-top: 36px;border-top: 1px solid var(--border);}.stat-item .stat-num {font-family: 'Space Grotesk', sans-serif;font-size: 1.75rem;font-weight: 700;color: var(--text-primary);line-height: 1;margin-bottom: 4px;}.stat-item .stat-num span { color: var(--cyan); }.stat-item .stat-label { font-size: 0.8125rem; color: var(--text-subtle); font-weight: 500; }
 
-/* ─── ORB GRAPHIC ───────────────────────────────────────────────── */.orb-wrap {position: relative;display: flex;justify-content: center;align-items: center;}.orb-svg-container {width: min(480px, 90vw);height: min(480px, 90vw);position: relative;}.orb-glow {position: absolute;inset: 15%;border-radius: 50%;background: radial-gradient(ellipse, rgba(0,194,255,0.18) 0%, rgba(123,47,255,0.12) 40%, transparent 70%);filter: blur(30px);animation: orb-breathe 4s ease-in-out infinite;}@keyframes orb-breathe {0%, 100% { opacity: 0.7; transform: scale(1); }50% { opacity: 1; transform: scale(1.08); }}.orb-ring-1 { animation: spin-cw  18s linear infinite; transform-origin: center; }.orb-ring-2 { animation: spin-ccw 24s linear infinite; transform-origin: center; }.orb-ring-3 { animation: spin-cw  32s linear infinite; transform-origin: center; }.orb-core   { animation: orb-breathe 4s ease-in-out infinite; transform-origin: center; }@keyframes spin-cw  { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }@keyframes spin-ccw { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }.orb-nodes .node { animation: node-pulse 3s ease-in-out infinite; }.orb-nodes .node(2) { animation-delay: 0.8s; }.orb-nodes .node(3) { animation-delay: 1.6s; }.orb-nodes .node(4) { animation-delay: 2.4s; }@keyframes node-pulse {0%, 100% { opacity: 0.5; }50% { opacity: 1; }}.orb-scan { animation: scan-pulse 2.8s ease-in-out infinite; }@keyframes scan-pulse {0%, 100% { opacity: 0.2; }50% { opacity: 0.7; }}
+/* ─── ORB GRAPHIC ───────────────────────────────────────────────── */.orb-wrap {position: relative;display: flex;justify-content: center;align-items: center;}.orb-svg-container {width: min(480px, 90vw);height: min(480px, 90vw);position: relative;}.orb-glow {position: absolute;inset: 15%;border-radius: 50%;background: radial-gradient(ellipse, rgba(0,194,255,0.18) 0%, rgba(123,47,255,0.12) 40%, transparent 70%);filter: blur(30px);animation: orb-breathe 4s ease-in-out infinite;}@keyframes orb-breathe {0%, 100% { opacity: 0.7; transform: scale(1); }50% { opacity: 1; transform: scale(1.08); }}.orb-ring-1 { animation: spin-cw  18s linear infinite; transform-origin: center; }.orb-ring-2 { animation: spin-ccw 24s linear infinite; transform-origin: center; }.orb-ring-3 { animation: spin-cw  32s linear infinite; transform-origin: center; }.orb-core   { animation: orb-breathe 4s ease-in-out infinite; transform-origin: center; }@keyframes spin-cw  { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }@keyframes spin-ccw { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }.orb-nodes .node { animation: node-pulse 3s ease-in-out infinite; }.orb-nodes .node:nth-child(2) { animation-delay: 0.8s; }.orb-nodes .node:nth-child(3) { animation-delay: 1.6s; }.orb-nodes .node:nth-child(4) { animation-delay: 2.4s; }@keyframes node-pulse {0%, 100% { opacity: 0.5; }50% { opacity: 1; }}.orb-scan { animation: scan-pulse 2.8s ease-in-out infinite; }@keyframes scan-pulse {0%, 100% { opacity: 0.2; }50% { opacity: 0.7; }}
 
+/* ─── SERVICES ───────────────────────────────────────────────────── */.service-card { position: relative; }.service-icon {width: 52px;height: 52px;border-radius: 12px;display: flex;align-items: center;justify-content: center;margin-bottom: 20px;background: var(--cyan-dim);border: 1px solid rgba(0,194,255,0.15);}.service-icon.violet { background: var(--violet-dim); border-color: rgba(123,47,255,0.2); }.service-card h3 { margin-bottom: 10px; font-size: 1.125rem; }.service-card p { font-size: 0.9375rem; margin-bottom: 20px; }.service-link {display: inline-flex;align-items: center;gap: 6px;font-family: 'Space Grotesk', sans-serif;font-size: 0.875rem;font-weight: 600;color: var(--cyan);transition: gap var(--transition);}.service-link:hover { gap: 10px; opacity: 1; }.service-card .card-number {position: absolute;top: 24px;right: 24px;font-family: 'Space Grotesk', sans-serif;font-size: 2.5rem;font-weight: 700;color: var(--border);line-height: 1;user-select: none;}
 
+/* ─── WHY ORBINEX ────────────────────────────────────────────────── */.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }@media (max-width: 600px) { .why-grid { grid-template-columns: 1fr; } }.why-item {display: flex;gap: 16px;padding: 24px;border-radius: var(--radius-md);border: 1px solid var(--border);background: var(--bg-elevated);transition: border-color var(--transition);}.why-item:hover { border-color: var(--border-glow); }.why-icon {width: 40px;height: 40px;flex-shrink: 0;border-radius: 8px;background: var(--cyan-dim);display: flex;align-items: center;justify-content: center;}.why-text h4 {font-size: 0.9375rem;font-weight: 600;margin-bottom: 4px;font-family: 'Space Grotesk', sans-serif;}.why-text p { font-size: 0.875rem; line-height: 1.6; }.why-visual {position: relative;border-radius: var(--radius-lg);background: var(--bg-elevated);border: 1px solid var(--border);overflow: hidden;min-height: 420px;display: flex;align-items: center;justify-content: center;}.threat-dashboard {padding: 32px;width: 100%;}.dash-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 24px;}.dash-title { font-family: 'Space Grotesk', sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }.status-ok { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #00E5A0; font-weight: 600; }.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00E5A0; animation: pulse-dot 1.5s ease-in-out infinite; }.dash-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }.dash-stat {padding: 14px;border-radius: 8px;background: var(--bg-card);border: 1px solid var(--border);}.dash-stat .val { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }.dash-stat .val.cyan { color: var(--cyan); }.dash-stat .val.green { color: #00E5A0; }.dash-stat .val.amber { color: #FFB547; }.dash-stat .lbl { font-size: 0.7rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }.threat-list { display: flex; flex-direction: column; gap: 8px; }.threat-row {display: flex;align-items: center;gap: 12px;padding: 10px 12px;border-radius: 7px;background: var(--bg-card);border: 1px solid var(--border);font-size: 0.8125rem;}.threat-badge {padding: 2px 8px;border-radius: 4px;font-size: 0.7rem;font-weight: 700;letter-spacing: 0.05em;flex-shrink: 0;}.threat-badge.blocked { background: rgba(0,229,160,0.12); color: #00E5A0; }.threat-badge.analyzed { background: rgba(0,194,255,0.12); color: var(--cyan); }.threat-badge.patched { background: rgba(123,47,255,0.15); color: #A86FFF; }.threat-name { color: var(--text-muted); flex: 1; }.threat-time { color: var(--text-subtle); font-size: 0.725rem; }
 
-/* ─── SERVICES ───────────────────────────────────────────────────── */.service-card { position: relative; }.service-icon {width: 52px;height: 52px;border-radius: 12px;display: flex;align-items: center;justify-content: center;margin-bottom: 20px;background: var(--cyan-dim);border: 1px solid rgba(0,194,255,0.15);}.service-icon.violet { background: var(--violet-dim); border-color: rgba(123,47,255,0.2); }.service-card h3 { margin-bottom: 10px; font-size: 1.125rem; }.service-card p { font-size: 0.9375rem; margin-bottom: 20px; }.service-link {display: inline-flex;align-items: center;gap: 6px;font-family: 'Space Grotesk', sans-serif;font-size: 0.875rem;font-weight: 600;color: var(--cyan);transition: gap var(--transition);}.service-link { gap: 10px; opacity: 1; }.service-card .card-number {position: absolute;top: 24px;right: 24px;font-family: 'Space Grotesk', sans-serif;font-size: 2.5rem;font-weight: 700;color: var(--border);line-height: 1;user-select: none;}
-
-/* ─── WHY ORBINEX ────────────────────────────────────────────────── */.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }@media (max-width: 600px) { .why-grid { grid-template-columns: 1fr; } }.why-item {display: flex;gap: 16px;padding: 24px;border-radius: var(--radius-md);border: 1px solid var(--border);background: var(--bg-elevated);transition: border-color var(--transition);}.why-item { border-color: var(--border-glow); }.why-icon {width: 40px;height: 40px;flex-shrink: 0;border-radius: 8px;background: var(--cyan-dim);display: flex;align-items: center;justify-content: center;}.why-text h4 {font-size: 0.9375rem;font-weight: 600;margin-bottom: 4px;font-family: 'Space Grotesk', sans-serif;}.why-text p { font-size: 0.875rem; line-height: 1.6; }.why-visual {position: relative;border-radius: var(--radius-lg);background: var(--bg-elevated);border: 1px solid var(--border);overflow: hidden;min-height: 420px;display: flex;align-items: center;justify-content: center;}.threat-dashboard {padding: 32px;width: 100%;}.dash-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 24px;}.dash-title { font-family: 'Space Grotesk', sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }.status-ok { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #00E5A0; font-weight: 600; }.status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00E5A0; animation: pulse-dot 1.5s ease-in-out infinite; }.dash-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }.dash-stat {padding: 14px;border-radius: 8px;background: var(--bg-card);border: 1px solid var(--border);}.dash-stat .val { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }.dash-stat .val.cyan { color: var(--cyan); }.dash-stat .val.green { color: #00E5A0; }.dash-stat .val.amber { color: #FFB547; }.dash-stat .lbl { font-size: 0.7rem; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }.threat-list { display: flex; flex-direction: column; gap: 8px; }.threat-row {display: flex;align-items: center;gap: 12px;padding: 10px 12px;border-radius: 7px;background: var(--bg-card);border: 1px solid var(--border);font-size: 0.8125rem;}.threat-badge {padding: 2px 8px;border-radius: 4px;font-size: 0.7rem;font-weight: 700;letter-spacing: 0.05em;flex-shrink: 0;}.threat-badge.blocked { background: rgba(0,229,160,0.12); color: #00E5A0; }.threat-badge.analyzed { background: rgba(0,194,255,0.12); color: var(--cyan); }.threat-badge.patched { background: rgba(123,47,255,0.15); color: #A86FFF; }.threat-name { color: var(--text-muted); flex: 1; }.threat-time { color: var(--text-subtle); font-size: 0.725rem; }
-
-/* ─── PROCESS ────────────────────────────────────────────────────── */.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }.process-steps::before {content: '';position: absolute;top: 32px;left: 12.5%;right: 12.5%;height: 1px;background: linear-gradient(90deg, transparent, var(--border-glow), var(--border-glow), transparent);}.process-step { padding: 0 20px; text-align: center; }.step-num {width: 64px;height: 64px;border-radius: 50%;background: var(--bg-elevated);border: 1px solid var(--border-glow);display: flex;align-items: center;justify-content: center;margin: 0 auto 20px;font-family: 'Space Grotesk', sans-serif;font-size: 1.25rem;font-weight: 700;color: var(--cyan);position: relative;z-index: 1;transition: all var(--transition);}.process-step .step-num {background: var(--cyan);color: var(--bg-deep);box-shadow: 0 0 30px rgba(0,194,255,0.4);}.process-step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }.process-step p { font-size: 0.875rem; }@media (max-width: 768px) {.process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }.process-steps::before { display: none; }}@media (max-width: 480px) {.process-steps { grid-template-columns: 1fr; }}
+/* ─── PROCESS ────────────────────────────────────────────────────── */.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }.process-steps::before {content: '';position: absolute;top: 32px;left: 12.5%;right: 12.5%;height: 1px;background: linear-gradient(90deg, transparent, var(--border-glow), var(--border-glow), transparent);}.process-step { padding: 0 20px; text-align: center; }.step-num {width: 64px;height: 64px;border-radius: 50%;background: var(--bg-elevated);border: 1px solid var(--border-glow);display: flex;align-items: center;justify-content: center;margin: 0 auto 20px;font-family: 'Space Grotesk', sans-serif;font-size: 1.25rem;font-weight: 700;color: var(--cyan);position: relative;z-index: 1;transition: all var(--transition);}.process-step:hover .step-num {background: var(--cyan);color: var(--bg-deep);box-shadow: 0 0 30px rgba(0,194,255,0.4);}.process-step h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; font-family: 'Space Grotesk', sans-serif; }.process-step p { font-size: 0.875rem; }@media (max-width: 768px) {.process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }.process-steps::before { display: none; }}@media (max-width: 480px) {.process-steps { grid-template-columns: 1fr; }}
 
 /* ─── ABOUT ─────────────────────────────────────────────────────── */.about-text h2 { margin-bottom: 20px; }.about-text p { margin-bottom: 16px; }.value-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }.pill {padding: 7px 16px;border-radius: 100px;border: 1px solid var(--border-glow);font-family: 'Space Grotesk', sans-serif;font-size: 0.825rem;font-weight: 600;color: var(--cyan);background: var(--cyan-dim);}.pill.violet { color: #A86FFF; background: var(--violet-dim); border-color: rgba(123,47,255,0.25); }.about-visual {position: relative;display: flex;justify-content: center;}.about-img-frame {position: relative;border-radius: var(--radius-lg);overflow: hidden;width: 100%;max-width: 440px;aspect-ratio: 4/5;background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);border: 1px solid var(--border);display: flex;align-items: center;justify-content: center;}.about-shield {position: relative;z-index: 2;}.about-frame-corner {position: absolute;width: 24px;height: 24px;border-color: var(--cyan);border-style: solid;opacity: 0.4;}.about-frame-corner.tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }.about-frame-corner.tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }.about-frame-corner.bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }.about-frame-corner.br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
 
-/* ─── LEADERSHIP ─────────────────────────────────────────────────── */.leadership { padding: 100px 0; }.ceo-card {display: grid;grid-template-columns: 280px 1fr;gap: 64px;align-items: center;background: var(--bg-card);border: 1px solid var(--border);border-radius: var(--radius-lg);padding: 52px 56px;position: relative;overflow: hidden;}.ceo-card::after {content: '';position: absolute;top: 0; right: 0;width: 300px;height: 300px;background: radial-gradient(ellipse, rgba(123,47,255,0.1), transparent 70%);pointer-events: none;}.ceo-photo {width: 220px;height: 220px;border-radius: 50%;background: linear-gradient(135deg, var(--bg-elevated), var(--bg-deep));border: 2px solid var(--border-glow);display: flex;align-items: center;justify-content: center;margin: 0 auto;position: relative;overflow: hidden;}.ceo-photo::before {content: '';position: absolute;inset: 0;background: linear-gradient(135deg, rgba(0,194,255,0.07), rgba(123,47,255,0.07));}.ceo-initials {font-family: 'Space Grotesk', sans-serif;font-size: 3rem;font-weight: 700;color: var(--cyan);letter-spacing: -0.02em;}.ceo-info .ceo-name {font-family: 'Space Grotesk', sans-serif;font-size: 2rem;font-weight: 700;margin-bottom: 4px;}.ceo-title {font-family: 'Space Grotesk', sans-serif;font-size: 0.875rem;font-weight: 600;color: var(--cyan);letter-spacing: 0.1em;text-transform: uppercase;margin-bottom: 20px;}.ceo-bio p { margin-bottom: 14px; max-width: 580px; }.ceo-social { display: flex; gap: 12px; margin-top: 24px; }.social-pill {display: inline-flex;align-items: center;gap: 7px;padding: 8px 16px;border-radius: 100px;border: 1px solid var(--border);font-size: 0.8125rem;font-weight: 500;color: var(--text-muted);transition: all var(--transition);font-family: 'Space Grotesk', sans-serif;}.social-pill {border-color: var(--border-glow);color: var(--cyan);background: var(--cyan-dim);opacity: 1;}@media (max-width: 768px) {.ceo-card { grid-template-columns: 1fr; gap: 32px; padding: 36px 28px; text-align: center; }.ceo-social { justify-content: center; }}
-
-
+/* ─── LEADERSHIP ─────────────────────────────────────────────────── */.leadership { padding: 100px 0; }.ceo-card {display: grid;grid-template-columns: 280px 1fr;gap: 64px;align-items: center;background: var(--bg-card);border: 1px solid var(--border);border-radius: var(--radius-lg);padding: 52px 56px;position: relative;overflow: hidden;}.ceo-card::after {content: '';position: absolute;top: 0; right: 0;width: 300px;height: 300px;background: radial-gradient(ellipse, rgba(123,47,255,0.1), transparent 70%);pointer-events: none;}.ceo-photo {width: 220px;height: 220px;border-radius: 50%;background: linear-gradient(135deg, var(--bg-elevated), var(--bg-deep));border: 2px solid var(--border-glow);display: flex;align-items: center;justify-content: center;margin: 0 auto;position: relative;overflow: hidden;}.ceo-photo::before {content: '';position: absolute;inset: 0;background: linear-gradient(135deg, rgba(0,194,255,0.07), rgba(123,47,255,0.07));}.ceo-initials {font-family: 'Space Grotesk', sans-serif;font-size: 3rem;font-weight: 700;color: var(--cyan);letter-spacing: -0.02em;}.ceo-info .ceo-name {font-family: 'Space Grotesk', sans-serif;font-size: 2rem;font-weight: 700;margin-bottom: 4px;}.ceo-title {font-family: 'Space Grotesk', sans-serif;font-size: 0.875rem;font-weight: 600;color: var(--cyan);letter-spacing: 0.1em;text-transform: uppercase;margin-bottom: 20px;}.ceo-bio p { margin-bottom: 14px; max-width: 580px; }.ceo-social { display: flex; gap: 12px; margin-top: 24px; }.social-pill {display: inline-flex;align-items: center;gap: 7px;padding: 8px 16px;border-radius: 100px;border: 1px solid var(--border);font-size: 0.8125rem;font-weight: 500;color: var(--text-muted);transition: all var(--transition);font-family: 'Space Grotesk', sans-serif;}.social-pill:hover {border-color: var(--border-glow);color: var(--cyan);background: var(--cyan-dim);opacity: 1;}@media (max-width: 768px) {.ceo-card { grid-template-columns: 1fr; gap: 32px; padding: 36px 28px; text-align: center; }.ceo-social { justify-content: center; }}
 
 /* ─── CTA BAND ───────────────────────────────────────────────────── */.cta-band {background: linear-gradient(135deg, var(--bg-elevated) 0%, rgba(10,22,40,0.9) 100%);border: 1px solid var(--border);border-radius: var(--radius-lg);padding: 72px 64px;text-align: center;position: relative;overflow: hidden;margin: 80px 0;}.cta-band::before {content: '';position: absolute;inset: 0;background:radial-gradient(ellipse 60% 70% at 20% 50%, rgba(0,194,255,0.06), transparent),radial-gradient(ellipse 50% 60% at 80% 50%, rgba(123,47,255,0.06), transparent);}.cta-band h2 { margin-bottom: 14px; position: relative; }.cta-band p { max-width: 500px; margin: 0 auto 32px; position: relative; }.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }@media (max-width: 600px) { .cta-band { padding: 48px 24px; } }
 
-/* ─── CONTACT ────────────────────────────────────────────────────── */.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }.contact-info h2 { margin-bottom: 16px; }.contact-info p { margin-bottom: 32px; }.contact-methods { display: flex; flex-direction: column; gap: 16px; }.contact-method {display: flex;align-items: center;gap: 16px;padding: 18px 20px;border-radius: var(--radius-md);border: 1px solid var(--border);background: var(--bg-elevated);transition: border-color var(--transition);}.contact-method { border-color: var(--border-glow); }.contact-method-icon {width: 42px;height: 42px;border-radius: 9px;background: var(--cyan-dim);border: 1px solid rgba(0,194,255,0.15);display: flex;align-items: center;justify-content: center;flex-shrink: 0;}.contact-method .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); font-weight: 600; margin-bottom: 3px; }.contact-method .value { font-family: 'Space Grotesk', sans-serif; font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); }.contact-form { display: flex; flex-direction: column; gap: 16px; }.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }.field { display: flex; flex-direction: column; gap: 7px; }.field label { font-family: 'Space Grotesk', sans-serif; font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); }.field input, .field textarea, .field select {background: var(--bg-elevated);border: 1px solid var(--border);border-radius: var(--radius-sm);padding: 12px 16px;color: var(--text-primary);font-family: 'Inter', sans-serif;font-size: 0.9375rem;transition: border-color var(--transition), box-shadow var(--transition);outline: none;resize: vertical;}.field input, .field textarea, .field select {border-color: var(--cyan);box-shadow: 0 0 0 3px rgba(0,194,255,0.1);}.field textarea { min-height: 120px; }.field select { appearance: none; cursor: pointer; }.field input::placeholder, .field textarea::placeholder { color: var(--text-subtle); }.form-submit { align-self: flex-start; width: 100%; }.form-success {display: none;padding: 18px;border-radius: var(--radius-md);background: rgba(0,229,160,0.08);border: 1px solid rgba(0,229,160,0.2);color: #00E5A0;font-family: 'Space Grotesk', sans-serif;font-weight: 500;text-align: center;}
+/* ─── CONTACT ────────────────────────────────────────────────────── */.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }.contact-info h2 { margin-bottom: 16px; }.contact-info p { margin-bottom: 32px; }.contact-methods { display: flex; flex-direction: column; gap: 16px; }.contact-method {display: flex;align-items: center;gap: 16px;padding: 18px 20px;border-radius: var(--radius-md);border: 1px solid var(--border);background: var(--bg-elevated);transition: border-color var(--transition);}.contact-method:hover { border-color: var(--border-glow); }.contact-method-icon {width: 42px;height: 42px;border-radius: 9px;background: var(--cyan-dim);border: 1px solid rgba(0,194,255,0.15);display: flex;align-items: center;justify-content: center;flex-shrink: 0;}.contact-method .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); font-weight: 600; margin-bottom: 3px; }.contact-method .value { font-family: 'Space Grotesk', sans-serif; font-size: 0.9375rem; font-weight: 500; color: var(--text-primary); }.contact-form { display: flex; flex-direction: column; gap: 16px; }.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }.field { display: flex; flex-direction: column; gap: 7px; }.field label { font-family: 'Space Grotesk', sans-serif; font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); }.field input, .field textarea, .field select {background: var(--bg-elevated);border: 1px solid var(--border);border-radius: var(--radius-sm);padding: 12px 16px;color: var(--text-primary);font-family: 'Inter', sans-serif;font-size: 0.9375rem;transition: border-color var(--transition), box-shadow var(--transition);outline: none;resize: vertical;}.field input:focus, .field textarea:focus, .field select:focus {border-color: var(--cyan);box-shadow: 0 0 0 3px rgba(0,194,255,0.1);}.field textarea { min-height: 120px; }.field select { appearance: none; cursor: pointer; }.field input::placeholder, .field textarea::placeholder { color: var(--text-subtle); }.form-submit { align-self: flex-start; width: 100%; }.form-success {display: none;padding: 18px;border-radius: var(--radius-md);background: rgba(0,229,160,0.08);border: 1px solid rgba(0,229,160,0.2);color: #00E5A0;font-family: 'Space Grotesk', sans-serif;font-weight: 500;text-align: center;}
 
-/* ─── FOOTER ─────────────────────────────────────────────────────── */footer {background: var(--bg-card);border-top: 1px solid var(--border);padding: 64px 0 32px;}.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }.footer-brand .tagline { font-size: 0.875rem; color: var(--text-subtle); max-width: 240px; line-height: 1.65; margin-top: 14px; margin-bottom: 0; }.footer-col h4 {font-family: 'Space Grotesk', sans-serif;font-size: 0.8125rem;font-weight: 600;letter-spacing: 0.1em;text-transform: uppercase;color: var(--text-muted);margin-bottom: 18px;}.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }.footer-links a { font-size: 0.9rem; color: var(--text-subtle); transition: color var(--transition); }.footer-links a { color: var(--text-primary); opacity: 1; }.footer-bottom {padding-top: 28px;border-top: 1px solid var(--border);display: flex;justify-content: space-between;align-items: center;gap: 16px;flex-wrap: wrap;}.footer-bottom p { font-size: 0.8125rem; color: var(--text-subtle); margin: 0; }.social-links { display: flex; gap: 12px; }.social-link {width: 36px;height: 36px;border-radius: 8px;border: 1px solid var(--border);display: flex;align-items: center;justify-content: center;color: var(--text-subtle);transition: all var(--transition);}.social-link { border-color: var(--border-glow); color: var(--cyan); background: var(--cyan-dim); opacity: 1; }
+/* ─── FOOTER ─────────────────────────────────────────────────────── */footer {background: var(--bg-card);border-top: 1px solid var(--border);padding: 64px 0 32px;}.footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }.footer-brand .tagline { font-size: 0.875rem; color: var(--text-subtle); max-width: 240px; line-height: 1.65; margin-top: 14px; margin-bottom: 0; }.footer-col h4 {font-family: 'Space Grotesk', sans-serif;font-size: 0.8125rem;font-weight: 600;letter-spacing: 0.1em;text-transform: uppercase;color: var(--text-muted);margin-bottom: 18px;}.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }.footer-links a { font-size: 0.9rem; color: var(--text-subtle); transition: color var(--transition); }.footer-links a:hover { color: var(--text-primary); opacity: 1; }.footer-bottom {padding-top: 28px;border-top: 1px solid var(--border);display: flex;justify-content: space-between;align-items: center;gap: 16px;flex-wrap: wrap;}.footer-bottom p { font-size: 0.8125rem; color: var(--text-subtle); margin: 0; }.social-links { display: flex; gap: 12px; }.social-link {width: 36px;height: 36px;border-radius: 8px;border: 1px solid var(--border);display: flex;align-items: center;justify-content: center;color: var(--text-subtle);transition: all var(--transition);}.social-link:hover { border-color: var(--border-glow); color: var(--cyan); background: var(--cyan-dim); opacity: 1; }
 
 /* ─── SECTION DIVIDER ────────────────────────────────────────────── */.divider {height: 1px;background: linear-gradient(90deg, transparent, var(--border), transparent);margin: 0;}
 
@@ -72,6 +103,7 @@ body {
 
 </head>
 <body>
+<!-- LAUNCH NOTE: replace the personal Gmail address with a dedicated Orbinex business email when available. -->
 
 <!-- ═══ NAVIGATION ══════════════════════════════════════════════════ -->
 
@@ -103,7 +135,7 @@ body {
         <li><a href="#leadership">Leadership</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:0.875rem;">Get Protected</a>
+      <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:0.875rem;">Request a Security Check</a>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -119,7 +151,7 @@ body {
   <a href="#about" class="mobile-link">About</a>
   <a href="#leadership" class="mobile-link">Leadership</a>
   <a href="#contact" class="mobile-link">Contact</a>
-  <a href="#contact" class="btn btn-primary" style="width:fit-content;margin-top:8px;">Get Protected →</a>
+  <a href="#contact" class="btn btn-primary" style="width:fit-content;margin-top:8px;">Request a Security Check →</a>
 </div>
 
 <!-- ═══ HERO ═════════════════════════════════════════════════════════ -->
@@ -200,11 +232,7 @@ body {
         <!-- Network nodes -->
         <g class="orb-nodes">
           <!-- node N -->
-          <class name="node">
-            <circle cx="240" cy="30"  r="7" fill="#7B2FFF" class="node"/>
-            <line x1="240" y1="37" x2="240" y2="110" stroke="#7B2FFF" stroke-width="1" opacity="0.4"/>
-          </class>
-          <circle cx="240" cy="30"  r="7" fill="#7B2FFF" opacity="0.9"/>
+          <circle cx="240" cy="30" r="7" fill="#7B2FFF" opacity="0.9" class="node"/>
           <line x1="240" y1="37" x2="240" y2="110" stroke="#7B2FFF" stroke-width="1" opacity="0.35"/>
 
           <circle cx="445" cy="140" r="6" fill="#00C2FF" opacity="0.9"/>
@@ -245,9 +273,7 @@ body {
 </div>
 
   </div>
-</section>
-
-
+<\/section>
 
 <!-- ═══ SERVICES ═════════════════════════════════════════════════════ -->
 
@@ -313,11 +339,9 @@ body {
 </div>
 
   </div>
-</section>
+<\/section>
 
-<div class="divider"></div>
-
-<!-- ═══ WHY ORBINEX ══════════════════════════════════════════════════ -->
+<div class="divider"><\/div>
 
 <section class="section" id="why">
   <div class="container">
@@ -325,8 +349,8 @@ body {
       <div>
         <div class="section-header reveal">
           <div class="eyebrow">Why Orbinex</div>
-          <h2>Security That Works as Hard as You Do</h2>
-          <p>We don't sell off-the-shelf solutions. Every engagement is built around your unique environment, risk profile, and business goals.</p>
+          <h2>Clear Website Security Checks</h2>
+          <p>Orbinex focuses on a defined service: reviewing a website from the outside, documenting relevant findings, and explaining what should be looked at first.</p>
         </div>
         <div class="why-grid reveal">
           <div class="why-item">
@@ -334,8 +358,8 @@ body {
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div class="why-text">
-              <h4>Rapid Response</h4>
-              <p>When threats emerge, minutes matter. Our team responds within hours, not days.</p>
+              <h4>Clear Scope</h4>
+              <p>You know what is being checked, what is outside the scope, and what the result means.</p>
             </div>
           </div>
           <div class="why-item">
@@ -343,8 +367,8 @@ body {
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#00C2FF" stroke-width="1.8"/><path d="M8 12l2.5 2.5L16 9" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/></svg>
             </div>
             <div class="why-text">
-              <h4>Proven Frameworks</h4>
-              <p>Aligned with NIST, ISO 27001, and CIS Controls for industry-recognized security.</p>
+              <h4>Security Best Practices</h4>
+              <p>Checks are guided by widely used cybersecurity practices and practical risk reduction.</p>
             </div>
           </div>
           <div class="why-item">
@@ -352,8 +376,8 @@ body {
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#00C2FF" stroke-width="1.8"/></svg>
             </div>
             <div class="why-text">
-              <h4>Proactive Defense</h4>
-              <p>We hunt threats before they hunt you — not just react after breaches occur.</p>
+              <h4>Practical Findings</h4>
+              <p>Findings are explained in plain language so you can understand the risk and next step.</p>
             </div>
           </div>
           <div class="why-item">
@@ -361,8 +385,8 @@ body {
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#00C2FF" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/></svg>
             </div>
             <div class="why-text">
-              <h4>Dedicated Experts</h4>
-              <p>A committed team that knows your infrastructure and speaks your language.</p>
+              <h4>Direct Communication</h4>
+              <p>You deal directly with the person performing the check, without layers of sales or support staff.</p>
             </div>
           </div>
         </div>
@@ -370,48 +394,48 @@ body {
       <div class="why-visual reveal reveal-delay-2">
         <div class="threat-dashboard">
           <div class="dash-header">
-            <span class="dash-title">Orbinex Threat Center</span>
-            <span class="status-ok"><span class="status-dot"></span>All Systems Protected</span>
+            <span class="dash-title">Orbinex Check Overview</span>
+            <span class="status-ok"><span class="status-dot"></span>Assessment View</span>
           </div>
           <div class="dash-stat-row">
             <div class="dash-stat">
-              <div class="val cyan">Active</div>
-              <div class="lbl">Monitoring</div>
+              <div class="val cyan">External</div>
+              <div class="lbl">Viewpoint</div>
             </div>
             <div class="dash-stat">
-              <div class="val green">Ready</div>
-              <div class="lbl">To Deploy</div>
+              <div class="val green">Clear</div>
+              <div class="lbl">Reporting</div>
             </div>
             <div class="dash-stat">
-              <div class="val amber">Live</div>
-              <div class="lbl">Threat Feed</div>
+              <div class="val amber">Risk</div>
+              <div class="lbl">Priorities</div>
             </div>
           </div>
           <div class="threat-list">
             <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">SQL Injection — Auth endpoint</span>
-              <span class="threat-time">2m ago</span>
+              <span class="threat-badge analyzed">REVIEW</span>
+              <span class="threat-name">Publicly exposed login surface</span>
+              <span class="threat-time">example</span>
             </div>
             <div class="threat-row">
-              <span class="threat-badge analyzed">ANALYZED</span>
-              <span class="threat-name">Port scan — 192.168.4.x</span>
-              <span class="threat-time">7m ago</span>
+              <span class="threat-badge analyzed">CHECK</span>
+              <span class="threat-name">Website security headers</span>
+              <span class="threat-time">example</span>
             </div>
             <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">Brute force — SSH service</span>
-              <span class="threat-time">11m ago</span>
+              <span class="threat-badge analyzed">CHECK</span>
+              <span class="threat-name">TLS / HTTPS configuration</span>
+              <span class="threat-time">example</span>
             </div>
             <div class="threat-row">
-              <span class="threat-badge patched">PATCHED</span>
-              <span class="threat-name">CVE-2024-3400 — SSL lib</span>
-              <span class="threat-time">1h ago</span>
+              <span class="threat-badge patched">REVIEW</span>
+              <span class="threat-name">Visible software versions</span>
+              <span class="threat-time">example</span>
             </div>
             <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">Phishing domain — spoofed URL</span>
-              <span class="threat-time">2h ago</span>
+              <span class="threat-badge analyzed">REPORT</span>
+              <span class="threat-name">Prioritised next steps</span>
+              <span class="threat-time">example</span>
             </div>
           </div>
         </div>
@@ -428,29 +452,29 @@ body {
   <div class="container">
     <div class="section-header center reveal">
       <div class="eyebrow">How it works</div>
-      <h2>From First Contact to Full Protection</h2>
-      <p>A proven engagement model designed to get you protected efficiently and thoroughly.</p>
+      <h2>From First Contact to Clear Findings</h2>
+      <p>A simple process focused on understanding the website, checking its external security posture, and reporting what matters.</p>
     </div>
     <div class="process-steps">
       <div class="process-step reveal reveal-delay-1">
         <div class="step-num">1</div>
-        <h4>Discovery Call</h4>
-        <p>We start by understanding your business, infrastructure, and current security posture — no assumptions, just listening.</p>
+        <h4>Scope</h4>
+        <p>We define the website, what may be tested, and any boundaries before the check begins.</p>
       </div>
       <div class="process-step reveal reveal-delay-2">
         <div class="step-num">2</div>
-        <h4>Risk Assessment</h4>
-        <p>A thorough evaluation of your environment identifies vulnerabilities, exposures, and critical assets to prioritize.</p>
+        <h4>External Check</h4>
+        <p>The website is reviewed from an external perspective using appropriate security tools and manual verification.</p>
       </div>
       <div class="process-step reveal reveal-delay-3">
         <div class="step-num">3</div>
-        <h4>Security Design</h4>
-        <p>We craft a tailored security architecture with layered defenses aligned to your operations and budget.</p>
+        <h4>Review Findings</h4>
+        <p>Potential issues are reviewed and organised by relevance and priority instead of being dumped into a raw scanner output.</p>
       </div>
       <div class="process-step reveal reveal-delay-4">
         <div class="step-num">4</div>
-        <h4>Deploy & Monitor</h4>
-        <p>Continuous monitoring and quarterly reviews ensure your defenses evolve as the threat landscape changes.</p>
+        <h4>Report & Next Steps</h4>
+        <p>You receive a clear report explaining the findings, their priority, and practical next steps.</p>
       </div>
     </div>
   </div>
@@ -465,10 +489,10 @@ body {
     <div class="grid-2" style="gap:72px;">
       <div class="about-text reveal">
         <div class="eyebrow">About Orbinex Security</div>
-        <h2>Built to Protect the <span class="text-gradient">Connected World</span></h2>
-        <p>Orbinex Security was founded on a straightforward conviction: that every business, regardless of size, deserves enterprise-grade cybersecurity. We saw too many organizations left exposed — not from negligence, but from a lack of accessible, expert guidance.</p>
-        <p>Our name tells that story. <strong style="color:var(--text-primary);">Orb</strong> represents the digital world — the cloud, the systems, the infrastructure that modern business depends on. <strong style="color:var(--text-primary);">Nex</strong> stands for nexus: connection, network, the invisible threads that bind it all together. Orbinex Security is here to protect those connections.</p>
-        <p>Headquartered in Belgium, we serve clients across Europe and beyond — bringing deep technical expertise, a human-centered approach, and an unwavering commitment to long-term security.</p>
+        <h2>Built Around <span class="text-gradient">Clear Security</span></h2>
+        <p>Orbinex Security is being built around a straightforward idea: smaller businesses should be able to understand the security of their website without needing to decode a wall of technical jargon.</p>
+        <p>The name reflects that idea. <strong style="color:var(--text-primary);">Orb</strong> represents the digital world — the cloud, the systems, the infrastructure that modern business depends on. <strong style="color:var(--text-primary);">Nex</strong> stands for nexus: connection, network, the invisible threads that bind it all together. Orbinex Security is here to protect those connections.</p>
+        <p>Based in Belgium, Orbinex is focused on practical website security checks, transparent scope, and clear reporting as the project grows.</p>
         <div class="value-pills">
           <span class="pill">Trust</span>
           <span class="pill">Protection</span>
@@ -525,33 +549,23 @@ body {
         </div>
       </div>
       <div class="ceo-info">
-        <div class="ceo-title">Chief Executive Officer</div>
+        <div class="ceo-title">Founder</div>
         <div class="ceo-name">Ferre Van Eyken</div>
         <div class="ceo-bio">
-          <p>Ferre Van Eyken is the founder and CEO of Orbinex Security — and at 16, he's only getting started. His journey into tech began through his stepdad, who introduced him to the world of IT and software development. Ferre started where many do: learning HTML, then moving into .NET, gradually building a foundation in how software and systems are made.</p>
-          <p>That curiosity about how things are built naturally led to a bigger question — how are they broken? That question pulled him into cybersecurity, and it stuck. Ferre is the first to say he's still learning, still growing, and has a long road ahead. But he also knows he has the drive, the mindset, and the potential to go far in this field.</p>
-          <p>Orbinex Security is the first real step — a vision for what he wants to build, starting now, and growing with every lesson learned along the way.</p>
+          <p>Ferre Van Eyken is the founder of Orbinex Security. His interest in technology grew from learning how software and systems are built, which gradually developed into a deeper focus on cybersecurity.</p>
+          <p>That curiosity led to hands-on learning around web security, security tooling, and the process of turning technical findings into understandable information. Orbinex is part of that long-term learning and building process.</p>
+          <p>The goal is to grow Orbinex responsibly: keep the scope honest, keep improving the technical process, and make security findings easier for businesses to act on.</p>
         </div>
         <div class="ceo-social">
-          <a href="mailto:ferrevaneyken@gmail.com" class="social-pill">
+          <a href="mailto:orbinex.cybersecurity@gmail.com" class="social-pill">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
             Email Ferre
-          </a>
-          <a href="tel:+320476067193" class="social-pill">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" stroke="currentColor" stroke-width="1.8"/></svg>
-            +32 476 06 71 93
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="social-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
-            LinkedIn
           </a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
 
 <div class="divider"></div>
 
@@ -561,11 +575,11 @@ body {
   <div class="container">
     <div class="cta-band reveal">
       <div class="eyebrow" style="justify-content:center;">Start Today</div>
-      <h2>Is Your Business Truly Secure?</h2>
-      <p>Most organizations don't discover vulnerabilities until it's too late. Let Orbinex find them first — with a no-obligation security assessment.</p>
+      <h2>Want a Clearer View of Your Website Security?</h2>
+      <p>A focused website security check can help surface issues that are easy to miss and turn them into clear priorities.</p>
       <div class="cta-actions">
-        <a href="#contact" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">Book a Free Consultation →</a>
-        <a href="#services" class="btn btn-outline" style="font-size:1rem;padding:14px 32px;">View Our Services</a>
+        <a href="#contact" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">Request a Website Security Check →</a>
+        <a href="#services" class="btn btn-outline" style="font-size:1rem;padding:14px 32px;">See What I Check</a>
       </div>
     </div>
   </div>
@@ -580,42 +594,24 @@ body {
     <div class="contact-grid">
       <div class="reveal">
         <div class="eyebrow">Get in Touch</div>
-        <h2>Let's Secure Your Business Together</h2>
-        <p>Whether you're looking for a full security overhaul, a focused audit, or simply want to understand your current risk — we're here. No sales pitch. Just an honest conversation about your security.</p>
+        <h2>Tell Me About Your Website</h2>
+        <p>If you want a clearer view of your website security, send the website address and a short explanation of what you want checked. The scope can be agreed before any testing begins.</p>
         <div class="contact-methods">
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#00C2FF" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="#00C2FF" stroke-width="1.8"/></svg>
-            </div>
-            <div>
-              <div class="label">Email</div>
-              <a href="mailto:ferrevaneyken@gmail.com" class="value">ferrevaneyken@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" stroke="#00C2FF" stroke-width="1.8"/></svg>
-            </div>
-            <div>
-              <div class="label">Phone</div>
-              <a href="tel:+320476067193" class="value">+32 476 06 71 93</a>
-            </div>
-          </div>
           <div class="contact-method">
             <div class="contact-method-icon">
               <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#00C2FF" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="#00C2FF" stroke-width="1.8"/></svg>
             </div>
             <div>
               <div class="label">Location</div>
-              <div class="value">Belgium — Serving Clients Europe-Wide</div>
+              <div class="value">Belgium</div>
             </div>
           </div>
         </div>
       </div>
       <div class="reveal reveal-delay-2">
         <div class="card" style="padding:40px;">
-          <h3 style="margin-bottom:6px;">Send Us a Message</h3>
-          <p style="font-size:0.875rem;margin-bottom:28px;">We respond within one business day.</p>
+          <h3 style="margin-bottom:6px;">Send a Message</h3>
+          <p style="font-size:0.875rem;margin-bottom:28px;">Your email app will open with the details filled in.</p>
           <form class="contact-form" id="contactForm">
             <div class="form-row">
               <div class="field">
@@ -636,27 +632,23 @@ body {
               <input type="text" id="company" placeholder="Your company">
             </div>
             <div class="field">
-              <label for="service">Service of Interest</label>
+              <label for="service">What do you need?</label>
               <select id="service">
                 <option value="" disabled selected>Select a service...</option>
-                <option>Network Security</option>
-                <option>Cybersecurity Consulting</option>
-                <option>Data Protection</option>
-                <option>Security Audit</option>
-                <option>Threat Detection</option>
-                <option>IT Infrastructure Security</option>
+                <option>Website Security Check</option>
+                <option>Question About a Finding</option>
                 <option>General Enquiry</option>
               </select>
             </div>
             <div class="field">
-              <label for="message">Tell Us About Your Needs</label>
-              <textarea id="message" placeholder="Describe your current security challenges or what you're looking for..." required></textarea>
+              <label for="message">Tell Me About Your Needs</label>
+              <textarea id="message" placeholder="Include the website address and what you would like checked..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary form-submit" style="width:100%;justify-content:center;">
               Send Message →
             </button>
             <div class="form-success" id="formSuccess">
-              ✓ Message received — Ferre will be in touch shortly.
+              Your email app should now be open. Send the prepared email to complete your request.
             </div>
           </form>
         </div>
@@ -691,12 +683,11 @@ body {
       <div class="footer-col">
         <h4>Services</h4>
         <ul class="footer-links">
-          <li><a href="#services">Network Security</a></li>
-          <li><a href="#services">Cybersecurity Consulting</a></li>
-          <li><a href="#services">Data Protection</a></li>
-          <li><a href="#services">Security Audits</a></li>
-          <li><a href="#services">Threat Detection</a></li>
-          <li><a href="#services">IT Infrastructure</a></li>
+          <li><a href="#services">Website Security Check</a></li>
+          <li><a href="#services">External Exposure Review</a></li>
+          <li><a href="#services">Security Header Review</a></li>
+          <li><a href="#services">Software & TLS Review</a></li>
+          <li><a href="#services">Clear Written Report</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -711,35 +702,62 @@ body {
       <div class="footer-col">
         <h4>Contact</h4>
         <ul class="footer-links">
-          <li><a href="mailto:ferrevaneyken@gmail.com">ferrevaneyken@gmail.com</a></li>
-          <li><a href="tel:+320476067193">+32 476 06 71 93</a></li>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="https://orbinexsecurity.com/">orbinexsecurity.com</a></li>
+          <li><a href="mailto:orbinex.cybersecurity@gmail.com">orbinex.cybersecurity@gmail.com</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2026 Orbinex Security. All rights reserved. — Belgium</p>
-      <div class="social-links">
-        <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
-        </a>
-        <a href="mailto:ferrevaneyken@gmail.com" class="social-link" aria-label="Email">
-          <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
-        </a>
-        <a href="tel:+320476067193" class="social-link" aria-label="Phone">
-          <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" stroke="currentColor" stroke-width="1.8"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
+
+<div class="social-links">
+
+  <!-- EMAIL -->
+  <a href="mailto:orbinex.cybersecurity@gmail.com"
+     class="social-link"
+     aria-label="Email">
+
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+      <polyline points="22,6 12,13 2,6"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+  </a>
+
+  <!-- INSTAGRAM -->
+  <a href="https://www.instagram.com/orbinex_cybersecurity/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="social-link"
+     aria-label="Instagram">
+
+    <svg width="15" height="15" fill="none" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+      <circle cx="12" cy="12" r="4"
+              stroke="currentColor"
+              stroke-width="1.8"/>
+      <circle cx="17.5" cy="6.5" r="1"
+              fill="currentColor"/>
+    </svg>
+  </a>
+
+</div>
+
+</div>
+</div>
+</div>
 </footer>
 
 <!-- Toast notification -->
 
 <div class="toast" id="toast">
   <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="22,4 12,14.01 9,11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  Message sent! We'll be in touch soon.
+  Email draft opened — send it to complete your request.
 </div>
 
 <script>
@@ -776,27 +794,40 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 reveals.forEach(el => observer.observe(el));
 
-
-
 // ─── CONTACT FORM ────────────────────────────────────────────────────
+// No fake "message sent" state. This version opens the visitor's email app
+// with a prepared request. Before launch, you can replace this with a real
+// form backend (for example your hosting provider's form handling).
 const form = document.getElementById('contactForm');
 const toast = document.getElementById('toast');
 const formSuccess = document.getElementById('formSuccess');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
 
-  setTimeout(() => {
-    formSuccess.style.display = 'block';
-    btn.style.display = 'none';
-    // Show toast
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-    form.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
-  }, 1200);
+  const firstName = document.getElementById('fname').value.trim();
+  const lastName = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const service = document.getElementById('service').value || 'General Enquiry';
+  const message = document.getElementById('message').value.trim();
+
+  const subject = `Orbinex request — ${service}`;
+  const body = [
+    `Name: ${firstName} ${lastName}`,
+    `Email: ${email}`,
+    `Company: ${company || 'Not provided'}`,
+    `Request: ${service}`,
+    '',
+    message
+  ].join('\n');
+
+  const mailto = `mailto:orbinex.cybersecurity@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+
+  formSuccess.style.display = 'block';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
 });
 
 // ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────────────
