@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +39,7 @@ body {
   --radius-md:   12px;
   --radius-lg:   20px;
   --transition:  0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
 }
 
 /* ─── TYPOGRAPHY ─────────────────────────────────────────────────── */
@@ -872,12 +872,191 @@ footer {
 }
 .toast.show { transform: none; opacity: 1; }
 
-/* ─── GRADIENT TEXT ─────────────────────────────────────────────── */
+/* ─── GRADIENT TEXT ─── */
 .text-gradient {
   background: linear-gradient(135deg, var(--cyan), var(--violet));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* TEST: kleurenthema van de slides */
+:root {
+ --bg-deep: #252C30;
+--bg-card: #30393E;
+--bg-elevated: #3B464C;
+  --cyan: #C3CDD1;
+--violet: #A8B7BE;
+--text-primary: #F2F3F0;
+--text-muted: #BCC5C9;
+--text-subtle: #A1AEB4;
+--border: #4A565D;
+--border-glow: #65767F;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+.hero,
+footer,
+.mobile-menu {
+  background: var(--bg-deep);
+}
+
+#nav,
+#nav.scrolled {
+  background: #252C30;
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.field input,
+.field textarea,
+.field select {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-subtle);
+}
+
+
+.card,
+.cta-band,
+.threat-dashboard,
+.about-img-frame,
+.ceo-card,
+.contact-method {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.field input,
+.field textarea,
+.field select {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border-color: #BBC3C6;
+}
+
+h1, h2, h3, h4,
+.nav-logo,
+.nav-links a,
+.mobile-menu a {
+  color: var(--text-primary);
+}
+
+.hero svg,
+.about-visual svg,
+.service-icon svg,
+.why-icon svg {
+  filter: grayscale(1);
+}
+
+*,
+*::before,
+*::after {
+  text-shadow: none !important;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+/* Vaste helderheid, beweging blijft behouden */
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.orb-glow,
+.orb-core {
+  opacity: 0.8;
+}
+
+.orb-nodes .node {
+  animation: none;
+  opacity: 0.9;
+}
+
+.orb-scan {
+  animation: none;
+  opacity: 0.4;
+}
+.orb-glow,
+.orb-core {
+  animation: none !important;
+  transform: none !important;
+  opacity: 0.8;
+}
+.orb-ring-1 {
+  animation: spin-cw 18s linear infinite !important;
+}
+
+.orb-ring-2 {
+  animation: spin-ccw 24s linear infinite !important;
+}
+
+.orb-ring-3 {
+  animation: spin-cw 32s linear infinite !important;
+}
+#services .section-header {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+#services .section-header p {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+#services .eyebrow {
+  justify-content: center;
+}
+#why .why-visual,
+#why .threat-dashboard {
+  display: none;
+}
+
+#why .grid-2 {
+  grid-template-columns: 1fr;
+  max-width: 960px;
+  margin-inline: auto;
+}
+#services .service-icon.violet {
+  background: rgba(120, 150, 165, 0.15);
+  border: 1px solid #7896A5;
+}
+
+#services .service-icon.violet svg {
+  filter: none;
+}
+
+#services .service-icon.violet svg [stroke] {
+  stroke: #B8C9D1;
+}
+
+/* Ook de paarse rand rond het tekstvak aanpassen */
+#services .card {
+  border-color: var(--border) !important;
+}
+.about-shield svg {
+  overflow: visible;
+}
+.value-pills .pill,
+.value-pills .pill.violet {
+  background: rgba(120, 150, 165, 0.15);
+  color: #C3CDD1;
+  border: 1px solid #65767F;
 }
 </style>
 </head>
@@ -1059,9 +1238,9 @@ footer {
 <section class="section" id="services">
   <div class="container">
     <div class="section-header reveal">
-      <div class="eyebrow">What I do</div>
-      <h2>Website Security Checks<br>for Businesses</h2>
-      <p>I reach out to businesses — or they reach out to me — and I run a thorough security check on their website using professional tools. You get a clear report on what I found and what you should do about it.</p>
+      <div class="eyebrow">Website Security</div>
+      <h2>Understand Your Website’s Security</h2>
+      <p>Orbinex Security checks your website for common vulnerabilities and turns the findings into a clear, practical report — so you know what needs attention, why it matters, and what to do next.</p>
     </div>
 
     <!-- Main service card -->
@@ -1127,95 +1306,76 @@ footer {
   <div class="container">
     <div class="grid-2" style="gap:72px;">
       <div>
-        <div class="section-header reveal">
+        <div class="section-header center reveal"></div>
           <div class="eyebrow">Why Orbinex</div>
           <h2>Security That Works as Hard as You Do</h2>
-          <p>We don't sell off-the-shelf solutions. Every engagement is built around your unique environment, risk profile, and business goals.</p>
-        </div>
-        <div class="why-grid reveal">
-          <div class="why-item">
-            <div class="why-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="why-text">
-              <h4>Rapid Response</h4>
-              <p>When threats emerge, minutes matter. Our team responds within hours, not days.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#00C2FF" stroke-width="1.8"/><path d="M8 12l2.5 2.5L16 9" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div class="why-text">
-              <h4>Proven Frameworks</h4>
-              <p>Aligned with NIST, ISO 27001, and CIS Controls for industry-recognized security.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#00C2FF" stroke-width="1.8"/></svg>
-            </div>
-            <div class="why-text">
-              <h4>Proactive Defense</h4>
-              <p>We hunt threats before they hunt you — not just react after breaches occur.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#00C2FF" stroke-width="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#00C2FF" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <div class="why-text">
-              <h4>Dedicated Experts</h4>
-              <p>A committed team that knows your infrastructure and speaks your language.</p>
-            </div>
-          </div>
-        </div>
+          <p>Clear communication, focused website checks, and practical advice. Orbinex Security helps you understand the findings and decide what to address next.</p>
+</div>
+
+<div class="why-grid reveal">
+  <div class="why-item">
+    <div class="why-icon">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path d="M21 11.5a8.5 8.5 0 01-8.5 8.5H4l-3 3V11.5a10 10 0 0120 0z"
+              stroke="var(--cyan)" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="why-text">
+      <h4>Direct Communication</h4>
+      <p>One point of contact from your first enquiry to the final report, with clear answers throughout the process.</p>
+    </div>
+  </div>
+
+  <div class="why-item">
+    <div class="why-icon">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="7"
+                stroke="var(--cyan)" stroke-width="1.8"/>
+        <path d="M16 16l5 5"
+              stroke="var(--cyan)" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="why-text">
+      <h4>Focused Security Checks</h4>
+      <p>Checks covering HTTPS, security headers, exposed pages, and outdated software to identify common website security issues.</p>
+    </div>
+  </div>
+
+  <div class="why-item">
+    <div class="why-icon">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M8 13h8M8 17h6"
+              stroke="var(--cyan)" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="why-text">
+      <h4>Actionable Reports</h4>
+      <p>Findings explained in plain language, with severity ratings and practical recommendations to help you prioritize improvements.</p>
+    </div>
+  </div>
+
+  <div class="why-item">
+    <div class="why-icon">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="7" r="4"
+                stroke="var(--cyan)" stroke-width="1.8"/>
+        <path d="M5 21v-2a7 7 0 0114 0v2"
+              stroke="var(--cyan)" stroke-width="1.8"
+              stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="why-text">
+      <h4>Personal Follow-up</h4>
+      <p>Discuss the findings directly with Ferre, the person who checked your website, and get clarity on the recommended next steps.</p>
+    </div>
+  </div>
+</div>
       </div>
       <div class="why-visual reveal reveal-delay-2">
-        <div class="threat-dashboard">
-          <div class="dash-header">
-            <span class="dash-title">Orbinex Threat Center</span>
-            <span class="status-ok"><span class="status-dot"></span>All Systems Protected</span>
-          </div>
-          <div class="dash-stat-row">
-            <div class="dash-stat">
-              <div class="val cyan">Active</div>
-              <div class="lbl">Monitoring</div>
-            </div>
-            <div class="dash-stat">
-              <div class="val green">Ready</div>
-              <div class="lbl">To Deploy</div>
-            </div>
-            <div class="dash-stat">
-              <div class="val amber">Live</div>
-              <div class="lbl">Threat Feed</div>
-            </div>
-          </div>
-          <div class="threat-list">
-            <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">SQL Injection — Auth endpoint</span>
-              <span class="threat-time">2m ago</span>
-            </div>
-            <div class="threat-row">
-              <span class="threat-badge analyzed">ANALYZED</span>
-              <span class="threat-name">Port scan — 192.168.4.x</span>
-              <span class="threat-time">7m ago</span>
-            </div>
-            <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">Brute force — SSH service</span>
-              <span class="threat-time">11m ago</span>
-            </div>
-            <div class="threat-row">
-              <span class="threat-badge patched">PATCHED</span>
-              <span class="threat-name">CVE-2024-3400 — SSL lib</span>
-              <span class="threat-time">1h ago</span>
-            </div>
-            <div class="threat-row">
-              <span class="threat-badge blocked">BLOCKED</span>
-              <span class="threat-name">Phishing domain — spoofed URL</span>
-              <span class="threat-time">2h ago</span>
+       
             </div>
           </div>
         </div>
@@ -1267,10 +1427,12 @@ footer {
     <div class="grid-2" style="gap:72px;">
       <div class="about-text reveal">
         <div class="eyebrow">About Orbinex Security</div>
-        <h2>Built to Protect the <span class="text-gradient">Connected World</span></h2>
-        <p>Orbinex Security was founded on a straightforward conviction: that every business, regardless of size, deserves enterprise-grade cybersecurity. We saw too many organizations left exposed — not from negligence, but from a lack of accessible, expert guidance.</p>
-        <p>Our name tells that story. <strong style="color:var(--text-primary);">Orb</strong> represents the digital world — the cloud, the systems, the infrastructure that modern business depends on. <strong style="color:var(--text-primary);">Nex</strong> stands for nexus: connection, network, the invisible threads that bind it all together. Orbinex Security is here to protect those connections.</p>
-        <p>Headquartered in Belgium, we serve clients across Europe and beyond — bringing deep technical expertise, a human-centered approach, and an unwavering commitment to long-term security.</p>
+        <h2>Built to protect the <span class="text-gradient">connected world</span></h2>
+
+<p>Orbinex Security was founded with a clear purpose: to make website security easier to understand. Through focused security checks and clear reports, businesses can identify weaknesses and understand what needs attention.</p>
+
+<p>The name reflects that purpose. <strong style="color:var(--text-primary);">Orb</strong> represents the digital world and the systems businesses rely on. <strong style="color:var(--text-primary);">Nex</strong> comes from nexus — a connection. Together, they express the ambition behind Orbinex: protecting what connects us.</p>
+<p>Founded by Ferre Van Eyken and based in Belgium, Orbinex Security combines a personal approach with a long-term ambition: to grow into a trusted cybersecurity company, expanding its capabilities while keeping communication clear and practical.</p>
         <div class="value-pills">
           <span class="pill">Trust</span>
           <span class="pill">Protection</span>
@@ -1329,9 +1491,9 @@ footer {
         <div class="ceo-title">Chief Executive Officer</div>
         <div class="ceo-name">Ferre Van Eyken</div>
         <div class="ceo-bio">
-          <p>Ferre Van Eyken is the founder and CEO of Orbinex Security — and at 16, he's only getting started. His journey into tech began through his stepdad, who introduced him to the world of IT and software development. Ferre started where many do: learning HTML, then moving into .NET, gradually building a foundation in how software and systems are made.</p>
-          <p>That curiosity about how things are built naturally led to a bigger question — how are they broken? That question pulled him into cybersecurity, and it stuck. Ferre is the first to say he's still learning, still growing, and has a long road ahead. But he also knows he has the drive, the mindset, and the potential to go far in this field.</p>
-          <p>Orbinex Security is the first real step — a vision for what he wants to build, starting now, and growing with every lesson learned along the way.</p>
+          <p>Ferre Van Eyken is the founder of Orbinex Security. At 17, he is turning his interest in technology into a clear ambition: helping businesses better understand their website security. His journey began when his stepdad introduced him to IT and software development. Starting with HTML and later exploring .NET, Ferre built a foundation in how websites and software are developed.</p>
+<p>That curiosity soon went beyond building things. He wanted to understand where weaknesses arise and how they can be prevented. This led him to cybersecurity, where he continues to develop his skills through study and hands-on practice. His approach is grounded in curiosity, persistence, and honesty about what he knows and what he is still learning.</p>
+<p>Orbinex Security is the next step in that journey: an independent venture built around clear communication, practical website security checks, and a commitment to continuous improvement.</p>
         </div>
         <div class="ceo-social">
           <a href="mailto:orbinex.cybersecurity@gmail.com" class="social-pill">
@@ -1406,7 +1568,7 @@ footer {
             </div>
             <div>
               <div class="label">Location</div>
-              <div class="value">Belgium — Serving Clients Europe-Wide</div>
+              <div class="value">Belgium</div>
             </div>
           </div>
         </div>
@@ -1509,7 +1671,8 @@ footer {
       <div class="footer-col">
         <h4>Contact</h4>
         <ul class="footer-links">
-          <li><a href="mailto:ferrevaneyken@gmail.com">ferrevaneyken@gmail.com</a></li>
+          <li><a href="mailto:orbinex.cybersecurity@gmail.com">orbinex.cybersecurity@gmail.com
+          </a></li>
           <li><a href="tel:+320476067193">+32 476 06 71 93</a></li>
           <li><a href="#">LinkedIn</a></li>
           <li><a href="#">Privacy Policy</a></li>
@@ -1522,7 +1685,7 @@ footer {
         <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
         </a>
-        <a href="mailto:ferrevaneyken@gmail.com" class="social-link" aria-label="Email">
+        <a href="mailto:orbinex.cybersecurity@gmail.com" class="social-link" aria-label="Email">
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
         </a>
         <a href="tel:+320476067193" class="social-link" aria-label="Phone">
