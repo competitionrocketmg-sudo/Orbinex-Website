@@ -1076,6 +1076,21 @@ h1, h2, h3, h4,
   color: #C3CDD1;
   border: 1px solid #65767F;
 }
+.contact-card {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.contact-card:hover {
+  transform: none;
+  border-color: rgba(143, 207, 232, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.contact-card:hover::before {
+  opacity: 0.15;
+}
 </style>
 </head>
 <body>
