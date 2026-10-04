@@ -162,6 +162,16 @@ a:hover { opacity: 0.8; }
   box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,194,255,0.06);
 }
 .card:hover::before { opacity: 1; }
+.contact-card {
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+}
 
 /* ─── NAV ───────────────────────────────────────────────────────── */
 .nav {
