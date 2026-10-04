@@ -156,23 +156,38 @@ a:hover { opacity: 0.8; }
   opacity: 0;
   transition: opacity var(--transition);
 }
-.card:hover {
+.card:not(.contact-card):hover {
   border-color: var(--border-glow);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,194,255,0.06);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4),
+              0 0 30px rgba(0,194,255,0.06);
 }
 
 .contact-card {
+  transform: translateY(0);
+  box-shadow: none;
+  border-color: var(--border);
+
   transition:
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.7s ease;
 }
+
+
 .contact-card::before {
   transition: opacity 0.7s ease;
 }
+
 .contact-card:hover {
   transform: translateY(-2px);
+  border-color: var(--border-glow);
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.20),
+    0 0 20px rgba(0,194,255,0.04);
+}
+.contact-card:hover::before {
+  opacity: 1;
 }
 
 /* ─── NAV ───────────────────────────────────────────────────────── */
