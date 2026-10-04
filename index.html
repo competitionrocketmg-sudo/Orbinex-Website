@@ -1076,6 +1076,21 @@ h1, h2, h3, h4,
   color: #C3CDD1;
   border: 1px solid #65767F;
 }
+.contact-card {
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.contact-card:hover {
+  transform: none;
+  border-color: rgba(143, 207, 232, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.contact-card:hover::before {
+  opacity: 0.15;
+}
 </style>
 </head>
 <body>
@@ -1580,7 +1595,7 @@ h1, h2, h3, h4,
         </div>
       </div>
       <div class="reveal reveal-delay-2">
-        <div class="card" style="padding:40px;">
+        <div class="card contact-card" style="padding:40px;"></div>
           <h3 style="margin-bottom:6px;">Send Us a Message</h3>
           <p style="font-size:0.875rem;margin-bottom:28px;">We respond within one business day.</p>
           <form class="contact-form" id="contactForm">
