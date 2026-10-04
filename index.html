@@ -234,14 +234,41 @@ a:hover { opacity: 0.8; }
   list-style: none;
 }
 .nav-links a {
+  position: relative;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-muted);
-  transition: color var(--transition);
+  padding: 8px 0;
+  transition: color 0.3s ease;
 }
-.nav-links a:hover { color: var(--text-primary); opacity: 1; }
-.nav-cta { margin-left: 12px; }
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #B8D8E7, #2AA9E0);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  margin-left: 12px;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
