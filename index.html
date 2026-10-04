@@ -882,6 +882,27 @@ footer {
 .section-header.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-header h2 { margin-bottom: 14px; }
 .section-header p { max-width: 480px; }
+.section-header h2 {
+  margin-bottom: 18px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-header h2::after {
+  content: '';
+  display: block;
+  width: 52px;
+  height: 2px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #B8D8E7, #2AA9E0);
+  opacity: 0.9;
+}
+
+.section-header.center h2::after {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ─── NOTIFICATION TOAST ─────────────────────────────────────────── */
 .toast {
