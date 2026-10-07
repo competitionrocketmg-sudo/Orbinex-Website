@@ -1348,6 +1348,75 @@ h1, h2, h3, h4,
     padding: 26px 22px;
   }
 }
+/* ─── WEBSITE SIZE SLIDER ─────────────────────────────────────────── */
+
+.page-slider-wrap {
+  padding: 22px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.page-slider-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-slider-top span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.page-slider-top strong {
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+#pageSlider {
+  width: 100%;
+  appearance: none;
+  height: 5px;
+  border-radius: 999px;
+  background: #59676E;
+  outline: none;
+  cursor: pointer;
+}
+
+#pageSlider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #F2F3F0;
+  border: 4px solid #9FB2BC;
+  cursor: pointer;
+  box-shadow: 0 0 0 5px rgba(195,205,209,0.08);
+  transition: transform 0.2s ease;
+}
+
+#pageSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+#pageSlider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #F2F3F0;
+  border: 4px solid #9FB2BC;
+  cursor: pointer;
+}
+
+.page-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+}
 </style>
 </head>
 <body>
@@ -2295,8 +2364,11 @@ reveals.forEach(el => observer.observe(el));
 
 // ─── PRICE ESTIMATOR ─────────────────────────────────────────────────
 
+const pageSlider = document.getElementById('pageSlider');
+const pageCount = document.getElementById('pageCount');
+
 const estimateInputs = document.querySelectorAll(
-  '#pricing input[type="radio"], #pricing input[type="checkbox"]'
+  '#pricing input[name="scanDepth"], #pricing .estimate-extra'
 );
 
 const estimatePrice = document.getElementById('estimatePrice');
@@ -2305,11 +2377,15 @@ const estimateDepth = document.getElementById('estimateDepth');
 const estimateExtras = document.getElementById('estimateExtras');
 const estimateCta = document.getElementById('estimateCta');
 
-let currentEstimate = '€70 – €95';
+let currentEstimate = '';
+
+function roundFive(number) {
+  return Math.round(number / 5) * 5;
+}
 
 function updateEstimate() {
-  const selectedSize =
-    document.querySelector('input[name="siteSize"]:checked');
+
+  const pages = Number(pageSlider.value);
 
   const selectedDepth =
     document.querySelector('input[name="scanDepth"]:checked');
@@ -2317,23 +2393,42 @@ function updateEstimate() {
   const selectedExtras =
     [...document.querySelectorAll('.estimate-extra:checked')];
 
-  let min =
-    Number(selectedSize.dataset.min) +
-    Number(selectedDepth.dataset.min);
+  // Base price comes from assessment depth
+  let min = Number(selectedDepth.dataset.min);
+  let max = Number(selectedDepth.dataset.max);
 
-  let max =
-    Number(selectedSize.dataset.max) +
-    Number(selectedDepth.dataset.max);
+  // Sites up to 10 pages use the base price.
+  // Larger sites gradually increase the estimate.
+  if (pages > 10) {
+    const extraPages = pages - 10;
 
+    min += extraPages * 2.5;
+    max += extraPages * 3.5;
+  }
+
+  // Optional extras
   selectedExtras.forEach(extra => {
     min += Number(extra.dataset.min);
     max += Number(extra.dataset.max);
   });
 
+  min = roundFive(min);
+  max = roundFive(max);
+
   currentEstimate = `€${min} – €${max}`;
 
   estimatePrice.textContent = currentEstimate;
-  estimateSize.textContent = selectedSize.value;
+
+  pageCount.textContent =
+    pages === 50
+      ? '50+ pages'
+      : `${pages} ${pages === 1 ? 'page' : 'pages'}`;
+
+  estimateSize.textContent =
+    pages === 50
+      ? '50+ pages'
+      : `${pages} pages`;
+
   estimateDepth.textContent = selectedDepth.value;
 
   estimateExtras.textContent =
@@ -2342,6 +2437,8 @@ function updateEstimate() {
       : 'None';
 }
 
+pageSlider.addEventListener('input', updateEstimate);
+
 estimateInputs.forEach(input => {
   input.addEventListener('change', updateEstimate);
 });
@@ -2349,14 +2446,14 @@ estimateInputs.forEach(input => {
 updateEstimate();
 
 
-// Send selected estimate to contact form
+// ─── SEND ESTIMATE TO CONTACT FORM ──────────────────────────────────
+
 estimateCta.addEventListener('click', () => {
 
   const serviceField = document.getElementById('service');
   const messageField = document.getElementById('message');
 
-  const size =
-    document.querySelector('input[name="siteSize"]:checked').value;
+  const pages = Number(pageSlider.value);
 
   const depth =
     document.querySelector('input[name="scanDepth"]:checked').value;
@@ -2375,34 +2472,13 @@ estimateCta.addEventListener('click', () => {
 `I used the Orbinex Price Estimate tool.
 
 Estimated cost: ${currentEstimate}
-Website size: ${size}
+Website size: ${pages === 50 ? '50+' : pages} pages
 Assessment: ${depth}
 Extras: ${extras}
 
 I would like to discuss this security assessment.`;
   }
 });
-// ─── CONTACT FORM ────────────────────────────────────────────────────
-const form = document.getElementById('contactForm');
-const toast = document.getElementById('toast');
-const formSuccess = document.getElementById('formSuccess');
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    formSuccess.style.display = 'block';
-    btn.style.display = 'none';
-    // Show toast
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-    form.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
-  }, 1200);
-});
-
 // ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
