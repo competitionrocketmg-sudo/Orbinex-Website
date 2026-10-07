@@ -2392,6 +2392,19 @@ function roundFive(number) {
 function updateEstimate() {
 
   const pages = Number(pageSlider.value);
+  const sliderPercent =
+  ((pages - Number(pageSlider.min)) /
+  (Number(pageSlider.max) - Number(pageSlider.min))) * 100;
+
+pageSlider.style.background = `
+  linear-gradient(
+    to right,
+    #BFD4DE 0%,
+    #BFD4DE ${sliderPercent}%,
+    #59676E ${sliderPercent}%,
+    #59676E 100%
+  )
+`;
 
   const selectedDepth =
     document.querySelector('input[name="scanDepth"]:checked');
