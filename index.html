@@ -432,17 +432,45 @@ a:hover { opacity: 0.8; }
   position: absolute;
   inset: 15%;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0,194,255,0.18) 0%, rgba(123,47,255,0.12) 40%, transparent 70%);
-  filter: blur(30px);
-  animation: orb-breathe 4s ease-in-out infinite;
+  background: radial-gradient(
+    ellipse,
+    rgba(0,194,255,0.11) 0%,
+    rgba(123,47,255,0.07) 40%,
+    transparent 70%
+  );
+  filter: blur(36px);
+  animation: orb-breathe 7s ease-in-out infinite;
 }
+
 @keyframes orb-breathe {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.72;
+    transform: scale(1.04);
+  }
 }
-.orb-ring-1 { animation: spin-cw  18s linear infinite; transform-origin: center; }
-.orb-ring-2 { animation: spin-ccw 24s linear infinite; transform-origin: center; }
-.orb-ring-3 { animation: spin-cw  32s linear infinite; transform-origin: center; }
+
+.orb-ring-1 {
+  animation: spin-cw 45s linear infinite;
+  transform-origin: center;
+  opacity: 0.65;
+}
+
+.orb-ring-2 {
+  animation: spin-ccw 60s linear infinite;
+  transform-origin: center;
+  opacity: 0.55;
+}
+
+.orb-ring-3 {
+  animation: spin-cw 75s linear infinite;
+  transform-origin: center;
+  opacity: 0.45;
+}
 .orb-core   { animation: orb-breathe 4s ease-in-out infinite; transform-origin: center; }
 @keyframes spin-cw  { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
 @keyframes spin-ccw { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
