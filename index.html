@@ -1581,7 +1581,296 @@ h1, h2, h3, h4,
 
 <div class="divider"></div>
 
-<!-- ═══ WHY ORBINEX ══════════════════════════════════════════════════ -->
+<!-- ═══ PRICE ESTIMATE ═══════════════════════════════════════════════ -->
+<section class="section section--alt" id="pricing">
+  <div class="container">
+
+    <div class="section-header center reveal">
+      <div class="eyebrow">Price Estimate</div>
+      <h2>Get an Idea of What Your Security Check Could Cost</h2>
+      <p>
+        Select the options that best match your website.
+        You'll instantly receive an estimated price range before getting in touch.
+      </p>
+    </div>
+
+    <div class="price-estimator">
+
+      <!-- LEFT SIDE -->
+      <div class="price-builder reveal">
+
+        <!-- WEBSITE SIZE -->
+        <div class="price-group">
+
+          <div class="price-group-title">
+            Website size
+            <span class="price-group-subtitle">
+              Choose the option that comes closest to your website.
+            </span>
+          </div>
+
+          <div class="price-options">
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="siteSize"
+                value="Small"
+                data-min="0"
+                data-max="0"
+                checked
+              >
+
+              <span class="price-choice-content">
+                <strong>Small</strong>
+                <small>Up to approximately 10 pages</small>
+              </span>
+            </label>
+
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="siteSize"
+                value="Medium"
+                data-min="25"
+                data-max="40"
+              >
+
+              <span class="price-choice-content">
+                <strong>Medium</strong>
+                <small>Approximately 10–30 pages</small>
+              </span>
+            </label>
+
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="siteSize"
+                value="Large"
+                data-min="55"
+                data-max="80"
+              >
+
+              <span class="price-choice-content">
+                <strong>Large</strong>
+                <small>30+ pages or more complexity</small>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+
+        <!-- SECURITY DEPTH -->
+        <div class="price-group">
+
+          <div class="price-group-title">
+            Security check depth
+            <span class="price-group-subtitle">
+              How extensively would you like the website checked?
+            </span>
+          </div>
+
+          <div class="price-options">
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="scanDepth"
+                value="Essential"
+                data-min="45"
+                data-max="60"
+              >
+
+              <span class="price-choice-content">
+                <strong>Essential</strong>
+                <small>
+                  A focused check of common website security issues.
+                </small>
+              </span>
+            </label>
+
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="scanDepth"
+                value="Standard"
+                data-min="70"
+                data-max="95"
+                checked
+              >
+
+              <span class="price-choice-content">
+                <strong>Standard</strong>
+                <small>
+                  A broader security review with additional verification.
+                </small>
+              </span>
+            </label>
+
+
+            <label class="price-choice">
+              <input
+                type="radio"
+                name="scanDepth"
+                value="Extended"
+                data-min="110"
+                data-max="150"
+              >
+
+              <span class="price-choice-content">
+                <strong>Extended</strong>
+                <small>
+                  A more extensive assessment for larger or more complex websites.
+                </small>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+
+        <!-- EXTRAS -->
+        <div class="price-group">
+
+          <div class="price-group-title">
+            Optional extras
+            <span class="price-group-subtitle">
+              Add these only if you need them.
+            </span>
+          </div>
+
+          <div class="price-options two">
+
+            <label class="price-choice">
+              <input
+                type="checkbox"
+                class="estimate-extra"
+                value="Retest after fixes"
+                data-min="20"
+                data-max="30"
+              >
+
+              <span class="price-choice-content">
+                <strong>Retest After Fixes</strong>
+                <small>
+                  I check the reported issues again after changes have been made.
+                </small>
+              </span>
+            </label>
+
+
+            <label class="price-choice">
+              <input
+                type="checkbox"
+                class="estimate-extra"
+                value="Priority turnaround"
+                data-min="30"
+                data-max="45"
+              >
+
+              <span class="price-choice-content">
+                <strong>Priority Turnaround</strong>
+                <small>
+                  Your assessment is prioritised where availability allows.
+                </small>
+              </span>
+            </label>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- RIGHT SIDE -->
+      <div class="price-result reveal reveal-delay-2">
+
+        <div class="price-result-label">
+          Estimated cost
+        </div>
+
+        <div class="price-result-amount" id="estimatePrice">
+          €70 – €95
+        </div>
+
+        <p class="price-result-description">
+          Based on the options you've selected.
+        </p>
+
+
+        <div class="estimate-summary">
+
+          <div class="estimate-summary-row">
+            <span>Website</span>
+            <span id="estimateSize">Small</span>
+          </div>
+
+          <div class="estimate-summary-row">
+            <span>Assessment</span>
+            <span id="estimateDepth">Standard</span>
+          </div>
+
+          <div class="estimate-summary-row">
+            <span>Extras</span>
+            <span id="estimateExtras">None</span>
+          </div>
+
+        </div>
+
+
+        <div class="estimate-includes">
+
+          <div class="estimate-include">
+            <span class="estimate-check">✓</span>
+            Website security assessment
+          </div>
+
+          <div class="estimate-include">
+            <span class="estimate-check">✓</span>
+            Manual review of relevant findings
+          </div>
+
+          <div class="estimate-include">
+            <span class="estimate-check">✓</span>
+            Clear written security report
+          </div>
+
+          <div class="estimate-include">
+            <span class="estimate-check">✓</span>
+            Practical recommendations
+          </div>
+
+        </div>
+
+
+        <a
+          href="#contact"
+          class="btn btn-primary"
+          id="estimateCta"
+          style="width:100%;justify-content:center;"
+        >
+          Request This Assessment →
+        </a>
+
+
+        <p class="estimate-disclaimer">
+          This calculator provides an indication only and is not a binding quote.
+          The final price may vary depending on the website's size, technology,
+          complexity and agreed scope.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div><!-- ═══ WHY ORBINEX ══════════════════════════════════════════════════ -->
 <section class="section" id="why">
   <div class="container">
     <div class="grid-2" style="gap:72px;">
