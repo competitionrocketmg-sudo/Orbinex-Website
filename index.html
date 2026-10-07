@@ -2303,19 +2303,76 @@ h1, h2, h3, h4,
           </div>
         </div>
       </div>
-      <div class="reveal reveal-delay-2">
-        <div class="card contact-card" style="padding:40px;">
-          <h3 style="margin-bottom:6px;">Send Us a Message</h3>
-          <p style="font-size:0.875rem;margin-bottom:28px;">We respond within one business day.</p>
-         <div class="field">
-  <label for="service">Service of Interest</label>
-  <select id="service" name="service">
-    <option value="" disabled selected>Select a service...</option>
-    <option>Website Security Check</option>
-    <option>Security Report Follow-up</option>
-    <option>General Enquiry</option>
-  </select>
+<div class="reveal reveal-delay-2">
+  <div class="card contact-card" style="padding:40px;">
+    <h3 style="margin-bottom:6px;">Send Us a Message</h3>
+    <p style="font-size:0.875rem;margin-bottom:28px;">
+      We respond within one business day.
+    </p>
+
+    <form class="contact-form" id="contactForm">
+
+      <div class="form-row">
+        <div class="field">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="first_name" placeholder="Jan" required>
+        </div>
+
+        <div class="field">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="last_name" placeholder="De Smedt" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Work Email</label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" required>
+      </div>
+
+      <div class="field">
+        <label for="company">Company / Organization</label>
+        <input type="text" id="company" name="company" placeholder="Your company">
+      </div>
+
+      <div class="field">
+        <label for="service">Service of Interest</label>
+        <select id="service" name="service">
+          <option value="" disabled selected>Select a service...</option>
+          <option>Website Security Check</option>
+          <option>Security Report Follow-up</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Tell Us About Your Needs</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Describe your current security challenges or what you're looking for..."
+          required
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary form-submit"
+        style="width:100%;justify-content:center;"
+      >
+        Send Message →
+      </button>
+
+      <div class="form-success" id="formSuccess">
+        ✓ Message received — Ferre will be in touch shortly.
+      </div>
+
+    </form>
+  </div>
 </div>
+
+</div>
+</div>
+</section>
 <!-- ═══ FOOTER ════════════════════════════════════════════════════════ -->
 <footer>
   <div class="container">
