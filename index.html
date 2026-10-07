@@ -2323,6 +2323,95 @@ reveals.forEach(el => observer.observe(el));
 
 
 
+// ─── PRICE ESTIMATOR ─────────────────────────────────────────────────
+
+const estimateInputs = document.querySelectorAll(
+  '#pricing input[type="radio"], #pricing input[type="checkbox"]'
+);
+
+const estimatePrice = document.getElementById('estimatePrice');
+const estimateSize = document.getElementById('estimateSize');
+const estimateDepth = document.getElementById('estimateDepth');
+const estimateExtras = document.getElementById('estimateExtras');
+const estimateCta = document.getElementById('estimateCta');
+
+let currentEstimate = '€70 – €95';
+
+function updateEstimate() {
+  const selectedSize =
+    document.querySelector('input[name="siteSize"]:checked');
+
+  const selectedDepth =
+    document.querySelector('input[name="scanDepth"]:checked');
+
+  const selectedExtras =
+    [...document.querySelectorAll('.estimate-extra:checked')];
+
+  let min =
+    Number(selectedSize.dataset.min) +
+    Number(selectedDepth.dataset.min);
+
+  let max =
+    Number(selectedSize.dataset.max) +
+    Number(selectedDepth.dataset.max);
+
+  selectedExtras.forEach(extra => {
+    min += Number(extra.dataset.min);
+    max += Number(extra.dataset.max);
+  });
+
+  currentEstimate = `€${min} – €${max}`;
+
+  estimatePrice.textContent = currentEstimate;
+  estimateSize.textContent = selectedSize.value;
+  estimateDepth.textContent = selectedDepth.value;
+
+  estimateExtras.textContent =
+    selectedExtras.length
+      ? selectedExtras.map(extra => extra.value).join(', ')
+      : 'None';
+}
+
+estimateInputs.forEach(input => {
+  input.addEventListener('change', updateEstimate);
+});
+
+updateEstimate();
+
+
+// Send selected estimate to contact form
+estimateCta.addEventListener('click', () => {
+
+  const serviceField = document.getElementById('service');
+  const messageField = document.getElementById('message');
+
+  const size =
+    document.querySelector('input[name="siteSize"]:checked').value;
+
+  const depth =
+    document.querySelector('input[name="scanDepth"]:checked').value;
+
+  const extras =
+    [...document.querySelectorAll('.estimate-extra:checked')]
+      .map(extra => extra.value)
+      .join(', ') || 'None';
+
+  if (serviceField) {
+    serviceField.value = 'Website Security Check';
+  }
+
+  if (messageField) {
+    messageField.value =
+`I used the Orbinex Price Estimate tool.
+
+Estimated cost: ${currentEstimate}
+Website size: ${size}
+Assessment: ${depth}
+Extras: ${extras}
+
+I would like to discuss this security assessment.`;
+  }
+});
 // ─── CONTACT FORM ────────────────────────────────────────────────────
 const form = document.getElementById('contactForm');
 const toast = document.getElementById('toast');
