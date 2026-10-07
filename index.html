@@ -1600,69 +1600,39 @@ h1, h2, h3, h4,
       <div class="price-builder reveal">
 
         <!-- WEBSITE SIZE -->
-        <div class="price-group">
+<div class="price-group">
 
-          <div class="price-group-title">
-            Website size
-            <span class="price-group-subtitle">
-              Choose the option that comes closest to your website.
-            </span>
-          </div>
+  <div class="price-group-title">
+    Number of website pages
+    <span class="price-group-subtitle">
+      Move the slider to roughly match the size of your website.
+    </span>
+  </div>
 
-          <div class="price-options">
+  <div class="page-slider-wrap">
 
-            <label class="price-choice">
-              <input
-                type="radio"
-                name="siteSize"
-                value="Small"
-                data-min="0"
-                data-max="0"
-                checked
-              >
+    <div class="page-slider-top">
+      <span>Website size</span>
+      <strong id="pageCount">10 pages</strong>
+    </div>
 
-              <span class="price-choice-content">
-                <strong>Small</strong>
-                <small>Up to approximately 10 pages</small>
-              </span>
-            </label>
+    <input
+      type="range"
+      id="pageSlider"
+      min="1"
+      max="50"
+      value="10"
+      step="1"
+    >
 
+    <div class="page-slider-labels">
+      <span>1 page</span>
+      <span>50+ pages</span>
+    </div>
 
-            <label class="price-choice">
-              <input
-                type="radio"
-                name="siteSize"
-                value="Medium"
-                data-min="25"
-                data-max="40"
-              >
+  </div>
 
-              <span class="price-choice-content">
-                <strong>Medium</strong>
-                <small>Approximately 10–30 pages</small>
-              </span>
-            </label>
-
-
-            <label class="price-choice">
-              <input
-                type="radio"
-                name="siteSize"
-                value="Large"
-                data-min="55"
-                data-max="80"
-              >
-
-              <span class="price-choice-content">
-                <strong>Large</strong>
-                <small>30+ pages or more complexity</small>
-              </span>
-            </label>
-
-          </div>
-        </div>
-
-
+</div>
         <!-- SECURITY DEPTH -->
         <div class="price-group">
 
