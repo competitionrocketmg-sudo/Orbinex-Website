@@ -1131,6 +1131,223 @@ h1, h2, h3, h4,
   color: #C3CDD1;
   border: 1px solid #65767F;
 }
+/* ─── PRICE ESTIMATE ───────────────────────────────────────────────── */
+
+.price-estimator {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.price-builder,
+.price-result {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+}
+
+.price-group {
+  margin-bottom: 32px;
+}
+
+.price-group:last-child {
+  margin-bottom: 0;
+}
+
+.price-group-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.price-group-subtitle {
+  display: block;
+  color: var(--text-subtle);
+  font-size: 0.8rem;
+  margin-top: 3px;
+}
+
+.price-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.price-options.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.price-choice {
+  cursor: pointer;
+  position: relative;
+}
+
+.price-choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.price-choice-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.price-choice-content strong {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.price-choice-content small {
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.price-choice:hover .price-choice-content {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+}
+
+.price-choice input:checked + .price-choice-content {
+  border-color: #9BAEB7;
+  background: #435058;
+  box-shadow: inset 0 0 0 1px rgba(195,205,209,0.12);
+}
+
+.price-result {
+  position: sticky;
+  top: 110px;
+  overflow: hidden;
+}
+
+.price-result::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--text-muted),
+    transparent
+  );
+}
+
+.price-result-label {
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  margin-bottom: 10px;
+}
+
+.price-result-amount {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.7rem);
+  line-height: 1;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+}
+
+.price-result-description {
+  font-size: 0.88rem;
+  margin-bottom: 28px;
+}
+
+.estimate-summary {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  margin-bottom: 24px;
+}
+
+.estimate-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 7px 0;
+  font-size: 0.82rem;
+}
+
+.estimate-summary-row span:first-child {
+  color: var(--text-subtle);
+}
+
+.estimate-summary-row span:last-child {
+  color: var(--text-primary);
+  text-align: right;
+  font-weight: 500;
+}
+
+.estimate-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 26px;
+}
+
+.estimate-include {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.estimate-check {
+  color: #C3CDD1;
+  font-weight: 700;
+}
+
+.estimate-disclaimer {
+  margin-top: 18px;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text-subtle);
+}
+
+@media (max-width: 900px) {
+  .price-estimator {
+    grid-template-columns: 1fr;
+  }
+
+  .price-result {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .price-options,
+  .price-options.two {
+    grid-template-columns: 1fr;
+  }
+
+  .price-builder,
+  .price-result {
+    padding: 26px 22px;
+  }
+}
 </style>
 </head>
 <body>
