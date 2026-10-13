@@ -2669,6 +2669,64 @@ Extras: ${extras}
 I would like to discuss this security assessment.`;
   }
 });
+
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+contactForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const submitButton = contactForm.querySelector(
+    'button[type="submit"]'
+  );
+
+  const originalText = submitButton.textContent;
+
+  const firstName = document.getElementById('fname').value.trim();
+  const lastName = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const website = document.getElementById('website').value.trim();
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+  formSuccess.style.display = 'none';
+
+  try {
+    const response = await fetch(
+      'http://localhost:3000/api/security-check',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: `${firstName} ${lastName}`.trim(),
+          email,
+          website
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message || 'The request could not be sent.');
+    }
+
+    formSuccess.textContent =
+      '✓ Request validated successfully. No scan has been performed yet.';
+    formSuccess.style.display = 'block';
+  } catch (error) {
+    formSuccess.textContent =
+      `Could not send your request: ${error.message}. Please try again.`;
+    formSuccess.style.display = 'block';
+    formSuccess.style.color = '#ff7777';
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+});
+
 // ─── SMOOTH ANCHOR SCROLL ────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
