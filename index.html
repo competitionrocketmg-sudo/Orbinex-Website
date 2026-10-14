@@ -2686,14 +2686,18 @@ contactForm.addEventListener('submit', async (event) => {
   const lastName = document.getElementById('lname').value.trim();
   const email = document.getElementById('email').value.trim();
   const website = document.getElementById('website').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
 
   submitButton.disabled = true;
   submitButton.textContent = 'Sending...';
   formSuccess.style.display = 'none';
+  formSuccess.style.color = '';
 
   try {
     const response = await fetch(
-      'http://localhost:3000/api/security-check',
+      'http://127.0.0.1:3000/api/security-check',
       {
         method: 'POST',
         headers: {
@@ -2702,20 +2706,24 @@ contactForm.addEventListener('submit', async (event) => {
         body: JSON.stringify({
           name: `${firstName} ${lastName}`.trim(),
           email,
-          website
+          website,
+          company,
+          service,
+          message
         })
       }
     );
 
-    const result = await response.json();
+    const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
       throw new Error(result.message || 'The request could not be sent.');
     }
 
     formSuccess.textContent =
-      '✓ Request validated successfully. No scan has been performed yet.';
+      '✓ Message received — Ferre will be in touch shortly.';
     formSuccess.style.display = 'block';
+    contactForm.reset();
   } catch (error) {
     formSuccess.textContent =
       `Could not send your request: ${error.message}. Please try again.`;
