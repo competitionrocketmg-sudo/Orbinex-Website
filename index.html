@@ -40,7 +40,10 @@
 <style>
 /* ─── RESET & BASE ─────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+}
 body {
   font-family: 'Inter', sans-serif;
   background: #060D1F;
@@ -974,6 +977,34 @@ footer {
 .section-header.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-header h2 { margin-bottom: 14px; }
 .section-header p { max-width: 480px; }
+/* ─── FAQ ─────────────────────────────────────────────────────────── */
+.faq-list { display: grid; max-width: 820px; gap: 12px; margin: 0 auto; }
+.faq-item { overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color var(--transition); }
+.faq-item[open] { border-color: var(--border-glow); }
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; flex: 0 0 auto; color: var(--cyan); font-size: 1.4rem; font-weight: 400; line-height: 1; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item summary:focus-visible { outline: 2px solid var(--border-glow); outline-offset: -4px; border-radius: var(--radius-md); }
+.faq-answer { padding: 0 22px 20px; }
+.faq-answer p { max-width: 720px; margin: 0; }
+.faq-cta { display: flex; justify-content: center; margin-top: 30px; }
+@media (max-width: 600px) {
+  .faq-item summary { padding: 17px 18px; font-size: .94rem; }
+  .faq-answer { padding: 0 18px 17px; }
+}
 
 
 /* ─── NOTIFICATION TOAST ─────────────────────────────────────────── */
@@ -1518,7 +1549,375 @@ h1, h2, h3, h4,
   }
 
 }
-</style>
+
+    /* Orbie-chat, geïntegreerd op de homepage */
+    .orbie-widget {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1400;
+      font-family: 'Inter', sans-serif;
+    }
+    .orbie-launcher {
+      display: inline-flex;
+      min-height: 54px;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 13px 7px 7px;
+      color: #F2F3F0;
+      background: #252C30;
+      border: 1px solid #65767F;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .24);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+    .orbie-launcher:hover,
+    .orbie-launcher[aria-expanded="true"] {
+      color: #F2F3F0;
+      background: #30393E;
+      border-color: #A8B7BE;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .3);
+      transform: translateY(-1px);
+    }
+    .orbie-launcher:focus-visible,
+    .orbie-close:focus-visible,
+    .orbie-suggestion:focus-visible,
+    .orbie-send:focus-visible,
+    .orbie-input:focus-visible {
+      outline: 2px solid #C3CDD1;
+      outline-offset: 3px;
+    }
+    .orbie-avatar {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      place-items: center;
+      overflow: hidden;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 9px;
+    }
+    .orbie-avatar svg { display: block; width: 32px; height: 32px; }
+    .orbie-launcher-copy { display: grid; gap: 1px; text-align: left; }
+    .orbie-launcher-copy strong { font-family: 'Space Grotesk', sans-serif; font-size: .82rem; font-weight: 650; }
+    .orbie-launcher-copy span { color: #BCC5C9; font-size: .68rem; }
+
+    .orbie-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 86px;
+      z-index: 1;
+      display: flex;
+      width: min(368px, calc(100vw - 40px));
+      height: min(560px, calc(100vh - 120px));
+      height: min(560px, calc(100dvh - 120px));
+      min-height: min(360px, calc(100dvh - 120px));
+      flex-direction: column;
+      overflow: hidden;
+      color: #F2F3F0;
+      background: linear-gradient(145deg, #30393E, #3B464C);
+      border: 1px solid #4A565D;
+      border-radius: 14px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, .38);
+    }
+    .orbie-panel[hidden] { display: none !important; }
+    .orbie-panel:not([hidden]) { animation: orbie-panel-in 160ms ease-out; }
+    @keyframes orbie-panel-in {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .orbie-panel-header {
+      display: flex;
+      min-height: 66px;
+      align-items: center;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      gap: 10px;
+      padding: 11px 14px;
+      background: rgba(37, 44, 48, .48);
+      border-bottom: 1px solid #4A565D;
+    }
+    .orbie-panel-header .orbie-avatar { width: 36px; height: 36px; flex-basis: 36px; }
+    .orbie-panel-header .orbie-avatar svg { width: 31px; height: 31px; }
+    .orbie-heading { display: grid; flex: 1; min-width: 0; gap: 1px; }
+    .orbie-heading strong { font-size: .86rem; font-weight: 650; }
+    .orbie-heading span { color: #BCC5C9; font-size: .68rem; }
+    .orbie-mode { padding: 4px 7px; color: #BCC5C9; background: #3B464C; border: 1px solid #4A565D; border-radius: 6px; font-size: .63rem; white-space: nowrap; }
+    .orbie-panel-header:active { cursor: grabbing; }
+    .orbie-panel-header:focus-visible { outline: 2px solid #C3CDD1; outline-offset: -3px; }
+    .orbie-close {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      place-items: center;
+      color: #BCC5C9;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .orbie-close:hover { color: #F2F3F0; background: #3B464C; border-color: #4A565D; }
+    .orbie-reset {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      place-items: center;
+      color: #BCC5C9;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .orbie-reset:hover { color: #F2F3F0; background: #3B464C; border-color: #4A565D; }
+    .orbie-reset svg { width: 15px; height: 15px; }
+    .orbie-messages {
+      display: flex;
+      min-height: 0;
+      flex: 1;
+      flex-direction: column;
+      gap: 11px;
+      overflow-y: auto;
+      padding: 16px 14px;
+      scrollbar-color: #65767F transparent;
+      scrollbar-width: thin;
+    }
+    .orbie-message {
+      max-width: 92%;
+      padding: 10px 12px;
+      border: 1px solid #4A565D;
+      border-radius: 11px;
+      font-size: .78rem;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+    .orbie-message p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+    .orbie-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      padding: 7px 10px;
+      color: #F2F3F0;
+      background: #30393E;
+      border: 1px solid #65767F;
+      border-radius: 7px;
+      font-size: .7rem;
+      font-weight: 600;
+      line-height: 1.25;
+      text-decoration: none;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .orbie-action:hover { color: #F2F3F0; background: #4A565D; border-color: #A8B7BE; opacity: 1; }
+    .orbie-action:focus-visible { outline: 2px solid #C3CDD1; outline-offset: 3px; }
+    .orbie-reset:focus-visible { outline: 2px solid #C3CDD1; outline-offset: 3px; }
+    .orbie-message--assistant { align-self: flex-start; color: #F2F3F0; background: #3B464C; border-bottom-left-radius: 4px; }
+    .orbie-message--user { align-self: flex-end; color: #F2F3F0; background: #4A565D; border-color: #65767F; border-bottom-right-radius: 4px; }
+    .orbie-suggestions { display: grid; gap: 6px; padding: 0 14px 12px; }
+    .orbie-suggestions[hidden] { display: none !important; }
+    .orbie-suggestions-label { margin: 0; color: #BCC5C9; font-size: .66rem; font-weight: 600; }
+    .orbie-suggestion {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 10px;
+      color: #F2F3F0;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 8px;
+      font: inherit;
+      font-size: .72rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .orbie-suggestion:hover { background: #3B464C; border-color: #65767F; }
+    .orbie-suggestion span:last-child { color: #BCC5C9; font-size: .95rem; }
+    .orbie-composer {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      margin: 0 12px;
+      padding: 7px;
+      background: #252C30;
+      border: 1px solid #4A565D;
+      border-radius: 9px;
+    }
+    .orbie-composer:focus-within { border-color: #A8B7BE; box-shadow: 0 0 0 2px rgba(195, 205, 209, .08); }
+    .orbie-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .orbie-input {
+      display: block;
+      width: 100%;
+      min-height: 36px;
+      max-height: 104px;
+      resize: vertical;
+      padding: 8px 5px;
+      color: #F2F3F0;
+      background: transparent;
+      border: 0;
+      outline: 0;
+      font: inherit;
+      font-size: .76rem;
+      line-height: 1.4;
+    }
+    .orbie-input::placeholder { color: #A1AEB4; }
+    .orbie-send {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      place-items: center;
+      color: #252C30;
+      background: #C3CDD1;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 150ms ease;
+    }
+    .orbie-send:hover { background: #E2E6E6; }
+    .orbie-send svg { width: 16px; height: 16px; }
+    .orbie-hint { margin: 7px 14px 10px; color: #A1AEB4; font-size: .62rem; }
+    .orbie-privacy { margin: 0 14px 11px; color: #A1AEB4; font-size: .64rem; line-height: 1.35; }
+    @media (max-width: 480px) {
+      .orbie-widget { right: 12px; bottom: 12px; }
+      .orbie-panel { right: 12px; bottom: 78px; width: calc(100vw - 24px); height: min(560px, calc(100vh - 96px)); height: min(560px, calc(100dvh - 96px)); min-height: min(320px, calc(100dvh - 96px)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orbie-panel:not([hidden]) { animation: none; }
+    }
+
+/* ─── ORBINEX HERO ─────────────────────────────────────────────── */
+.hero { min-height:100svh; align-items:center; padding:142px 0 76px; }
+.hero-bg { background:radial-gradient(ellipse 52% 58% at 76% 48%, rgba(168,183,190,.085), transparent 72%), linear-gradient(115deg, rgba(37,44,48,.12), transparent 64%); }
+.hex-grid { display:none; }
+.hero-content .grid-2 { grid-template-columns:minmax(0,1.02fr) minmax(360px,.98fr); gap:clamp(42px,7vw,100px); align-items:center; }
+.hero-content .grid-2 > div:first-child { max-width:620px; margin:0; text-align:left; }
+.hero-tag { display:inline-flex; gap:10px; margin:0 0 24px; padding:0; border:0; background:transparent; color:#C3CDD1; font-size:.72rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase; }
+.pulse-dot { width:6px; height:6px; background:#C3CDD1; animation:none; }
+.hero h1 { max-width:660px; margin:0 0 22px; color:#F2F3F0; font-size:clamp(3.25rem,5.4vw,5.25rem); font-weight:600; line-height:1.02; letter-spacing:-.065em; }
+.hero h1 span.accent,.hero h1 span.accent-v { color:#C3CDD1; }
+.hero p.lead { max-width:550px; margin:0 0 30px; color:#BCC5C9; font-size:clamp(1rem,1.35vw,1.12rem); line-height:1.8; }
+.hero-actions { justify-content:flex-start; gap:12px; }
+.hero-proof { display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin-top:34px; color:#A1AEB4; font-size:.76rem; }
+.hero-proof span { display:inline-flex; align-items:center; gap:9px; }
+.hero-proof span::before { content:""; width:5px; height:5px; flex:0 0 5px; border-radius:50%; background:#A8B7BE; }
+.orb-wrap { width:100%; margin:0 auto; overflow:visible; }
+.security-scene { position:relative; isolation:isolate; width:min(100%,570px); aspect-ratio:1; margin:0 auto; }
+.security-halo { position:absolute; inset:12%; border-radius:50%; background:radial-gradient(circle, rgba(195,205,209,.12), rgba(195,205,209,.035) 48%, transparent 73%); filter:blur(24px); z-index:-1; }
+.hero .security-visual { display:block; width:100%; height:100%; overflow:visible; }
+.security-halo { animation:security-halo-breathe 8s ease-in-out infinite; }
+@keyframes security-halo-breathe { 0%,100% { opacity:.72; transform:scale(.98); } 50% { opacity:1; transform:scale(1.035); } }
+.security-orbits { transform-box:view-box; transform-origin:50% 50%; animation:security-orbit-drift 72s linear infinite; }
+@keyframes security-orbit-drift { to { transform:rotate(360deg); } }
+.security-shield { transform-box:fill-box; transform-origin:center; animation:security-shield-float 7s ease-in-out infinite; }
+@keyframes security-shield-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-4px); } }
+.security-keywords { position:absolute; inset:0; z-index:2; pointer-events:none; }
+.security-keywords .security-term { pointer-events:auto; }
+.security-term {
+  position:absolute;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 11px;
+  color:#E2E7E8;
+  background:rgba(37,44,48,.92);
+  border:1px solid rgba(195,205,209,.24);
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
+  font:600 .62rem/1 'Inter',sans-serif;
+  letter-spacing:.09em;
+  white-space:nowrap;
+  cursor:pointer;
+  appearance:none;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(7px);
+  animation:security-term-cycle 20s ease-in-out infinite both;
+  transition:opacity .2s ease,border-color .2s ease,background .2s ease;
+}
+.security-term:hover,.security-term:focus-visible { visibility:visible; pointer-events:auto; opacity:1; background:rgba(48,57,62,.98); border-color:rgba(195,205,209,.56); animation-play-state:paused; }
+.security-term:focus-visible { outline:2px solid #C3CDD1; outline-offset:3px; }
+.security-term::before { content:""; width:5px; height:5px; flex:0 0 5px; border-radius:50%; background:#C3CDD1; box-shadow:0 0 9px rgba(195,205,209,.42); }
+.security-term:nth-child(1) { top:12%; left:13%; animation-delay:0s; }
+.security-term:nth-child(2) { top:21%; right:4%; animation-delay:4s; }
+.security-term:nth-child(3) { top:57%; right:0; animation-delay:8s; }
+.security-term:nth-child(4) { bottom:14%; right:13%; animation-delay:12s; }
+.security-term:nth-child(5) { top:69%; left:2%; animation-delay:16s; }
+@keyframes security-term-cycle {
+  0%,2%,19%,100% { opacity:0; pointer-events:none; transform:translateY(7px); }
+  4%,15% { opacity:1; pointer-events:auto; transform:translateY(0); }
+}
+.security-keywords.has-active-term .security-term { animation-play-state:paused; }
+.security-term-detail {
+  position:absolute;
+  pointer-events:auto;
+  z-index:5;
+  width:min(280px,calc(100% - 24px));
+  padding:14px 38px 14px 15px;
+  color:#E2E7E8;
+  background:rgba(37,44,48,.98);
+  border:1px solid rgba(195,205,209,.38);
+  border-radius:12px;
+  box-shadow:0 16px 42px rgba(0,0,0,.3);
+  backdrop-filter:blur(14px);
+}
+.security-term-detail[hidden] { display:none !important; }
+.security-term-detail p { margin:0; color:#BCC5C9; font-size:.78rem; line-height:1.55; }
+.security-term-close {
+  position:absolute;
+  top:7px;
+  right:7px;
+  display:grid;
+  width:26px;
+  height:26px;
+  place-items:center;
+  padding:0;
+  color:#C3CDD1;
+  background:transparent;
+  border:0;
+  border-radius:7px;
+  font:400 1.1rem/1 'Inter',sans-serif;
+  cursor:pointer;
+}
+.security-term-close:hover,.security-term-close:focus-visible { color:#F2F3F0; background:rgba(195,205,209,.1); }
+.security-term-close:focus-visible { outline:2px solid #C3CDD1; outline-offset:2px; }
+@media(max-width:900px) {
+ .hero { min-height:auto; padding:124px 0 54px; }
+ .hero-content .grid-2 { grid-template-columns:1fr; gap:18px; }
+ .hero-content .grid-2 > div:first-child { max-width:700px; margin-inline:auto; text-align:center; }
+ .hero h1 { margin-inline:auto; font-size:clamp(3.1rem,8vw,4.7rem); }
+ .hero p.lead { margin-inline:auto; }
+ .hero-actions,.hero-proof { justify-content:center; }
+ .security-scene { width:min(100%,500px); }
+}
+@media(max-width:600px) {
+ .hero { padding:108px 0 38px; }
+ .hero-tag { margin-bottom:18px; font-size:.66rem; letter-spacing:.11em; }
+ .hero h1 { font-size:clamp(2.7rem,12vw,3.8rem); letter-spacing:-.055em; }
+ .hero p.lead { max-width:450px; margin-bottom:23px; font-size:.97rem; line-height:1.7; }
+ .hero-actions { flex-direction:column; align-items:stretch; }
+ .hero-actions .btn { justify-content:center; }
+ .hero-proof { gap:10px 17px; margin-top:25px; font-size:.7rem; }
+ .security-scene { width:min(100%,390px); }
+}
+@media(prefers-reduced-motion:reduce) {
+ .security-halo,.security-orbits,.security-shield,.security-term { animation:none !important; }
+ .security-halo { opacity:.85; transform:none; }
+ .security-term { opacity:.72; pointer-events:auto; transform:none; }
+}
+  </style>
 </head>
 <body>
 
@@ -1539,6 +1938,7 @@ h1, h2, h3, h4,
         <li><a href="#about">About</a></li>
         <li><a href="#leadership">Leadership</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="admin.html" class="local-admin-link" hidden>Admin</a></li>
       </ul>
       <a href="#contact" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:0.875rem;">Request a Security Check</a>
       <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -1556,6 +1956,8 @@ h1, h2, h3, h4,
   <a href="#about" class="mobile-link">About</a>
   <a href="#leadership" class="mobile-link">Leadership</a>
   <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#faq" class="mobile-link">FAQs</a>
+  <a href="admin.html" class="mobile-link local-admin-link" hidden>Adminpaneel</a>
   <a href="#contact" class="btn btn-primary" style="width:fit-content;margin-top:8px;">Request a Security Check →</a>
 </div>
 
@@ -1568,114 +1970,66 @@ h1, h2, h3, h4,
       <div>
         <div class="hero-tag">
           <span class="pulse-dot"></span>
-          Website Security Checks — Based in Belgium
+          Independent Website Security · Belgium
         </div>
         <h1>
-          Is Your Website<br>
-          <span class="accent">Safe</span> From the<br>
-          <span class="accent-v">Outside World?</span>
+          Website security,<br>
+          made <span class="accent">clear.</span>
         </h1>
-        <p class="lead">Orbinex Security scans and tests your website for vulnerabilities using professional tools — and gives you a clear, honest report on what needs fixing and why it matters.</p>
+        <p class="lead">An independent review of your website security, with clear findings, priorities and practical next steps.</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Get Your Website Checked →</a>
-          <a href="#services" class="btn btn-outline">See What I Do</a>
+          <a href="#contact" class="btn btn-primary">Request a Security Check →</a>
+          <a href="#services" class="btn btn-outline">Explore the Process</a>
         </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <div class="stat-num">BE<span>-based</span></div>
-            <div class="stat-label">Founded in Belgium</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">Solo<span> op.</span></div>
-            <div class="stat-label">Personal, direct service</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">Real<span> tools</span></div>
-            <div class="stat-label">Professional scanning</div>
-          </div>
+        <div class="hero-proof" aria-label="What to expect">
+          <span>Independent review</span>
+          <span>Clear written findings</span>
+          <span>Practical next steps</span>
         </div>
       </div>
       <div class="orb-wrap">
-        <div class="orb-svg-container">
-          <div class="orb-glow"></div>
-          <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;top:0;left:0;">
+        <div class="security-scene">
+          <div class="security-halo" aria-hidden="true"></div>
+          <svg class="security-visual" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
-              <radialGradient id="orbCore" cx="50%" cy="50%" r="50%">
-                <stop offset="0%"   stop-color="#00C2FF" stop-opacity="0.7"/>
-                <stop offset="40%"  stop-color="#00C2FF" stop-opacity="0.2"/>
-                <stop offset="100%" stop-color="#00C2FF" stop-opacity="0"/>
+              <radialGradient id="orbinexEmblemFill" cx="38%" cy="30%" r="78%">
+                <stop offset="0" stop-color="#536168" stop-opacity=".72"/>
+                <stop offset="1" stop-color="#252C30" stop-opacity=".12"/>
               </radialGradient>
-              <radialGradient id="orbViolet" cx="50%" cy="50%" r="50%">
-                <stop offset="0%"   stop-color="#7B2FFF" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#7B2FFF" stop-opacity="0"/>
-              </radialGradient>
+              <linearGradient id="orbinexEmblemLine" x1=".1" y1="0" x2=".9" y2="1">
+                <stop offset="0" stop-color="#F2F3F0" stop-opacity=".82"/>
+                <stop offset="1" stop-color="#A8B7BE" stop-opacity=".45"/>
+              </linearGradient>
             </defs>
-            <!-- Outer dashed ring -->
-            <g class="orb-ring-1">
-              <circle cx="240" cy="240" r="210" fill="none" stroke="#00C2FF" stroke-width="0.8" stroke-dasharray="4 8" opacity="0.25"/>
+            <circle cx="260" cy="260" r="184" fill="url(#orbinexEmblemFill)" stroke="#A8B7BE" stroke-opacity=".2"/>
+            <circle cx="260" cy="260" r="145" fill="none" stroke="#A8B7BE" stroke-opacity=".16"/>
+            <g class="security-orbits" fill="none" stroke="#A8B7BE" stroke-width="1">
+              <ellipse cx="260" cy="260" rx="204" ry="70" opacity=".34" transform="rotate(-28 260 260)"/>
+              <ellipse cx="260" cy="260" rx="204" ry="70" opacity=".2" transform="rotate(48 260 260)"/>
+              <circle cx="458" cy="260" r="3.5" fill="#F2F3F0" opacity=".9"/>
             </g>
-            <!-- Mid ellipse ring, tilted -->
-            <g class="orb-ring-2" style="transform-origin:240px 240px;">
-              <ellipse cx="240" cy="240" rx="170" ry="68" fill="none" stroke="#7B2FFF" stroke-width="1" stroke-dasharray="6 10" opacity="0.35" transform="rotate(30 240 240)"/>
+            <g class="security-shield">
+              <path d="M260 155 330 182v57c0 54-29 98-70 122-41-24-70-68-70-122v-57l70-27Z" fill="#30393E" fill-opacity=".88" stroke="url(#orbinexEmblemLine)" stroke-width="1.5"/>
+              <path d="m230 244 21 21 43-47" fill="none" stroke="#F2F3F0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
-            <!-- Second ellipse, different axis -->
-            <g class="orb-ring-3" style="transform-origin:240px 240px;">
-              <ellipse cx="240" cy="240" rx="150" ry="58" fill="none" stroke="#00C2FF" stroke-width="0.8" stroke-dasharray="3 12" opacity="0.25" transform="rotate(-50 240 240)"/>
+            <g fill="#C3CDD1">
+              <circle cx="424" cy="184" r="3.5"/>
+              <circle cx="118" cy="324" r="3" opacity=".72"/>
+              <circle cx="351" cy="432" r="2.5" opacity=".66"/>
             </g>
-            <!-- Inner solid ring -->
-            <circle cx="240" cy="240" r="130" fill="none" stroke="#00C2FF" stroke-width="1.2" opacity="0.15"/>
-            <!-- Core glow -->
-            <circle cx="240" cy="240" r="80" fill="url(#orbCore)" class="orb-core"/>
-            <circle cx="240" cy="240" r="50" fill="none" stroke="#00C2FF" stroke-width="1.5" opacity="0.4"/>
-            <circle cx="240" cy="240" r="30" fill="rgba(0,194,255,0.3)"/>
-            <circle cx="240" cy="240" r="16" fill="#00C2FF" opacity="0.9"/>
-            <circle cx="240" cy="240" r="7"  fill="#060D1F"/>
-            <!-- Violet inner core -->
-            <circle cx="240" cy="240" r="38" fill="url(#orbViolet)" opacity="0.5"/>
-
-            <!-- Network nodes -->
-            <g class="orb-nodes">
-              <!-- node N -->
-              <class name="node">
-                <circle cx="240" cy="30"  r="7" fill="#7B2FFF" class="node"/>
-                <line x1="240" y1="37" x2="240" y2="110" stroke="#7B2FFF" stroke-width="1" opacity="0.4"/>
-              </class>
-              <circle cx="240" cy="30"  r="7" fill="#7B2FFF" opacity="0.9"/>
-              <line x1="240" y1="37" x2="240" y2="110" stroke="#7B2FFF" stroke-width="1" opacity="0.35"/>
-
-              <circle cx="445" cy="140" r="6" fill="#00C2FF" opacity="0.9"/>
-              <line x1="439" y1="144" x2="367" y2="183" stroke="#00C2FF" stroke-width="1" opacity="0.35"/>
-
-              <circle cx="445" cy="340" r="6" fill="#7B2FFF" opacity="0.9"/>
-              <line x1="439" y1="336" x2="367" y2="297" stroke="#7B2FFF" stroke-width="1" opacity="0.35"/>
-
-              <circle cx="240" cy="450" r="7" fill="#00C2FF" opacity="0.9"/>
-              <line x1="240" y1="443" x2="240" y2="370" stroke="#00C2FF" stroke-width="1" opacity="0.35"/>
-
-              <circle cx="35"  cy="340" r="6" fill="#7B2FFF" opacity="0.9"/>
-              <line x1="41"  y1="336" x2="113" y2="297" stroke="#7B2FFF" stroke-width="1" opacity="0.35"/>
-
-              <circle cx="35"  cy="140" r="6" fill="#00C2FF" opacity="0.9"/>
-              <line x1="41"  y1="144" x2="113" y2="183" stroke="#00C2FF" stroke-width="1" opacity="0.35"/>
-            </g>
-
-            <!-- Cross-scan lines -->
-            <g class="orb-scan">
-              <line x1="70"  y1="240" x2="410" y2="240" stroke="#00C2FF" stroke-width="0.75" stroke-dasharray="3 6"/>
-              <line x1="240" y1="70"  x2="240" y2="410" stroke="#00C2FF" stroke-width="0.75" stroke-dasharray="3 6"/>
-            </g>
-
-            <!-- Small blip indicators -->
-            <circle cx="318" cy="162" r="3" fill="#00E5A0" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="162" cy="318" r="3" fill="#FFB547" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite" begin="1s"/>
-            </circle>
-            <circle cx="318" cy="318" r="3" fill="#00C2FF" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.6s" repeatCount="indefinite" begin="0.5s"/>
-            </circle>
+            <circle cx="260" cy="260" r="202" fill="none" stroke="#F2F3F0" stroke-opacity=".06" stroke-dasharray="1 9"/>
           </svg>
+          <div class="security-keywords" role="group" aria-label="Website security topics. Select a term for an explanation.">
+            <button class="security-term" type="button" data-term="https" aria-controls="securityTermDetail" aria-expanded="false">HTTPS</button>
+            <button class="security-term" type="button" data-term="tls" aria-controls="securityTermDetail" aria-expanded="false">TLS</button>
+            <button class="security-term" type="button" data-term="cookies" aria-controls="securityTermDetail" aria-expanded="false">SECURE COOKIES</button>
+            <button class="security-term" type="button" data-term="csp" aria-controls="securityTermDetail" aria-expanded="false">CSP HEADERS</button>
+            <button class="security-term" type="button" data-term="access" aria-controls="securityTermDetail" aria-expanded="false">ACCESS CONTROL</button>
+            <div class="security-term-detail" id="securityTermDetail" role="region" aria-label="Security term explanation" hidden>
+              <p id="securityTermDescription" aria-live="polite"></p>
+              <button class="security-term-close" type="button" aria-label="Close explanation">×</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2230,10 +2584,7 @@ h1, h2, h3, h4,
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
             Email Ferre
           </a>
-          <a href="tel:+320476067193" class="social-pill">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" stroke="currentColor" stroke-width="1.8"/></svg>
-            +32 476 06 71 93
-          </a>
+
           <a href="https://www.linkedin.com/in/ferre-van-eyken-528b83441/" target="_blank" class="social-pill">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
             LinkedIn
@@ -2248,6 +2599,33 @@ h1, h2, h3, h4,
 
 <div class="divider"></div>
 
+<!-- ═══ FAQ ══════════════════════════════════════════════════════════ -->
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="eyebrow">Frequently Asked Questions</div>
+      <h2>Before You Request a Check</h2>
+      <p>Clear answers about the security check, pricing and permission.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>What does a website security check include?</summary>
+        <div class="faq-answer"><p>Depending on the agreed scope, a check can review SSL/HTTPS, security headers, publicly visible login or admin pages, and identifiable software versions. The exact checks depend on the website and the scope agreed in advance.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>How is the price estimate calculated?</summary>
+        <div class="faq-answer"><p>The estimate uses the website size, chosen assessment depth and any selected extras. The calculator is an indication, not a binding quote. The final scope and price are confirmed after discussing the website’s complexity.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary>Do you need permission before testing?</summary>
+        <div class="faq-answer"><p>Yes. Testing starts only after the website owner has agreed to the scope and given permission. The check stays within the approved scope.</p></div>
+      </details>
+    </div>
+    <div class="faq-cta reveal"><a href="#contact" class="btn btn-outline">Still have a question? Contact Orbinex →</a></div>
+  </div>
+</section>
+
+<div class="divider"></div>
 <!-- ═══ CTA BAND ══════════════════════════════════════════════════════ -->
 <section class="section" style="padding:40px 0 80px;">
   <div class="container">
@@ -2281,15 +2659,6 @@ h1, h2, h3, h4,
             <div>
               <div class="label">Email</div>
               <a href="mailto:orbinex.cybersecurity@gmail.com" class="value">orbinex.cybersecurity@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-method">
-            <div class="contact-method-icon">
-              <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" stroke="#00C2FF" stroke-width="1.8"/></svg>
-            </div>
-            <div>
-              <div class="label">Phone</div>
-              <a href="tel:+320476067193" class="value">+32 476 06 71 93</a>
             </div>
           </div>
           <div class="contact-method">
@@ -2435,6 +2804,7 @@ h1, h2, h3, h4,
           <li><a href="#about">About Us</a></li>
           <li><a href="#leadership">Leadership</a></li>
           <li><a href="#why">Why Orbinex</a></li>
+          <li><a href="#faq">FAQs</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -2454,11 +2824,7 @@ h1, h2, h3, h4,
             </a>
           </li>
 
-          <li>
-            <a href="tel:+32476067193">
-              +32 476 06 71 93
-            </a>
-          </li>
+
 
           <li>
             <a
@@ -2489,14 +2855,262 @@ h1, h2, h3, h4,
         <a href="mailto:orbinex.cybersecurity@gmail.com" class="social-link" aria-label="Email">
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.8"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.8"/></svg>
         </a>
-        <a href="tel:+320476067193" class="social-link" aria-label="Phone">
-          <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z" stroke="currentColor" stroke-width="1.8"/></svg>
-        </a>
+
       </div>
     </div>
   </div>
 </footer>
 
+<!-- Orbie — chatvenster op dezelfde pagina -->
+<div class="orbie-widget">
+  <aside id="orbiePanel" class="orbie-panel" aria-label="Orbie websitegids" aria-hidden="true" hidden>
+    <div class="orbie-panel-header" role="group" tabindex="0" aria-label="Sleep de balk om Orbie te verplaatsen; gebruik de pijltjestoetsen om hem te verplaatsen">
+      <span class="orbie-avatar" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="10" width="34" height="30" rx="9" fill="#30393E" stroke="#A8B7BE" stroke-width="2"/>
+          <path d="M24 10V5" stroke="#C3CDD1" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="4" r="2" fill="#C3CDD1"/>
+          <circle cx="17" cy="23" r="2.5" fill="#C3CDD1"/><circle cx="31" cy="23" r="2.5" fill="#C3CDD1"/>
+          <path d="M18 32H30" stroke="#A8B7BE" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <div class="orbie-heading"><strong>Orbie</strong><span>Orbinex websitegids</span></div>
+      <span class="orbie-mode">Gidsmodus</span>
+      <button id="orbieReset" class="orbie-reset" type="button" aria-label="Nieuw gesprek starten" title="Nieuw gesprek starten">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7v5h-5M4.9 9a7.5 7.5 0 0112.4-2.2L20 12M4 17v-5h5m10.1 3a7.5 7.5 0 01-12.4 2.2L4 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="orbieClose" class="orbie-close" type="button" aria-label="Orbie sluiten">×</button>
+    </div>
+    <div id="orbieMessages" class="orbie-messages" role="log" aria-live="polite" aria-relevant="additions text">
+      <div class="orbie-message orbie-message--assistant"><p>Hoi, ik ben Orbie. Ik geef heldere uitleg over de diensten, werkwijze en prijsindicatie van Orbinex.</p></div>
+    </div>
+    <div id="orbieSuggestions" class="orbie-suggestions">
+      <p class="orbie-suggestions-label">Veelgestelde vragen</p>
+      <button class="orbie-suggestion" type="button" data-orbie-prompt="Wat controleert Orbinex?"><span>Wat controleert Orbinex?</span><span aria-hidden="true">›</span></button>
+      <button class="orbie-suggestion" type="button" data-orbie-prompt="Hoe wordt de prijs bepaald?"><span>Hoe wordt de prijs bepaald?</span><span aria-hidden="true">›</span></button>
+    </div>
+    <form id="orbieForm" class="orbie-composer">
+      <label class="orbie-sr-only" for="orbieInput">Stel een vraag aan Orbie</label>
+      <textarea id="orbieInput" class="orbie-input" rows="1" maxlength="500" placeholder="Stel je vraag aan Orbie…"></textarea>
+      <button class="orbie-send" type="submit" aria-label="Verstuur vraag">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 3L10.8 13.2M21 3l-6.5 18-3.7-7.3L3.5 10 21 3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+    <p class="orbie-hint">Enter verstuurt · Shift+Enter voor een nieuwe regel</p>
+    <p class="orbie-privacy">Deel geen wachtwoorden of toegangscodes in de chat.</p>
+  </aside>
+  <button id="orbieToggle" class="orbie-launcher" type="button" aria-controls="orbiePanel" aria-expanded="false" aria-label="Open Orbie op deze pagina">
+    <span class="orbie-avatar" aria-hidden="true">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="7" y="10" width="34" height="30" rx="9" fill="#30393E" stroke="#A8B7BE" stroke-width="2"/>
+        <path d="M24 10V5" stroke="#C3CDD1" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="4" r="2" fill="#C3CDD1"/>
+        <circle cx="17" cy="23" r="2.5" fill="#C3CDD1"/><circle cx="31" cy="23" r="2.5" fill="#C3CDD1"/>
+        <path d="M18 32H30" stroke="#A8B7BE" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="orbie-launcher-copy"><strong>Orbie</strong><span>Websitegids</span></span>
+  </button>
+</div>
+<script>
+(() => {
+  const panel = document.getElementById('orbiePanel');
+  const widget = panel && panel.closest('.orbie-widget');
+  const header = panel && panel.querySelector('.orbie-panel-header');
+  const toggle = document.getElementById('orbieToggle');
+  const close = document.getElementById('orbieClose');
+  const reset = document.getElementById('orbieReset');
+  const messages = document.getElementById('orbieMessages');
+  const form = document.getElementById('orbieForm');
+  const input = document.getElementById('orbieInput');
+  const suggestions = document.getElementById('orbieSuggestions');
+  if (!panel || !widget || !header || !toggle || !close || !reset || !messages || !form || !input || !suggestions) return;
+
+  function setOpen(open) {
+    panel.hidden = !open;
+    panel.setAttribute('aria-hidden', String(!open));
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Sluit Orbie op deze pagina' : 'Open Orbie op deze pagina');
+    if (open) {
+      requestAnimationFrame(() => {
+        if (savedPanelPosition) applyPanelPosition(savedPanelPosition.left, savedPanelPosition.top);
+        input.focus();
+      });
+    } else toggle.focus();
+  }
+
+  function addMessage(text, role) {
+    const bubble = document.createElement('div');
+    bubble.className = `orbie-message orbie-message--${role}`;
+    const paragraph = document.createElement('p');
+    paragraph.textContent = text;
+    bubble.append(paragraph);
+    messages.append(bubble);
+    messages.scrollTop = messages.scrollHeight;
+    return bubble;
+  }
+
+  function replyTo(question) {
+    const q = question.toLocaleLowerCase('nl-BE');
+    if (/(prijs|kost|du(u|i)r|budget|raming)/.test(q)) {
+      return 'De prijsindicatie is gebaseerd op het geschatte aantal pagina’s en de gekozen diepgang. Je kunt beide opties aanpassen in de prijsindicatie op deze website. De definitieve scope en prijs worden vooraf besproken.';
+    }
+    if (/(proces|werkwijze|verloop|stappen|aanvraag|rapport|hoe werkt)/.test(q)) {
+      return 'Je stuurt een aanvraag met de website en je vraag. Daarna worden scope en toestemming afgestemd. Na de afgesproken controle ontvang je een rapport met bevindingen en praktische vervolgstappen.';
+    }
+    if (/(contact|mail|email|bereik|formulier)/.test(q)) {
+      return 'Je kunt het contactformulier op deze website gebruiken of mailen naar orbinex.cybersecurity@gmail.com. Deel geen wachtwoorden of toegangscodes.';
+    }
+    if (/(monitor|beheer|onderhoud|doorlopend|infrastructuur)/.test(q)) {
+      return 'Orbinex richt zich op website security checks en duidelijke rapportage. Infrastructuurbeheer en doorlopende monitoring vallen buiten de huidige dienst.';
+    }
+    if (/(check|scan|controle|ssl|https|header|kwetsbaar|beveilig|security|dienst|website)/.test(q)) {
+      return 'Orbinex kan onder meer SSL/HTTPS, security headers, zichtbare login- of beheerderspagina’s en softwareversies beoordelen. De controle blijft beperkt tot de vooraf afgesproken scope en gebeurt met toestemming van de eigenaar.';
+    }
+    return 'Daar heb ik geen gericht antwoord op. Ik kan geen specifieke website bekijken of scannen, maar je kunt je vraag via het contactformulier verder toelichten.';
+  }
+
+  function actionFor(question) {
+    const q = question.toLocaleLowerCase('nl-BE');
+    if (/(prijs|kost|du(u|i)r|budget|raming)/.test(q)) {
+      return { label: 'Bekijk de prijsindicatie', href: '#pricing' };
+    }
+    if (/(contact|mail|email|bereik|formulier)/.test(q)) {
+      return { label: 'Neem contact op', href: '#contact' };
+    }
+    if (/(proces|werkwijze|verloop|stappen|aanvraag|rapport|hoe werkt)/.test(q)) {
+      return { label: 'Bespreek een securitycheck', href: '#contact' };
+    }
+    if (/(check|scan|controle|ssl|https|header|kwetsbaar|beveilig|security|dienst|website)/.test(q)) {
+      return { label: 'Bekijk de diensten', href: '#services' };
+    }
+    return { label: 'Neem contact op', href: '#contact' };
+  }
+
+  function addAction(bubble, action) {
+    if (!action) return;
+    const link = document.createElement('a');
+    link.className = 'orbie-action';
+    link.href = action.href;
+    link.textContent = `${action.label}  ↗`;
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const target = document.querySelector(action.href);
+      if (!target) return;
+      setOpen(false);
+      const offset = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: offset, behavior: 'auto' });
+    });
+    bubble.append(link);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function send(question) {
+    const text = question.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    suggestions.hidden = true;
+    input.value = '';
+    const reply = addMessage(replyTo(text), 'assistant');
+    addAction(reply, actionFor(text));
+    input.focus();
+  }
+
+  function clamp(value, minimum, maximum) {
+    return Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
+  }
+
+  function applyPanelPosition(left, top) {
+    const rect = panel.getBoundingClientRect();
+    const x = clamp(left, 0, window.innerWidth - rect.width);
+    const y = clamp(top, 0, window.innerHeight - rect.height);
+    panel.style.left = `${x}px`;
+    panel.style.top = `${y}px`;
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+  }
+
+  function savePanelPosition() {
+    const rect = panel.getBoundingClientRect();
+    savedPanelPosition = { left: rect.left, top: rect.top };
+    try {
+      localStorage.setItem('orbie-panel-position-v1', JSON.stringify(savedPanelPosition));
+    } catch (_) { /* The chat remains draggable when storage is unavailable. */ }
+  }
+
+  let savedPanelPosition = null;
+  try {
+    const storedPosition = JSON.parse(localStorage.getItem('orbie-panel-position-v1') || 'null');
+    if (storedPosition && Number.isFinite(storedPosition.left) && Number.isFinite(storedPosition.top)) {
+      savedPanelPosition = storedPosition;
+    }
+  } catch (_) { /* Start at the default corner when no position is saved. */ }
+
+  let drag = null;
+  header.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0 || event.target.closest('button')) return;
+    const rect = panel.getBoundingClientRect();
+    drag = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY, left: rect.left, top: rect.top, moved: false };
+    header.setPointerCapture(event.pointerId);
+  });
+  header.addEventListener('pointermove', (event) => {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
+    if (!drag.moved && Math.hypot(deltaX, deltaY) < 4) return;
+    drag.moved = true;
+    event.preventDefault();
+    applyPanelPosition(drag.left + deltaX, drag.top + deltaY);
+  });
+  function finishDrag(event) {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    if (drag.moved) savePanelPosition();
+    drag = null;
+  }
+  header.addEventListener('pointerup', finishDrag);
+  header.addEventListener('pointercancel', finishDrag);
+  header.addEventListener('keydown', (event) => {
+    if (event.target !== header || !event.key.startsWith('Arrow')) return;
+    const rect = panel.getBoundingClientRect();
+    const step = event.shiftKey ? 4 : 16;
+    const left = rect.left + (event.key === 'ArrowLeft' ? -step : event.key === 'ArrowRight' ? step : 0);
+    const top = rect.top + (event.key === 'ArrowUp' ? -step : event.key === 'ArrowDown' ? step : 0);
+    event.preventDefault();
+    applyPanelPosition(left, top);
+    savePanelPosition();
+  });
+  window.addEventListener('resize', () => {
+    if (panel.hidden || !savedPanelPosition) return;
+    const rect = panel.getBoundingClientRect();
+    applyPanelPosition(rect.left, rect.top);
+    savePanelPosition();
+  }, { passive: true });
+  toggle.addEventListener('click', () => setOpen(panel.hidden));
+  close.addEventListener('click', () => setOpen(false));
+  reset.addEventListener('click', () => {
+    messages.replaceChildren();
+    addMessage('Hoi, ik ben Orbie. Ik geef heldere uitleg over de diensten, werkwijze en prijsindicatie van Orbinex.', 'assistant');
+    suggestions.hidden = false;
+    input.value = '';
+    messages.scrollTop = 0;
+    input.focus();
+  });
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    send(input.value);
+  });
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
+  suggestions.querySelectorAll('[data-orbie-prompt]').forEach((button) => {
+    button.addEventListener('click', () => send(button.dataset.orbiePrompt || ''));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !panel.hidden) setOpen(false);
+  });
+})();
+</script>
 <!-- Toast notification -->
 <div class="toast" id="toast">
   <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="22,4 12,14.01 9,11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2742,7 +3356,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) {
       e.preventDefault();
       const offset = target.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top: offset, behavior: 'smooth' });
+      window.scrollTo({ top: offset, behavior: 'auto' });
     }
   });
 });
@@ -2761,6 +3375,89 @@ document.querySelectorAll('.card').forEach(card => {
     card.style.transition = '';
   });
 });
+</script>
+<script>
+  if (["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+    document.querySelectorAll(".local-admin-link").forEach((link) => {
+      link.hidden = false;
+    });
+  }
+</script>
+
+
+
+<script>
+(() => {
+  const scene = document.querySelector(".security-scene");
+  if (!scene) return;
+
+  const terms = [...scene.querySelectorAll(".security-term")];
+  const keywordContainer = scene.querySelector('.security-keywords');
+  const detail = scene.querySelector(".security-term-detail");
+  const description = scene.querySelector("#securityTermDescription");
+  const closeButton = scene.querySelector(".security-term-close");
+  let activeTerm = null;
+
+  const explanations = {
+    https: "HTTPS encrypts the connection between a visitor and a website. A review can check whether it is active and configured correctly.",
+    tls: "TLS helps protect information while it travels between a visitor and a website. Certificate and configuration checks depend on the agreed review scope.",
+    cookies: "Cookie settings can help protect login sessions. Relevant flags include Secure, HttpOnly and SameSite.",
+    csp: "Content Security Policy can restrict which sources a page is allowed to load. The right policy depends on how the website works.",
+    access: "Access controls decide who can reach sensitive pages and actions. A review can include publicly visible access points."
+  };
+
+  function positionDetail(term) {
+    detail.hidden = false;
+    const sceneRect = scene.getBoundingClientRect();
+    const termRect = term.getBoundingClientRect();
+    const halfWidth = detail.offsetWidth / 2;
+    const center = termRect.left - sceneRect.left + termRect.width / 2;
+    const left = Math.max(halfWidth + 8, Math.min(sceneRect.width - halfWidth - 8, center));
+    let top = termRect.bottom - sceneRect.top + 10;
+    if (top + detail.offsetHeight > sceneRect.height - 8) {
+      top = termRect.top - sceneRect.top - detail.offsetHeight - 10;
+    }
+    top = Math.max(8, Math.min(top, sceneRect.height - detail.offsetHeight - 8));
+    detail.style.left = `${left}px`;
+    detail.style.top = `${top}px`;
+  }
+
+  function closeDetail(returnFocus = false) {
+    detail.hidden = true;
+    keywordContainer.classList.remove('has-active-term');
+    if (activeTerm) {
+      activeTerm.setAttribute("aria-expanded", "false");
+      if (returnFocus) activeTerm.focus();
+    }
+    activeTerm = null;
+  }
+
+  terms.forEach((term) => {
+    term.addEventListener("click", () => {
+      if (activeTerm === term && !detail.hidden) {
+        closeDetail();
+        return;
+      }
+      if (activeTerm) activeTerm.setAttribute("aria-expanded", "false");
+      activeTerm = term;
+      keywordContainer.classList.add('has-active-term');
+      term.setAttribute("aria-expanded", "true");
+      description.textContent = explanations[term.dataset.term];
+      positionDetail(term);
+    });
+  });
+
+  closeButton.addEventListener("click", () => closeDetail(true));
+  scene.addEventListener("click", (event) => {
+    if (!detail.hidden && !event.target.closest(".security-term, .security-term-detail")) closeDetail();
+  });
+  scene.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !detail.hidden) closeDetail(true);
+  });
+  window.addEventListener("resize", () => {
+    if (activeTerm && !detail.hidden) positionDetail(activeTerm);
+  });
+})();
 </script>
 </body>
 </html>
