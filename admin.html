@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbinex | Admin</title>
+  <meta name="theme-color" content="#252C30">
+  <link rel="icon" type="image/png" href="orbinex-logo.png">
+
+  <style>
+    .admin-greeting  {
+      margin: 6px 0 0;
+      color: #BCC5C9;
+      font-size: 14px;    
+      } 
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      background: #252C30;
+      color: #F2F3F0;
+      font-family: Arial, sans-serif;
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 1080px;
+      padding: 28px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 16px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .blue,
+    a {
+      color: #C3CDD1;
+    }
+
+    .muted {
+      color: #BCC5C9;
+    }
+
+    input,
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 13px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    input {
+      background: #30393E;
+      color: white;
+      border: 1px solid #4A565D;
+    }
+
+    button {
+      border: 0;
+      background: #C3CDD1;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #A8B7BE;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible {
+      outline: 2px solid #C3CDD1;
+      outline-offset: 2px;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .secondary {
+      width: auto;
+      padding: 10px 16px;
+      background: #4A565D;
+    }
+
+    .secondary:hover {
+      background: #4A565D;
+    }
+
+    .site-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0;
+      color: #F2F3F0;
+      text-decoration: none;
+    }
+
+    .site-link:hover {
+      background: #4A565D;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .stat-card {
+      padding: 20px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 12px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+      border-color: #C3CDD1;
+      transform: translateY(-2px);
+    }
+
+    .stat-card span {
+      display: block;
+      margin-bottom: 12px;
+      color: #BCC5C9;
+      font-size: 13px;
+    }
+
+    .stat-card strong {
+      display: block;
+      color: #C3CDD1;
+      font-size: 30px;
+    }
+
+    .analytics-card {
+      margin: 28px 0;
+      padding: 20px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 14px;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .dashboard-actions button {
+      width: auto;
+      margin-top: 0;
+    }
+
+    .analytics-header,
+    .analytics-panel-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .analytics-header h3,
+    .analytics-panel h4 {
+      margin: 0;
+    }
+
+    .analytics-header p {
+      margin: 6px 0 0;
+      color: #BCC5C9;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .analytics-kpis {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .analytics-kpi {
+      padding: 14px 16px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 10px;
+    }
+
+    .analytics-kpi span {
+      display: block;
+      color: #BCC5C9;
+      font-size: 12px;
+    }
+
+    .analytics-kpi strong {
+      display: block;
+      margin-top: 6px;
+      color: #C3CDD1;
+      font-size: 26px;
+    }
+
+    .analytics-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+      gap: 14px;
+    }
+
+    .analytics-panel {
+      min-width: 0;
+      padding: 16px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 10px;
+    }
+
+    .analytics-panel h4 {
+      font-size: 14px;
+    }
+
+    .analytics-chart {
+      display: grid;
+      grid-template-columns: repeat(30, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 4px;
+      height: 170px;
+      margin-top: 16px;
+    }
+
+    .analytics-day {
+      display: flex;
+      min-width: 0;
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .analytics-bar-track {
+      display: flex;
+      width: 100%;
+      min-height: 130px;
+      flex: 1;
+      align-items: flex-end;
+      border-bottom: 1px solid #4A565D;
+    }
+
+    .analytics-bar {
+      width: 100%;
+      min-height: 2px;
+      background: linear-gradient(180deg, #C3CDD1, #C3CDD1);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .analytics-day-label {
+      min-height: 12px;
+      color: #A1AEB4;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .service-row {
+      min-width: 0;
+    }
+
+    .service-row-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      color: #F2F3F0;
+      font-size: 12px;
+    }
+
+    .service-row-heading span:first-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .service-track {
+      height: 6px;
+      overflow: hidden;
+      background: #3B464C;
+      border-radius: 999px;
+    }
+
+    .service-bar {
+      height: 100%;
+      background: #C3CDD1;
+      border-radius: inherit;
+    }
+
+    .analytics-empty {
+      margin: 16px 0 0;
+      color: #BCC5C9;
+      font-size: 13px;
+    }
+
+    .request {
+      margin-top: 16px;
+      padding: 22px;
+      overflow-wrap: anywhere;
+      background: linear-gradient(145deg, #30393E, #252C30);
+      border: 1px solid #4A565D;
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgb(0 0 0 / 14%);
+    }
+
+    .request-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #4A565D;
+    }
+
+    .request-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .request-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      color: #BCC5C9;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .request-id {
+      padding: 5px 9px;
+      color: #F2F3F0;
+      background: #3B464C;
+      border: 1px solid #4A565D;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .request-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .request-detail {
+      min-width: 0;
+      padding: 12px 14px;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 9px;
+    }
+
+    .request-detail--wide {
+      grid-column: 1 / -1;
+    }
+
+    .request-detail-label {
+      display: block;
+      margin-bottom: 6px;
+      color: #BCC5C9;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .request-detail-value {
+      margin: 0;
+      color: #F2F3F0;
+      font-size: 14px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .request-status-field {
+      max-width: 360px;
+    }
+
+    .request-admin-controls {
+      display: grid;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid #4A565D;
+    }
+
+    .request-field-label,
+    .request-notes-label {
+      display: block;
+      color: #F2F3F0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .request-help {
+      margin: 5px 0 8px;
+      color: #BCC5C9;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .request-tools {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .request-tools input,
+    .request-tools select,
+    .request input[type="text"],
+    .request textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      margin-top: 0;
+      padding: 12px 14px;
+      color: #F2F3F0;
+      background-color: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .pagination button {
+      width: auto;
+      margin-top: 0;
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .request-tools select {
+      padding-right: 40px;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2358b9ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    .request-tools select option,
+    .request select option {
+      color: #F2F3F0;
+      background-color: #30393E;
+    }
+
+    .request select {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      margin-top: 8px;
+      padding: 10px 12px;
+      color: #F2F3F0;
+      background: #30393E;
+      border: 1px solid #4A565D;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .request textarea {
+      min-height: 110px;
+      margin-top: 8px;
+      resize: vertical;
+      line-height: 1.5;
+      font: inherit;
+    }
+
+    .request-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .request-actions button {
+      width: auto;
+      margin-top: 0;
+    }
+
+    .request--archived {
+      border-color: #65767F;
+    }
+
+    .archive-badge {
+      padding: 5px 9px;
+      color: #F2F3F0;
+      background: #3B464C;
+      border: 1px solid #65767F;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .archive-button {
+      padding: 10px 14px;
+      color: #F2F3F0;
+      background: #3B464C;
+      border: 1px solid #4A565D;
+    }
+
+    .archive-button:hover {
+      background: #4A565D;
+    }
+
+    .request-feedback {
+      min-height: 18px;
+      margin: 8px 0 0;
+      color: #BCC5C9;
+      font-size: 12px;
+    }
+
+
+    @media (max-width: 600px) {
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .request-tools,
+      .request-details,
+      .analytics-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .request-detail--wide {
+        grid-column: auto;
+      }
+
+      .request {
+        padding: 17px;
+      }
+
+      .request-header {
+        flex-direction: column;
+      }
+
+      .request-meta {
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .request-status-field {
+        max-width: none;
+      }
+
+      .request-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .request-actions button {
+        width: 100%;
+      }
+    }
+
+
+    /* Split-screen Orbinex admin sign-in */
+    body.auth-screen {
+      padding: 28px;
+      background: #252C30;
+      color: #F2F3F0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    body.auth-screen .panel {
+      width: min(1320px, 100%);
+      max-width: 1320px;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 0;
+      border-radius: 18px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.3);
+    }
+
+    body.auth-screen #login {
+      display: grid;
+      min-height: min(760px, calc(100vh - 56px));
+      grid-template-columns: minmax(0, 1.45fr) minmax(390px, .8fr);
+      overflow: hidden;
+      background: #252C30;
+      border: 1px solid #4A565D;
+      border-radius: 18px;
+    }
+
+    .auth-brand {
+      display: grid;
+      min-height: 560px;
+      place-items: center;
+      padding: 56px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(195,205,209,.12), transparent 48%),
+        linear-gradient(145deg, #3B464C 0%, #30393E 58%, #252C30 100%);
+      border-right: 1px solid #4A565D;
+    }
+
+    .auth-brand-content { display: grid; justify-items: center; gap: 22px; }
+    .auth-logo { display: block; width: min(300px, 68%); max-height: 190px; object-fit: contain; }
+    .auth-brand-rule { width: 56px; height: 2px; background: linear-gradient(90deg, #C3CDD1, #A8B7BE); border-radius: 99px; }
+    .auth-brand-tagline { max-width: 390px; margin: 0; color: #F2F3F0; font-family: "Space Grotesk", Inter, sans-serif; font-size: clamp(1.45rem, 2.8vw, 2.1rem); font-weight: 600; line-height: 1.25; letter-spacing: -.025em; }
+    .auth-brand-caption { color: #BCC5C9; font-size: .72rem; font-weight: 650; letter-spacing: .15em; text-transform: uppercase; }
+
+    body.auth-screen #login .auth-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(34px, 5vw, 72px);
+      background: #252C30;
+    }
+
+    .auth-form-wrap { width: min(360px, 100%); }
+    .auth-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; color: #C3CDD1; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .auth-eyebrow::before { width: 7px; height: 7px; content: ""; background: #A8B7BE; border-radius: 50%; }
+    .auth-form-wrap h1 { margin: 0 0 9px; color: #F2F3F0; font-family: "Space Grotesk", Inter, sans-serif; font-size: clamp(1.85rem, 3vw, 2.25rem); line-height: 1.15; letter-spacing: -.035em; }
+    .auth-intro { margin: 0 0 30px; color: #BCC5C9; font-size: .92rem; line-height: 1.65; }
+    body.auth-screen #loginForm { display: grid; gap: 9px; }
+    body.auth-screen #loginForm label { margin-top: 6px; color: #E2E6E6; font-size: .8rem; font-weight: 600; }
+    body.auth-screen #loginForm input {
+      width: 100%;
+      min-height: 48px;
+      margin: 0;
+      padding: 12px 14px;
+      background: #30393E;
+      color: #F2F3F0;
+      border: 1px solid #4A565D;
+      border-radius: 8px;
+      font: inherit;
+      font-size: .92rem;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+    body.auth-screen #loginForm input:focus { border-color: #A8B7BE; box-shadow: 0 0 0 3px rgba(168,183,190,.12); outline: 0; }
+    body.auth-screen #loginForm button {
+      width: 100%;
+      min-height: 48px;
+      margin: 17px 0 0;
+      padding: 12px 16px;
+      color: #252C30;
+      background: linear-gradient(135deg, #C3CDD1, #A8B7BE);
+      border: 0;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter .18s ease, transform .18s ease;
+    }
+    body.auth-screen #loginForm button:hover { background: linear-gradient(135deg, #D5DCDF, #B9C5CA); transform: translateY(-1px); }
+    body.auth-screen #loginForm button:disabled { opacity: .65; cursor: wait; transform: none; }
+    body.auth-screen #loginMessage { min-height: 21px; margin: 11px 0 0; color: #BCC5C9; font-size: .8rem; }
+    .auth-divider { height: 1px; margin: 25px 0 16px; background: #4A565D; }
+    .auth-note { margin: 0; color: #A1AEB4; font-size: .73rem; line-height: 1.55; }
+    .auth-return { display: inline-flex; margin-top: 24px; color: #C3CDD1; font-size: .78rem; text-decoration: none; }
+    .auth-return:hover { color: #F2F3F0; }
+
+    body.auth-screen input:focus-visible,
+    body.auth-screen button:focus-visible,
+    body.auth-screen a:focus-visible {
+      outline: 2px solid #C3CDD1;
+      outline-offset: 3px;
+    }
+
+    body.auth-screen #dashboard { display: none; }
+    body:not(.auth-screen) #login { display: none; }
+
+    @media (max-width: 820px) {
+      body.auth-screen { padding: 16px; }
+      body.auth-screen .panel { width: min(620px, 100%); }
+      body.auth-screen #login { grid-template-columns: 1fr; min-height: 0; }
+      .auth-brand { min-height: 250px; padding: 28px; border-right: 0; border-bottom: 1px solid #4A565D; }
+      .auth-brand-content { gap: 13px; }
+      .auth-logo { width: min(220px, 60%); max-height: 100px; }
+      .auth-brand-rule { width: 40px; }
+      .auth-brand-tagline { font-size: 1.35rem; }
+      .auth-brand-caption { font-size: .64rem; }
+      body.auth-screen #login .auth-content { padding: 32px clamp(24px, 8vw, 54px) 36px; }
+    }
+
+    @media (max-width: 480px) {
+      body.auth-screen { padding: 0; align-items: stretch; }
+      body.auth-screen .panel { min-height: 100vh; }
+      body.auth-screen #login { min-height: 100vh; border: 0; border-radius: 0; }
+      .auth-brand { min-height: 210px; }
+      body.auth-screen #login .auth-content { align-items: flex-start; padding-top: 34px; }
+    }
+
+
+  /* Orbinex dashboard: warm, calm, and easy to scan */
+  :root {
+    color-scheme: light;
+    --orbinex-paper: #f5f2e9;
+    --orbinex-surface: #fffefa;
+    --orbinex-soft: #f2efe6;
+    --orbinex-ink: #1d1f1a;
+    --orbinex-muted: #72746d;
+    --orbinex-line: #e5e0d4;
+    --orbinex-gold: #e7b82f;
+    --orbinex-gold-soft: #fff3ca;
+    --orbinex-shadow: 0 16px 44px rgba(43, 39, 27, 0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: clamp(12px, 2.4vw, 32px);
+    color: var(--orbinex-ink);
+    background:
+      radial-gradient(circle at 84% 8%, rgba(231, 184, 47, 0.13), transparent 28rem),
+      linear-gradient(135deg, #f8f6ef 0%, var(--orbinex-paper) 100%);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  .panel {
+    width: min(100%, 1320px);
+    max-width: 1320px;
+    min-height: calc(100vh - 64px);
+    margin: 0 auto;
+    padding: clamp(16px, 2.2vw, 30px);
+    color: var(--orbinex-ink);
+    background: rgba(255, 254, 250, 0.62);
+    border: 1px solid rgba(229, 224, 212, 0.8);
+    border-radius: 28px;
+    box-shadow: var(--orbinex-shadow);
+  }
+
+  .top {
+    position: sticky;
+    top: 10px;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    background: rgba(255, 254, 250, 0.92);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(43, 39, 27, 0.05);
+    backdrop-filter: blur(14px);
+  }
+
+  .admin-brand {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 10px;
+    color: var(--orbinex-ink);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 760;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .admin-brand img {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    object-fit: contain;
+  }
+
+  .admin-nav {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    background: var(--orbinex-soft);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 999px;
+  }
+
+  .admin-nav a {
+    padding: 9px 14px;
+    color: var(--orbinex-muted);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 680;
+    text-decoration: none;
+    transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .admin-nav a.is-active {
+    color: #fffefa;
+    background: var(--orbinex-ink);
+  }
+
+  .admin-nav a:hover {
+    color: var(--orbinex-ink);
+    background: #fffefa;
+    transform: translateY(-1px);
+  }
+
+  .dashboard-actions {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 8px;
+  }
+
+  .dashboard-welcome {
+    margin: 0;
+  }
+
+  .dashboard-overview-head {
+    display: grid;
+    grid-template-columns: minmax(210px, .8fr) minmax(0, 1.6fr);
+    align-items: end;
+    gap: 22px;
+    margin: 0 0 20px;
+  }
+
+  .dashboard-welcome h1 {
+    margin: 0 0 4px;
+    color: var(--orbinex-ink);
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 760;
+    letter-spacing: -0.045em;
+  }
+
+  .dashboard-welcome .admin-greeting { margin: 0 0 5px; }
+
+  .dashboard-welcome .muted { margin: 0; }
+
+  button {
+    min-height: 42px;
+    padding: 10px 16px;
+    color: var(--orbinex-ink);
+    background: var(--orbinex-gold);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 720;
+    box-shadow: none;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  }
+
+  button:hover:not(:disabled) {
+    color: var(--orbinex-ink);
+    background: #f0c64f;
+    box-shadow: 0 6px 14px rgba(134, 100, 8, 0.12);
+    transform: translateY(-1px);
+  }
+
+  button.secondary {
+    color: var(--orbinex-ink);
+    background: #fffefa;
+    border-color: var(--orbinex-line);
+  }
+
+  button.secondary:hover:not(:disabled) {
+    color: var(--orbinex-ink);
+    background: var(--orbinex-soft);
+  }
+
+  button:disabled {
+    color: #9b9b94;
+    background: #ebe8df;
+    border-color: #ebe8df;
+    box-shadow: none;
+  }
+
+  .muted { color: var(--orbinex-muted); }
+
+  #dashboard > .muted {
+    margin: 0 2px 20px;
+    font-size: 14px;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 0 18px;
+  }
+
+  .dashboard-overview-head .stats { gap: 8px; margin: 0; }
+
+  .stat-card {
+    position: relative;
+    min-height: 108px;
+    padding: 18px 20px;
+    overflow: hidden;
+    background: var(--orbinex-surface);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 19px;
+    box-shadow: none;
+  }
+
+  .dashboard-overview-head .stat-card { min-height: 67px; padding: 10px 12px; border-radius: 13px; }
+  .dashboard-overview-head .stat-card::after { display: none; }
+  .dashboard-overview-head .stat-card span { font-size: 9px; letter-spacing: .025em; }
+  .dashboard-overview-head .stat-card strong { margin-top: 6px; font-size: 23px; }
+
+  .stat-card::after {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    width: 9px;
+    height: 9px;
+    background: var(--orbinex-gold);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .stat-card span {
+    color: var(--orbinex-muted);
+    font-size: 11px;
+    font-weight: 680;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+  }
+
+  .stat-card strong {
+    display: block;
+    margin-top: 12px;
+    color: var(--orbinex-ink);
+    font-size: 34px;
+    font-weight: 760;
+    letter-spacing: -0.06em;
+    line-height: 1;
+  }
+
+  .analytics-card {
+    margin: 18px 0 20px;
+    padding: clamp(18px, 2vw, 26px);
+    background: var(--orbinex-surface);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 23px;
+    box-shadow: 0 8px 24px rgba(43, 39, 27, 0.035);
+  }
+
+  .analytics-header {
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .analytics-header h3 {
+    margin: 0 0 5px;
+    color: var(--orbinex-ink);
+    font-size: 19px;
+    font-weight: 740;
+    letter-spacing: -0.035em;
+  }
+
+  .analytics-header p {
+    max-width: 700px;
+    color: var(--orbinex-muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .analytics-kpis { gap: 12px; margin: 0 0 14px; }
+
+  .analytics-kpi {
+    padding: 16px 18px;
+    background: var(--orbinex-soft);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 16px;
+  }
+
+  .analytics-kpi span {
+    color: var(--orbinex-muted);
+    font-size: 11px;
+    font-weight: 670;
+  }
+
+  .analytics-kpi strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--orbinex-ink);
+    font-size: 26px;
+    letter-spacing: -0.04em;
+  }
+
+  .analytics-layout {
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.85fr);
+    gap: 12px;
+  }
+
+  .analytics-panel {
+    padding: 16px;
+    background: #fffefa;
+    border: 1px solid var(--orbinex-line);
+    border-radius: 17px;
+  }
+
+  .analytics-panel h4 {
+    color: var(--orbinex-ink);
+    font-size: 13px;
+    font-weight: 720;
+  }
+
+  .analytics-bar {
+    background: var(--orbinex-gold);
+    border-radius: 999px;
+  }
+
+  .service-track { background: #ece8dd; }
+  .service-bar { background: var(--orbinex-ink); border-radius: 999px; }
+
+  .request-tools {
+    position: sticky;
+    top: 82px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 10px;
+    margin: 0 0 12px;
+    padding: 10px;
+    background: rgba(255, 254, 250, 0.94);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(43, 39, 27, 0.045);
+    backdrop-filter: blur(12px);
+  }
+
+  input, select, textarea {
+    color: var(--orbinex-ink);
+    background: #fffefa;
+    border: 1px solid var(--orbinex-line);
+    border-radius: 12px;
+    font: inherit;
+  }
+
+  input, select { min-height: 44px; padding: 10px 13px; }
+  input::placeholder, textarea::placeholder { color: #9a9a91; }
+  input:focus, select:focus, textarea:focus {
+    outline: 3px solid rgba(231, 184, 47, 0.22);
+    border-color: #c99d22;
+  }
+
+  #requests { scroll-margin-top: 150px; }
+
+  .request {
+    margin: 12px 0;
+    padding: clamp(16px, 2vw, 22px);
+    background: var(--orbinex-surface);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 21px;
+    box-shadow: 0 8px 22px rgba(43, 39, 27, 0.035);
+  }
+
+  .request-header {
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--orbinex-line);
+  }
+
+  .request-title {
+    color: var(--orbinex-ink);
+    font-size: 17px;
+    font-weight: 760;
+    letter-spacing: -0.025em;
+  }
+
+  .request-meta { gap: 8px; color: var(--orbinex-muted); font-size: 11px; }
+
+  .request-id {
+    padding: 6px 10px;
+    color: #56440c;
+    background: var(--orbinex-gold-soft);
+    border: 1px solid #f0dfaa;
+    border-radius: 999px;
+    font-weight: 720;
+  }
+
+  .request-details { gap: 9px; margin-top: 14px; }
+
+  .request-detail {
+    padding: 12px 14px;
+    background: #f8f6f0;
+    border: 1px solid #eeeadf;
+    border-radius: 14px;
+  }
+
+  .request-detail-label {
+    margin-bottom: 5px;
+    color: var(--orbinex-muted);
+    font-size: 10px;
+    font-weight: 720;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .request-detail-value {
+    color: var(--orbinex-ink);
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .request-admin-controls {
+    margin-top: 14px;
+    padding: 15px;
+    background: #f7f5ee;
+    border: 1px solid var(--orbinex-line);
+    border-radius: 16px;
+  }
+
+  .request-admin-controls label,
+  .request-notes-label {
+    color: var(--orbinex-ink);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .request textarea {
+    width: 100%;
+    min-height: 82px;
+    padding: 12px 14px;
+    resize: vertical;
+  }
+
+  .request select { min-height: 40px; }
+  .request-actions { gap: 8px; margin-top: 12px; }
+  .request-actions button { min-height: 40px; }
+  .request--archived { opacity: 0.78; }
+  .archive-badge { color: #57470f; background: var(--orbinex-gold-soft); }
+  .pagination {
+    margin-top: 16px;
+    padding: 10px 12px;
+    background: var(--orbinex-surface);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 16px;
+  }
+
+  body.auth-screen {
+    display: grid;
+    place-items: center;
+  }
+
+  body.auth-screen .panel {
+    width: min(100%, 1080px);
+    max-width: 1080px;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--orbinex-surface);
+    border: 1px solid var(--orbinex-line);
+    border-radius: 28px;
+    box-shadow: 0 24px 72px rgba(43, 39, 27, 0.12);
+  }
+
+  body.auth-screen #login {
+    min-height: min(700px, calc(100vh - 64px));
+    grid-template-columns: 0.9fr 1.1fr;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .auth-brand {
+    color: #f8f5eb;
+    background:
+      radial-gradient(circle at 75% 22%, rgba(231, 184, 47, 0.24), transparent 19rem),
+      linear-gradient(145deg, #171915, #24251f);
+  }
+
+  .auth-brand-rule { background: var(--orbinex-gold); }
+  .auth-brand-tagline { color: #e6e2d6; }
+  .auth-brand-caption { color: #aaa99e; }
+
+  body.auth-screen #login .auth-content {
+    padding: clamp(26px, 6vw, 76px);
+    background: var(--orbinex-surface);
+  }
+
+  .auth-eyebrow {
+    color: #72570d;
+    background: var(--orbinex-gold-soft);
+    border: 1px solid #f0dfaa;
+    border-radius: 999px;
+  }
+
+  body.auth-screen #loginForm input { background: #fffefa; }
+  body.auth-screen #loginForm button {
+    color: var(--orbinex-ink);
+    background: var(--orbinex-gold);
+    border: 0;
+  }
+
+  @media (max-width: 960px) {
+    .top {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: "brand actions" "nav nav";
+    }
+    .admin-brand { grid-area: brand; }
+    .admin-nav { grid-area: nav; justify-self: start; }
+    .dashboard-actions { grid-area: actions; justify-self: end; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .analytics-layout { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 8px; }
+    .panel { min-height: calc(100vh - 16px); padding: 12px; border-radius: 21px; }
+    .top { position: static; display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; }
+    .admin-brand { font-size: 13px; }
+    .dashboard-actions { margin-left: auto; }
+    .dashboard-actions button { min-height: 38px; padding: 8px 11px; font-size: 11px; }
+    .admin-nav { width: 100%; justify-content: space-between; overflow-x: auto; }
+    .admin-nav a { flex: 1 0 auto; padding: 9px 10px; text-align: center; }
+    .stats { gap: 8px; }
+    .stat-card { min-height: 94px; padding: 14px; border-radius: 15px; }
+    .stat-card strong { font-size: 29px; }
+    .analytics-card { padding: 15px; border-radius: 19px; }
+    .analytics-header { display: block; }
+    .analytics-header > .muted { display: inline-block; margin-top: 7px; }
+    .analytics-kpis { grid-template-columns: 1fr 1fr; }
+    .analytics-panel { padding: 12px; }
+    .request-tools { position: static; grid-template-columns: 1fr; padding: 8px; }
+    .request-header { align-items: flex-start; flex-direction: column; }
+    .request-meta { flex-wrap: wrap; }
+    .request-details { grid-template-columns: 1fr; }
+    .request-admin-controls { padding: 12px; }
+    .request-actions { flex-wrap: wrap; }
+    body.auth-screen .panel { width: min(100%, 480px); }
+    body.auth-screen #login { min-height: 0; grid-template-columns: 1fr; }
+    .auth-brand { min-height: 190px; }
+    body.auth-screen #login .auth-content { padding: 24px; }
+  }
+
+  body.auth-screen #login .auth-content,
+  body.auth-screen #login .auth-content h1,
+  body.auth-screen #login .auth-content label {
+    color: var(--orbinex-ink);
+  }
+
+  body.auth-screen #login .auth-content .auth-intro,
+  body.auth-screen #login .auth-content .auth-note {
+    color: var(--orbinex-muted);
+  }
+
+  body.auth-screen #login .auth-content a,
+  body.auth-screen #login .auth-content .auth-return {
+    color: #72570d;
+  }
+
+  body.auth-screen #login .auth-content a:hover {
+    color: var(--orbinex-ink);
+  }
+
+  body.auth-screen #loginForm input {
+    color: var(--orbinex-ink);
+    background: #fffefa;
+  }
+
+  body.auth-screen #loginMessage {
+    color: #8b301f;
+  }
+
+  body.auth-screen {
+    color: var(--orbinex-ink);
+    background:
+      radial-gradient(circle at 84% 8%, rgba(231, 184, 47, 0.13), transparent 28rem),
+      linear-gradient(135deg, #f8f6ef 0%, var(--orbinex-paper) 100%);
+  }
+
+  /* Orbinex graphite and ice palette */
+  :root {
+    --orbinex-paper: #252C30;
+    --orbinex-surface: #30393E;
+    --orbinex-soft: #3B464C;
+    --orbinex-ink: #F2F3F0;
+    --orbinex-muted: #BCC5C9;
+    --orbinex-line: #4A565D;
+    --orbinex-gold: #C3CDD1;
+    --orbinex-gold-soft: #3B464C;
+    --orbinex-shadow: 0 16px 44px rgba(0, 0, 0, 0.18);
+  }
+
+  body,
+  body.auth-screen {
+    color: var(--orbinex-ink);
+    background:
+      radial-gradient(circle at 84% 8%, rgba(195, 205, 209, 0.10), transparent 28rem),
+      linear-gradient(135deg, #30393E 0%, var(--orbinex-paper) 100%);
+  }
+
+  .panel {
+    color: var(--orbinex-ink);
+    background: rgba(48, 57, 62, 0.86);
+    border-color: rgba(74, 86, 93, 0.92);
+  }
+
+  .top,
+  .request-tools { background: rgba(48, 57, 62, 0.96); }
+
+  .admin-nav a.is-active {
+    color: #252C30;
+    background: var(--orbinex-gold);
+  }
+
+  .admin-nav a:hover {
+    color: var(--orbinex-ink);
+    background: #4A565D;
+  }
+
+  button:hover:not(:disabled) {
+    color: #252C30;
+    background: #A8B7BE;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  }
+
+  button:disabled {
+    color: #A1AEB4;
+    background: #4A565D;
+    border-color: #4A565D;
+  }
+
+  .analytics-panel { background: var(--orbinex-surface); }
+  .analytics-kpi { background: var(--orbinex-soft); }
+  .service-track { background: #4A565D; }
+  .service-bar { background: var(--orbinex-gold); }
+
+  input,
+  select,
+  textarea {
+    color: var(--orbinex-ink);
+    background: #252C30;
+    border-color: var(--orbinex-line);
+  }
+
+  input::placeholder,
+  textarea::placeholder { color: #89969B; }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline-color: rgba(195, 205, 209, 0.22);
+    border-color: var(--orbinex-gold);
+  }
+
+  .request { background: var(--orbinex-surface); }
+  .request-detail,
+  .request-admin-controls { background: #252C30; }
+
+  .request-id,
+  .archive-badge {
+    color: var(--orbinex-ink);
+    background: var(--orbinex-soft);
+    border-color: #65767F;
+  }
+
+  .auth-brand {
+    background:
+      radial-gradient(circle at 75% 22%, rgba(195, 205, 209, 0.14), transparent 19rem),
+      linear-gradient(145deg, #30393E, #252C30);
+  }
+
+  .auth-brand-tagline { color: var(--orbinex-ink); }
+  .auth-brand-caption { color: var(--orbinex-muted); }
+
+  .auth-eyebrow {
+    color: var(--orbinex-ink);
+    background: var(--orbinex-soft);
+    border-color: var(--orbinex-line);
+  }
+
+  body.auth-screen #login .auth-content a,
+  body.auth-screen #login .auth-content .auth-return {
+    color: var(--orbinex-gold);
+  }
+
+  body.auth-screen #loginForm input {
+    color: var(--orbinex-ink);
+    background: #252C30;
+  }
+
+  body.auth-screen #loginForm button {
+    color: #252C30;
+    background: var(--orbinex-gold);
+  }
+  .dashboard-actions button.secondary {
+  color: #F2F3F0;
+  background: #4A565D;
+  border: 1px solid #65767F;
+}
+
+.dashboard-actions button.secondary:hover:not(:disabled) {
+  color: #F2F3F0;
+  background: #3B464C;
+}
+/* De vakkenindeling van het dashboard */
+.orbinex-dashboard-layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas: "profile profile profile middle middle middle middle middle middle checklist checklist checklist";
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Elk vak krijgt de bestaande Orbinex-kleuren */
+.orbinex-dashboard-card {
+  min-width: 0;
+  padding: 18px;
+  color: inherit;
+  background: var(--orbinex-surface);
+  border: 1px solid var(--orbinex-line);
+  border-radius: 16px;
+}
+
+/* 12-kolomsindeling: 3 kolommen links, 6 midden, 3 rechts */
+.orbinex-profile { grid-area: profile; }
+.orbinex-middle { grid-area: middle; display: grid; gap: 14px; min-width: 0; }
+.orbinex-middle-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+.orbinex-checklist { grid-area: checklist; }
+
+.orbinex-dashboard-card h3 {
+  margin: 0 0 9px;
+  color: inherit;
+  font-size: 15px;
+}
+
+.orbinex-dashboard-card p {
+  margin: 0;
+  color: var(--orbinex-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.orbinex-card-heading,
+.orbinex-calendar-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orbinex-card-heading h3,
+.orbinex-calendar-heading h3 { margin-bottom: 0; }
+
+.orbinex-audit-badge,
+.orbinex-task-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25px;
+  padding: 4px 9px;
+  color: var(--orbinex-ink);
+  background: var(--orbinex-gold-soft);
+  border: 1px solid var(--orbinex-line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.orbinex-profile { display: flex; min-height: 390px; flex-direction: column; justify-content: space-between; }
+.orbinex-audit-visual {
+  display: flex;
+  min-height: 176px;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 9px;
+  margin: 17px 0 14px;
+  padding: 18px;
+  background: radial-gradient(circle at 80% 15%, rgba(195,205,209,.22), transparent 42%), linear-gradient(145deg, #3B464C, #252C30);
+  border: 1px solid #4A565D;
+  border-radius: 14px;
+}
+.orbinex-audit-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #252C30;
+  background: var(--orbinex-gold);
+  border-radius: 13px;
+  font-size: 20px;
+  font-weight: 850;
+}
+.orbinex-audit-visual h2 { margin: auto 0 0; color: #F2F3F0; font-size: 18px; line-height: 1.25; overflow-wrap: anywhere; }
+.orbinex-audit-visual p { color: #BCC5C9 !important; overflow-wrap: anywhere; }
+.orbinex-audit-details { display: grid; gap: 0; }
+.orbinex-audit-details > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 8px; padding: 9px 0; border-top: 1px solid var(--orbinex-line); }
+.orbinex-audit-details span { color: var(--orbinex-muted); font-size: 10px; }
+.orbinex-audit-details strong { min-width: 0; overflow: hidden; color: var(--orbinex-ink); font-size: 10px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.orbinex-profile-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--orbinex-ink);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.orbinex-progress-value {
+  display: block;
+  margin: 14px 0 5px;
+  color: var(--orbinex-ink);
+  font-size: 30px;
+  font-weight: 760;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.orbinex-progress-track {
+  height: 8px;
+  margin: 14px 0 10px;
+  overflow: hidden;
+  background: var(--orbinex-soft);
+  border: 1px solid var(--orbinex-line);
+  border-radius: 999px;
+}
+
+.orbinex-progress-fill {
+  width: 0;
+  height: 100%;
+  background: var(--orbinex-gold);
+  border-radius: inherit;
+  transition: width 180ms ease;
+}
+
+.orbinex-activity-total { display: flex; align-items: center; gap: 8px; margin: 10px 0 2px; }
+.orbinex-activity-total output { color: var(--orbinex-ink); font-size: 27px; font-weight: 780; line-height: 1; font-variant-numeric: tabular-nums; }
+.orbinex-activity-total span { color: var(--orbinex-muted); font-size: 9px; line-height: 1.3; }
+.orbinex-card-arrow { display: grid; width: 24px; height: 24px; place-items: center; color: var(--orbinex-muted); border: 1px solid var(--orbinex-line); border-radius: 8px; font-size: 13px; }
+.orbinex-week-chart { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; gap: 8px; height: 92px; margin-top: 12px; padding: 0 2px; }
+.orbinex-week-column { display: flex; min-width: 0; height: 100%; flex-direction: column; align-items: center; justify-content: flex-end; gap: 5px; }
+.orbinex-week-bar-track { display: flex; width: 100%; height: 70px; align-items: flex-end; justify-content: center; overflow: hidden; background: rgba(195,205,209,.08); border-radius: 999px; }
+.orbinex-week-bar { width: min(15px, 60%); min-height: 3px; background: #7D898E; border-radius: 999px; transition: height 180ms ease; }
+.orbinex-week-column.is-latest .orbinex-week-bar { background: var(--orbinex-gold); }
+.orbinex-week-label { color: var(--orbinex-muted); font-size: 8px; font-weight: 700; text-transform: uppercase; }
+
+.orbinex-checklist {
+  color: #F2F3F0;
+  background: #252C30;
+  border-color: #4A565D;
+}
+
+.orbinex-checklist .orbinex-muted { color: #A1AEB4; }
+.orbinex-worklist-card { margin: 18px 0; }
+.orbinex-task-list { display: grid; gap: 8px; margin: 15px 0 0; padding: 0; list-style: none; }
+
+.orbinex-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 9px 10px;
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 10px;
+}
+
+.orbinex-task-item input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  min-height: 16px;
+  margin: 1px 0 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--orbinex-gold);
+}
+
+.orbinex-task-item label { color: #E2E6E7; font-size: 11px; line-height: 1.4; cursor: pointer; }
+.orbinex-task-item input:checked + label { color: #A1AEB4; text-decoration: line-through; }
+.orbinex-task-group { margin: 15px 0 0; color: #A1AEB4; font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+
+.orbinex-calendar-heading { flex-wrap: wrap; margin-bottom: 14px; }
+.orbinex-calendar-controls { display: flex; align-items: center; gap: 7px; }
+.orbinex-calendar-range { min-width: 108px; color: var(--orbinex-muted); font-size: 11px; text-align: center; }
+.orbinex-calendar-controls button,
+.orbinex-calendar-add,
+.orbinex-calendar-form button {
+  min-height: 32px;
+  padding: 6px 10px;
+  font-size: 11px;
+}
+.orbinex-calendar-controls button { min-width: 32px; padding: 5px; }
+.orbinex-calendar-scroll { max-height: 292px; overflow: auto; margin-top: 14px; border: 1px solid var(--orbinex-line); border-radius: 12px; overscroll-behavior: contain; }
+.orbinex-calendar-grid {
+  display: grid;
+  min-width: 570px;
+  gap: 1px;
+  background: var(--orbinex-line);
+}
+.orbinex-calendar-row { display: grid; grid-template-columns: 48px repeat(6, minmax(0, 1fr)); gap: 1px; }
+.orbinex-calendar-row--heading { position: sticky; top: 0; z-index: 3; }
+.orbinex-calendar-weekday { display: flex; min-height: 39px; align-items: center; justify-content: center; gap: 6px; padding: 6px 4px; color: var(--orbinex-muted); background: #252C30; font-size: 9px; font-weight: 750; letter-spacing: .025em; text-align: center; text-transform: uppercase; }
+.orbinex-calendar-weekday.is-today { color: var(--orbinex-ink); background: #3B464C; }
+.orbinex-calendar-weekday strong { color: inherit; font-size: 11px; }
+.orbinex-calendar-time-label { display: flex; min-height: 43px; align-items: flex-start; justify-content: flex-end; padding: 5px 5px 0 0; color: var(--orbinex-muted); background: #252C30; font-size: 9px; font-variant-numeric: tabular-nums; }
+.orbinex-calendar-slot { min-width: 0; min-height: 43px; padding: 3px; background: var(--orbinex-surface); cursor: pointer; }
+.orbinex-calendar-slot:hover { background: #343E43; }
+.orbinex-calendar-slot.is-today { background: #343E43; }
+.orbinex-calendar-slot:focus-visible { outline: 2px solid var(--orbinex-gold); outline-offset: -2px; }
+.orbinex-event-chip { display: flex; min-width: 0; align-items: flex-start; justify-content: space-between; gap: 3px; padding: 5px 4px; color: var(--orbinex-ink); background: var(--orbinex-gold-soft); border: 1px solid var(--orbinex-line); border-left: 3px solid var(--orbinex-gold); border-radius: 6px; font-size: 9px; line-height: 1.3; }
+.orbinex-event-title { min-width: 0; margin: 0 !important; overflow-wrap: anywhere; color: inherit !important; font-size: inherit !important; font-weight: 650; }
+.orbinex-event-time { display: block; margin-top: 2px; color: var(--orbinex-muted); font-size: 8px; font-weight: 600; }
+.orbinex-event-delete { flex: 0 0 18px; min-height: 18px !important; width: 18px; padding: 0 !important; border-radius: 5px !important; font-size: 11px !important; }
+.orbinex-calendar-form { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(130px, 1fr) minmax(92px, .7fr) auto; gap: 8px; margin-top: 12px; }
+.orbinex-calendar-form[hidden] { display: none !important; }
+.orbinex-calendar-form input { min-width: 0; min-height: 36px; padding: 7px 10px; color: var(--orbinex-ink); background: var(--orbinex-paper); border: 1px solid var(--orbinex-line); border-radius: 9px; font: inherit; font-size: 11px; }
+.orbinex-calendar-notice { margin-top: 8px !important; font-size: 10px !important; }
+.orbinex-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.audit-steps-card {
+  grid-area: checklist;
+  min-height: 100%;
+  color: #F2F3F0;
+  background: #252C30;
+  border-color: #4A565D;
+}
+.audit-steps-card h3 { margin-bottom: 6px; }
+.audit-steps-card > p { color: #A1AEB4; }
+.audit-steps-card .orbinex-checklist-list {
+  display: grid;
+  gap: 9px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.audit-steps-card .orbinex-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 10px;
+  color: #E2E6E7;
+  background: rgba(255, 255, 255, .045);
+  border: 1px solid rgba(255, 255, 255, .075);
+  border-radius: 11px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.audit-steps-card .orbinex-checklist-item span:first-child {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  place-items: center;
+  color: #252C30;
+  background: var(--orbinex-gold);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* Op smallere schermen komen de vakken onder elkaar */
+@media (max-width: 900px) {
+  .dashboard-overview-head { grid-template-columns: 1fr; gap: 14px; }
+  .orbinex-profile { min-height: 320px; }
+  .orbinex-dashboard-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "profile profile"
+      "middle middle"
+      "checklist checklist";
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard-overview-head .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .orbinex-dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "profile"
+      "middle"
+      "checklist"
+      ;
+  }
+  .orbinex-middle-top { grid-template-columns: minmax(0, 1fr); }
+  .orbinex-calendar-grid { min-width: 570px; }
+  .orbinex-calendar-form { grid-template-columns: 1fr; }
+}
+/* Subtiele dashboardanimaties in de bestaande Orbinex-kleuren */
+@keyframes orbinex-rise-in {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes orbinex-bar-grow {
+  from { transform: scaleY(.08); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes orbinex-event-arrive {
+  from { opacity: 0; transform: translateY(5px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dashboard-overview-head { animation: orbinex-rise-in .48s cubic-bezier(.2,.7,.25,1) both; }
+.orbinex-profile { animation: orbinex-rise-in .52s .06s cubic-bezier(.2,.7,.25,1) both; }
+.orbinex-middle { animation: orbinex-rise-in .52s .12s cubic-bezier(.2,.7,.25,1) both; }
+.audit-steps-card { animation: orbinex-rise-in .52s .18s cubic-bezier(.2,.7,.25,1) both; }
+.orbinex-worklist-card { animation: orbinex-rise-in .52s .24s cubic-bezier(.2,.7,.25,1) both; }
+.analytics-card { animation: orbinex-rise-in .52s .3s cubic-bezier(.2,.7,.25,1) both; }
+
+.orbinex-dashboard-card,
+.analytics-card,
+.analytics-panel,
+.stat-card {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .orbinex-dashboard-card:hover,
+  .analytics-panel:hover,
+  .stat-card:hover {
+    transform: translateY(-2px);
+    border-color: #68757B;
+    box-shadow: 0 9px 22px rgba(0,0,0,.12);
+  }
+}
+
+.orbinex-week-bar {
+  transform: scaleY(.08);
+  transform-origin: bottom;
+  animation: orbinex-bar-grow .65s cubic-bezier(.2,.75,.25,1) both;
+}
+.orbinex-week-column:nth-child(2) .orbinex-week-bar { animation-delay: .05s; }
+.orbinex-week-column:nth-child(3) .orbinex-week-bar { animation-delay: .1s; }
+.orbinex-week-column:nth-child(4) .orbinex-week-bar { animation-delay: .15s; }
+.orbinex-week-column:nth-child(5) .orbinex-week-bar { animation-delay: .2s; }
+.orbinex-week-column:nth-child(6) .orbinex-week-bar { animation-delay: .25s; }
+.orbinex-week-column:nth-child(7) .orbinex-week-bar { animation-delay: .3s; }
+
+.analytics-bar {
+  transform: scaleY(.08);
+  transform-origin: bottom;
+  animation: orbinex-bar-grow .52s cubic-bezier(.2,.75,.25,1) both;
+}
+.orbinex-event-chip { animation: orbinex-event-arrive .28s ease-out both; }
+.orbinex-checklist-item { transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.orbinex-checklist-item:hover { transform: translateX(2px); border-color: #68757B; background: rgba(255,255,255,.07); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+  </style>
+</head>
+
+<body class="auth-screen">
+  <main class="panel">
+    <section id="login" aria-label="Orbinex admin aanmelden">
+      <div class="auth-brand">
+        <div class="auth-brand-content">
+          <img class="auth-logo" src="orbinex-logo.png" alt="Orbinex Security">
+          <span class="auth-brand-rule" aria-hidden="true"></span>
+          <p class="auth-brand-tagline">Protecting what connects us.</p>
+          <span class="auth-brand-caption">Secure administration</span>
+        </div>
+      </div>
+
+      <div class="auth-content">
+        <div class="auth-form-wrap">
+          <span class="auth-eyebrow">Orbinex admin</span>
+          <h1>Welkom terug, Ferre</h1>
+          <p class="auth-intro">Meld je aan om binnengekomen aanvragen en websitegegevens te beheren.</p>
+
+          <form id="loginForm">
+            <label for="password">Admin-wachtwoord</label>
+            <input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            >
+            <button type="submit">Veilig inloggen</button>
+          </form>
+
+          <p id="loginMessage" class="message" role="status" aria-live="polite"></p>
+          <div class="auth-divider" aria-hidden="true"></div>
+          <p class="auth-note">Deze omgeving is bedoeld voor geautoriseerd Orbinex-beheer.</p>
+          <a href="index.html" class="auth-return">← Terug naar de website</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="top">
+        <a class="admin-brand" href="#dashboard" aria-label="Orbinex overzicht">
+          <img src="orbinex-logo.png" alt="">
+          <span>Orbinex Security</span>
+        </a>
+        <nav class="admin-nav" aria-label="Adminonderdelen">
+          <a href="#dashboard" class="is-active" aria-current="page">Overzicht</a>
+          <a href="#analyticsTitle">Analyse</a>
+          <a href="#requests">Aanvragen</a>
+        </nav>
+        <div class="dashboard-actions">
+          <button id="refreshButton" class="secondary" type="button">
+            Vernieuwen
+          </button>
+          <button id="logoutButton" class="secondary" type="button">
+            Uitloggen
+          </button>
+        </div>
+      </div>
+
+      <div class="dashboard-overview-head">
+        <div class="dashboard-welcome">
+          <h1 id="adminGreeting" class="admin-greeting">Goedemorgen!</h1>
+          <p class="muted">Je Orbinex-overzicht van vandaag.</p>
+        </div>
+        <div class="stats" aria-label="Aanvraagcijfers">
+          <article class="stat-card"><span>Actieve aanvragen</span><strong id="statTotal">0</strong></article>
+          <article class="stat-card"><span>Nieuwe aanvragen</span><strong id="statNew">0</strong></article>
+          <article class="stat-card"><span>In behandeling</span><strong id="statProgress">0</strong></article>
+          <article class="stat-card"><span>Voltooid</span><strong id="statCompleted">0</strong></article>
+        </div>
+      </div>
+
+      <div class="orbinex-dashboard-layout">
+        <section class="orbinex-dashboard-card orbinex-profile" aria-labelledby="activeAuditHeading">
+          <div class="orbinex-card-heading">
+            <h3 id="activeAuditHeading">Actieve audit</h3>
+            <span id="activeAuditStatus" class="orbinex-audit-badge">Geen actief</span>
+          </div>
+          <div class="orbinex-audit-visual" aria-live="polite">
+            <div class="orbinex-audit-mark" aria-hidden="true">O</div>
+            <h2 id="activeAuditName">Nog geen audit actief</h2>
+            <p id="activeAuditCopy">Nieuwe aanvragen vind je in het tabblad Aanvragen.</p>
+          </div>
+          <div class="orbinex-audit-details" aria-label="Auditgegevens">
+            <div><span>Bedrijf</span><strong id="activeAuditCompany">—</strong></div>
+            <div><span>Website</span><strong id="activeAuditWebsite">—</strong></div>
+            <div><span>Dienst</span><strong id="activeAuditService">—</strong></div>
+          </div>
+          <a class="orbinex-profile-link" href="#requests">Bekijk aanvragen <span aria-hidden="true">→</span></a>
+        </section>
+
+        <div class="orbinex-middle">
+          <div class="orbinex-middle-top">
+            <section class="orbinex-dashboard-card orbinex-progress" aria-labelledby="auditProgressHeading">
+              <div class="orbinex-card-heading">
+                <h3 id="auditProgressHeading">Aanvraagactiviteit</h3>
+                <span class="orbinex-card-arrow" aria-hidden="true">↗</span>
+              </div>
+              <div class="orbinex-activity-total"><output id="dashboardWeeklyRequests">0</output><span>aanvragen<br>laatste 7 dagen</span></div>
+              <div id="dashboardWeeklyChart" class="orbinex-week-chart" role="img" aria-label="Aanvragen per dag in de laatste 7 dagen"></div>
+            </section>
+          </div>
+
+          <section class="orbinex-dashboard-card orbinex-calendar" aria-labelledby="planningHeading">
+            <div class="orbinex-calendar-heading">
+              <h3 id="planningHeading">Planning</h3>
+              <div class="orbinex-calendar-controls" aria-label="Planningweek kiezen">
+                <button id="planningPrevious" class="secondary" type="button" aria-label="Vorige week">‹</button>
+                <span id="planningRange" class="orbinex-calendar-range" aria-live="polite"></span>
+                <button id="planningNext" class="secondary" type="button" aria-label="Volgende week">›</button>
+              </div>
+              <button id="planningAdd" class="orbinex-calendar-add" type="button" aria-expanded="false">+ Afspraak</button>
+            </div>
+            <div class="orbinex-calendar-scroll" aria-label="Weekplanning met tijdvakken">
+              <div id="orbinexCalendarGrid" class="orbinex-calendar-grid" role="grid" aria-label="Afspraken per dag en tijd" aria-live="polite"></div>
+            </div>
+            <form id="orbinexCalendarForm" class="orbinex-calendar-form" method="post" hidden>
+              <label class="orbinex-sr-only" for="planningTitle">Naam van de afspraak</label>
+              <input id="planningTitle" type="text" maxlength="80" placeholder="Bijv. opvolging klant" required>
+              <label class="orbinex-sr-only" for="planningDate">Datum van de afspraak</label>
+              <input id="planningDate" type="date" required>
+              <label class="orbinex-sr-only" for="planningTime">Tijdstip van de afspraak</label>
+              <input id="planningTime" type="time" min="08:00" max="17:59" step="1800" required>
+              <button type="submit">Opslaan</button>
+            </form>
+            <p class="orbinex-calendar-notice">Afspraken worden in deze browser bewaard.</p>
+          </section>
+        </div>
+
+        <section class="orbinex-dashboard-card audit-steps-card" aria-labelledby="auditChecklistHeading">
+          <div class="orbinex-card-heading">
+            <div>
+              <h3 id="auditChecklistHeading">Auditchecklist</h3>
+              <p class="orbinex-muted">Standaardstappen per opdracht</p>
+            </div>
+            <span class="orbinex-task-count">5 stappen</span>
+          </div>
+          <ul class="orbinex-checklist-list">
+            <li class="orbinex-checklist-item"><span aria-hidden="true">1</span><span>Toestemming en scope bevestigen</span></li>
+            <li class="orbinex-checklist-item"><span aria-hidden="true">2</span><span>Checks binnen de afgesproken scope uitvoeren</span></li>
+            <li class="orbinex-checklist-item"><span aria-hidden="true">3</span><span>Bevindingen handmatig verifiëren</span></li>
+            <li class="orbinex-checklist-item"><span aria-hidden="true">4</span><span>Bewijs en risico’s documenteren</span></li>
+            <li class="orbinex-checklist-item"><span aria-hidden="true">5</span><span>Rapport nalezen</span></li>
+          </ul>
+        </section>
+      </div>
+      <section class="orbinex-dashboard-card orbinex-checklist orbinex-worklist-card" aria-labelledby="orbinexWorkHeading">
+        <div class="orbinex-card-heading">
+          <div>
+            <h3 id="orbinexWorkHeading">Orbinex-actielijst</h3>
+            <p class="orbinex-muted">Interne verbeterpunten</p>
+          </div>
+          <span id="orbinexWorkCount" class="orbinex-task-count">0/10</span>
+        </div>
+        <p class="orbinex-task-group">Klaar voor klanten</p>
+        <ul id="orbinexWorkList" class="orbinex-task-list">
+          <li class="orbinex-task-item"><input id="workTask1" type="checkbox" data-work-task="form-fallback"><label for="workTask1">Formulier veilig laten falen als JavaScript ontbreekt</label></li>
+          <li class="orbinex-task-item"><input id="workTask2" type="checkbox" data-work-task="https-api"><label for="workTask2">Publieke HTTPS-API op de server koppelen</label></li>
+          <li class="orbinex-task-item"><input id="workTask3" type="checkbox" data-work-task="request-storage"><label for="workTask3">Aanvraagopslag en weergave in admin controleren</label></li>
+        </ul>
+        <p class="orbinex-task-group">Website en kwaliteit</p>
+        <ul class="orbinex-task-list">
+          <li class="orbinex-task-item"><input id="workTask4" type="checkbox" data-work-task="no-js-content"><label for="workTask4">Pagina-inhoud zichtbaar houden zonder JavaScript</label></li>
+          <li class="orbinex-task-item"><input id="workTask5" type="checkbox" data-work-task="why-html"><label for="workTask5">HTML-structuur van Why Orbinex opruimen</label></li>
+          <li class="orbinex-task-item"><input id="workTask6" type="checkbox" data-work-task="pricing-a11y"><label for="workTask6">Prijscalculator toegankelijk maken</label></li>
+          <li class="orbinex-task-item"><input id="workTask7" type="checkbox" data-work-task="reduced-motion"><label for="workTask7">Minder-beweginginstelling respecteren</label></li>
+          <li class="orbinex-task-item"><input id="workTask8" type="checkbox" data-work-task="orbie-language"><label for="workTask8">Nederlandse taalmarkering voor Orbie toevoegen</label></li>
+          <li class="orbinex-task-item"><input id="workTask9" type="checkbox" data-work-task="privacy-copy"><label for="workTask9">Privacytekst en dienstbeloftes nalopen</label></li>
+          <li class="orbinex-task-item"><input id="workTask10" type="checkbox" data-work-task="permission-process"><label for="workTask10">Toestemming en scopeproces vastleggen</label></li>
+        </ul>
+      </section>
+
+      <section class="analytics-card" aria-labelledby="analyticsTitle">
+        <div class="analytics-header">
+          <div>
+            <h3 id="analyticsTitle">Aanvraaganalyse</h3>
+            <p>Gebaseerd op echte formulierinzendingen, inclusief gearchiveerde aanvragen. Dit zijn geen bezoekers- of scanmetingen.</p>
+          </div>
+          <span class="muted">Laatste 30 dagen</span>
+        </div>
+
+        <div class="analytics-kpis">
+          <article class="analytics-kpi">
+            <span>Nieuwe aanvragen</span>
+            <strong id="analyticsLast30">0</strong>
+          </article>
+          <article class="analytics-kpi">
+            <span>Vorige 30 dagen</span>
+            <strong id="analyticsPrevious30">0</strong>
+          </article>
+        </div>
+
+        <div class="analytics-layout">
+          <article class="analytics-panel">
+            <div class="analytics-panel-heading">
+              <h4>Aanvragen per dag</h4>
+              <span class="muted">30 dagen</span>
+            </div>
+            <div id="analyticsChart" class="analytics-chart" role="img" aria-label="Aanvragen per dag in de laatste 30 dagen"></div>
+          </article>
+
+          <article class="analytics-panel">
+            <h4>Populaire diensten</h4>
+            <div id="analyticsServices" class="service-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <p id="dashboardMessage" class="message" role="status"></p>
+
+      <div class="request-tools">
+        <input
+          id="requestSearch"
+          type="search"
+          placeholder="Zoek op naam, e-mail, bedrijf of website..."
+          aria-label="Zoek aanvragen"
+        >
+
+        <select id="statusFilter" aria-label="Filter op status">
+          <option value="active">Alle actieve aanvragen</option>
+          <option value="new">Nieuw</option>
+          <option value="in_progress">In behandeling</option>
+          <option value="completed">Voltooid</option>
+          <option value="archived">Gearchiveerd</option>
+        </select>
+      </div>
+
+      <div id="requests"></div>
+
+      <nav class="pagination" aria-label="Paginering aanvragen">
+        <button id="previousPageButton" class="secondary" type="button">Vorige</button>
+        <span id="pageInfo" class="muted" aria-live="polite"></span>
+        <button id="nextPageButton" class="secondary" type="button">Volgende</button>
+      </nav>
+    </section>
+  </main>
+
+  <script>
+    const API = "http://127.0.0.1:3000";
+
+    const loginSection = document.getElementById("login");
+    const dashboardSection = document.getElementById("dashboard");
+    const loginForm = document.getElementById("loginForm");
+    const passwordInput = document.getElementById("password");
+    const loginMessage = document.getElementById("loginMessage");
+    const dashboardMessage = document.getElementById("dashboardMessage");
+    const requestsContainer = document.getElementById("requests");
+
+    async function apiRequest(path, options = {}) {
+      const response = await fetch(API + path, {
+        ...options,
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers
+        }
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || "Er ging iets mis.");
+      }
+
+      return data;
+    }
+
+    function showDashboard() {
+      document.body.classList.remove("auth-screen");
+      loginSection.classList.add("hidden");
+      dashboardSection.classList.remove("hidden");
+    }
+
+    function showLogin() {
+      document.body.classList.add("auth-screen");
+      dashboardSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+    }
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      loginMessage.textContent = "Bezig met inloggen...";
+
+      try {
+        await apiRequest("/api/admin/login", {
+          method: "POST",
+          body: JSON.stringify({ password: passwordInput.value })
+        });
+
+        loginMessage.textContent = "";
+        showDashboard();
+        await Promise.all([loadStats(), loadAnalytics(), loadRequests()]);
+      } catch (error) {
+        loginMessage.textContent = error.message;
+      }
+    });
+
+    async function loadStats() {
+      const data = await apiRequest("/api/admin/stats");
+
+      document.getElementById("statTotal").textContent =
+        data.stats.total;
+
+      document.getElementById("statNew").textContent =
+        data.stats.new;
+
+      document.getElementById("statProgress").textContent =
+        data.stats.inProgress;
+
+      document.getElementById("statCompleted").textContent =
+        data.stats.completed;
+    }
+
+    function renderWeeklyActivity(dailyRequests) {
+      const chart = document.getElementById("dashboardWeeklyChart");
+      const totalOutput = document.getElementById("dashboardWeeklyRequests");
+      if (!chart || !totalOutput) return;
+
+      const lastSevenDays = Array.isArray(dailyRequests) ? dailyRequests.slice(-7) : [];
+      const total = lastSevenDays.reduce((sum, day) => sum + (Number(day.total) || 0), 0);
+      const largestDay = Math.max(1, ...lastSevenDays.map((day) => Number(day.total) || 0));
+      totalOutput.textContent = String(total);
+      chart.setAttribute("aria-label", `${total} formulieraanvragen in de laatste 7 dagen`);
+      chart.replaceChildren();
+
+      lastSevenDays.forEach((day, index) => {
+        const date = new Date(`${day.date}T00:00:00Z`);
+        const column = document.createElement("div");
+        column.className = `orbinex-week-column${index === lastSevenDays.length - 1 ? " is-latest" : ""}`;
+        column.title = `${date.toLocaleDateString("nl-BE", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" })}: ${day.total} aanvraag${day.total === 1 ? "" : "en"}`;
+
+        const track = document.createElement("div");
+        track.className = "orbinex-week-bar-track";
+        const bar = document.createElement("div");
+        bar.className = "orbinex-week-bar";
+        const count = Number(day.total) || 0;
+        bar.style.height = `${count ? Math.max(8, (count / largestDay) * 100) : 3}%`;
+        track.append(bar);
+
+        const label = document.createElement("span");
+        label.className = "orbinex-week-label";
+        label.textContent = date.toLocaleDateString("nl-BE", { weekday: "short", timeZone: "UTC" }).replace(".", "");
+        column.append(track, label);
+        chart.append(column);
+      });
+    }
+
+    async function loadAnalytics() {
+      const chart = document.getElementById("analyticsChart");
+      const services = document.getElementById("analyticsServices");
+
+      try {
+        const data = await apiRequest("/api/admin/analytics");
+        const analytics = data.analytics;
+        renderWeeklyActivity(analytics.dailyRequests);
+        const last30Element = document.getElementById("analyticsLast30");
+        const previous30Element = document.getElementById("analyticsPrevious30");
+
+        last30Element.textContent = analytics.totalLast30Days;
+        previous30Element.textContent = analytics.previous30Days;
+        chart.replaceChildren();
+        services.replaceChildren();
+        chart.setAttribute(
+          "aria-label",
+          `${analytics.totalLast30Days} formulieraanvragen in de laatste 30 dagen, per dag weergegeven.`
+        );
+
+        const largestDay = Math.max(
+          1,
+          ...analytics.dailyRequests.map((day) => day.total)
+        );
+
+        analytics.dailyRequests.forEach((day, index) => {
+          const dayColumn = document.createElement("div");
+          dayColumn.className = "analytics-day";
+
+          const date = new Date(`${day.date}T00:00:00Z`);
+          const readableDate = date.toLocaleDateString("nl-BE", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC"
+          });
+          dayColumn.title = `${readableDate}: ${day.total} aanvraag${day.total === 1 ? "" : "en"}`;
+          dayColumn.setAttribute(
+            "aria-label",
+            `${readableDate}: ${day.total} aanvragen`
+          );
+
+          const track = document.createElement("div");
+          track.className = "analytics-bar-track";
+          const bar = document.createElement("div");
+          bar.className = "analytics-bar";
+          bar.style.height = `${Math.max(2, (day.total / largestDay) * 100)}%`;
+          track.appendChild(bar);
+          dayColumn.appendChild(track);
+
+          const dayLabel = document.createElement("span");
+          dayLabel.className = "analytics-day-label";
+          dayLabel.textContent = index === 0 || index === 29 || (index + 1) % 7 === 0
+            ? date.toLocaleDateString("nl-BE", {
+                day: "numeric",
+                month: "short",
+                timeZone: "UTC"
+              })
+            : "";
+          dayColumn.appendChild(dayLabel);
+          chart.appendChild(dayColumn);
+        });
+
+        if (analytics.topServices.length === 0) {
+          services.textContent = "Nog geen diensten om te analyseren.";
+          return;
+        }
+
+        const largestService = Math.max(
+          1,
+          ...analytics.topServices.map((service) => service.total)
+        );
+
+        for (const service of analytics.topServices) {
+          const row = document.createElement("div");
+          row.className = "service-row";
+
+          const heading = document.createElement("div");
+          heading.className = "service-row-heading";
+          const serviceName = document.createElement("span");
+          serviceName.textContent = service.service;
+          const serviceCount = document.createElement("span");
+          serviceCount.textContent = service.total;
+          heading.appendChild(serviceName);
+          heading.appendChild(serviceCount);
+
+          const track = document.createElement("div");
+          track.className = "service-track";
+          const bar = document.createElement("div");
+          bar.className = "service-bar";
+          bar.style.width = `${(service.total / largestService) * 100}%`;
+          track.appendChild(bar);
+
+          row.appendChild(heading);
+          row.appendChild(track);
+          services.appendChild(row);
+        }
+      } catch (error) {
+        chart.textContent = "Aanvraaganalyse kon niet worden geladen.";
+        services.textContent = error.message;
+      }
+    }
+
+    let allRequests = [];
+    let currentPage = 1;
+    let requestPagination = { page: 1, limit: 50, total: 0, pages: 1 };
+    let searchTimer;
+
+    function updateActiveAuditCard() {
+      const statusFilter = document.getElementById("statusFilter").value;
+      const searchValue = document.getElementById("requestSearch").value.trim();
+      if (searchValue || !["active", "in_progress"].includes(statusFilter)) return;
+
+      const badge = document.getElementById("activeAuditStatus");
+      const copy = document.getElementById("activeAuditCopy");
+      const name = document.getElementById("activeAuditName");
+      const company = document.getElementById("activeAuditCompany");
+      const website = document.getElementById("activeAuditWebsite");
+      const service = document.getElementById("activeAuditService");
+      const activeAudit = allRequests.find(
+        (request) => request.status === "in_progress" && !request.archived_at
+      );
+      if (!badge || !copy || !name) return;
+
+      if (!activeAudit) {
+        badge.textContent = "Geen actief";
+        name.textContent = "Nog geen audit actief";
+        copy.textContent = "Zodra een aanvraag in behandeling staat, verschijnen de gegevens hier.";
+        if (company) company.textContent = "—";
+        if (website) website.textContent = "—";
+        if (service) service.textContent = "—";
+        return;
+      }
+
+      badge.textContent = "In behandeling";
+      name.textContent = activeAudit.company || activeAudit.name || "Audit in behandeling";
+      copy.textContent = "Beveiligingsaudit in uitvoering";
+      if (company) company.textContent = activeAudit.company || activeAudit.name || "—";
+      if (website) website.textContent = activeAudit.website || "—";
+      if (service) service.textContent = activeAudit.service || "—";
+    }
+
+    async function loadRequests() {
+      dashboardMessage.textContent = "Aanvragen laden...";
+      requestsContainer.replaceChildren();
+
+      try {
+        const params = new URLSearchParams({
+          page: String(currentPage),
+          q: document.getElementById("requestSearch").value.trim(),
+          status: document.getElementById("statusFilter").value
+        });
+        const data = await apiRequest(`/api/admin/requests?${params}`);
+        allRequests = data.requests;
+        requestPagination = data.pagination;
+        currentPage = requestPagination.page;
+        renderRequests();
+      } catch (error) {
+        dashboardMessage.textContent = error.message;
+
+        if (error.message.toLowerCase().includes("log in")) {
+          showLogin();
+        }
+      }
+    }
+
+
+    function renderRequests() {
+      const filteredRequests = allRequests;
+      updateActiveAuditCard();
+      const { page, limit, total, pages } = requestPagination;
+      const pageInfo = document.getElementById("pageInfo");
+      const previousPageButton = document.getElementById("previousPageButton");
+      const nextPageButton = document.getElementById("nextPageButton");
+
+      pageInfo.textContent = total === 0
+        ? "Pagina 1 van 1"
+        : `Pagina ${page} van ${pages}`;
+      previousPageButton.disabled = page <= 1;
+      nextPageButton.disabled = page >= pages;
+      dashboardMessage.textContent = total === 0
+        ? ""
+        : `Aanvragen ${(page - 1) * limit + 1}–${Math.min(page * limit, total)} van ${total}.`;
+
+      requestsContainer.replaceChildren();
+
+      if (filteredRequests.length === 0) {
+        requestsContainer.textContent = total === 0
+          ? "Er zijn nog geen aanvragen voor deze zoekopdracht of filter."
+          : "Geen aanvragen op deze pagina.";
+        return;
+      }
+
+      const statuses = [
+        { value: "new", label: "Nieuw" },
+        { value: "in_progress", label: "In behandeling" },
+        { value: "completed", label: "Voltooid" }
+      ];
+
+      for (const request of filteredRequests) {
+        const card = document.createElement("article");
+        card.className = request.archived_at
+          ? "request request--archived"
+          : "request";
+
+        const header = document.createElement("header");
+        header.className = "request-header";
+
+        const title = document.createElement("h3");
+        title.className = "request-title";
+        title.textContent = request.name || "Naam ontbreekt";
+        header.appendChild(title);
+
+        const meta = document.createElement("div");
+        meta.className = "request-meta";
+
+        const requestId = document.createElement("span");
+        requestId.className = "request-id";
+        requestId.textContent = `Aanvraag #${request.id}`;
+        meta.appendChild(requestId);
+
+        if (request.archived_at) {
+          const archivedBadge = document.createElement("span");
+          archivedBadge.className = "archive-badge";
+          archivedBadge.textContent = "Gearchiveerd";
+          meta.appendChild(archivedBadge);
+        }
+
+        const received = document.createElement("span");
+        received.textContent = `Ontvangen ${request.created_at || "-"}`;
+        meta.appendChild(received);
+        header.appendChild(meta);
+        card.appendChild(header);
+
+        const details = document.createElement("div");
+        details.className = "request-details";
+
+        for (const [label, value] of [
+          ["E-mail", request.email],
+          ["Website", request.website],
+          ["Bedrijf", request.company],
+          ["Dienst", request.service],
+          ["Bericht", request.message]
+        ]) {
+          const detail = document.createElement("div");
+          detail.className = "request-detail";
+
+          if (label === "Bericht") {
+            detail.classList.add("request-detail--wide");
+          }
+
+          const detailLabel = document.createElement("span");
+          detailLabel.className = "request-detail-label";
+          detailLabel.textContent = label;
+
+          const detailValue = document.createElement("p");
+          detailValue.className = "request-detail-value";
+          detailValue.textContent = value || "-";
+
+          detail.appendChild(detailLabel);
+          detail.appendChild(detailValue);
+          details.appendChild(detail);
+        }
+
+        card.appendChild(details);
+
+        const adminControls = document.createElement("div");
+        adminControls.className = "request-admin-controls";
+        const statusField = document.createElement("div");
+        statusField.className = "request-status-field";
+
+        const statusLabel = document.createElement("label");
+        statusLabel.className = "request-field-label";
+        statusLabel.textContent = "Aanvraagstatus";
+        statusLabel.htmlFor = `status-${request.id}`;
+
+        const statusSelect = document.createElement("select");
+        statusSelect.id = `status-${request.id}`;
+
+        for (const item of statuses) {
+          const option = document.createElement("option");
+          option.value = item.value;
+          option.textContent = item.label;
+          statusSelect.appendChild(option);
+        }
+
+        statusSelect.value = statuses.some(
+          (item) => item.value === request.status
+        ) ? request.status : "new";
+        statusSelect.disabled = Boolean(request.archived_at);
+
+        statusSelect.addEventListener("change", async () => {
+          const previousStatus = request.status || "new";
+          statusSelect.disabled = true;
+
+          try {
+            await apiRequest(
+              `/api/admin/requests/${request.id}/status`,
+              {
+                method: "PATCH",
+                body: JSON.stringify({ status: statusSelect.value })
+              }
+            );
+
+            request.status = statusSelect.value;
+            await Promise.all([loadStats(), loadAnalytics(), loadRequests()]);
+          } catch (error) {
+            dashboardMessage.textContent = error.message;
+            statusSelect.value = previousStatus;
+            statusSelect.disabled = false;
+          }
+        });
+
+        statusField.appendChild(statusLabel);
+        statusField.appendChild(statusSelect);
+        adminControls.appendChild(statusField);
+
+        const notesSection = document.createElement("section");
+        notesSection.className = "request-notes";
+
+        const notesLabel = document.createElement("label");
+        notesLabel.className = "request-notes-label";
+        notesLabel.htmlFor = `notes-${request.id}`;
+        notesLabel.textContent = "Interne notitie";
+
+        const notesHelp = document.createElement("p");
+        notesHelp.className = "request-help";
+        notesHelp.textContent = "Alleen zichtbaar voor beheerders.";
+
+        const notesField = document.createElement("textarea");
+        notesField.id = `notes-${request.id}`;
+        notesField.rows = 4;
+        notesField.maxLength = 5000;
+        notesField.placeholder = "Voeg interne opvolgnotities toe...";
+        notesField.value = request.internal_notes || "";
+
+        const requestFeedback = document.createElement("p");
+        requestFeedback.className = "request-feedback";
+        requestFeedback.setAttribute("aria-live", "polite");
+
+        const requestActions = document.createElement("div");
+        requestActions.className = "request-actions";
+
+        const saveNotesButton = document.createElement("button");
+        saveNotesButton.type = "button";
+        saveNotesButton.textContent = "Notitie opslaan";
+
+        saveNotesButton.addEventListener("click", async () => {
+          saveNotesButton.disabled = true;
+          saveNotesButton.textContent = "Opslaan...";
+          requestFeedback.textContent = "";
+
+          try {
+            const data = await apiRequest(
+              `/api/admin/requests/${request.id}/notes`,
+              {
+                method: "PATCH",
+                body: JSON.stringify({
+                  internal_notes: notesField.value
+                })
+              }
+            );
+
+            request.internal_notes = data.internal_notes;
+            notesField.value = data.internal_notes;
+            requestFeedback.textContent = "Notitie opgeslagen.";
+          } catch (error) {
+            requestFeedback.textContent = error.message;
+          } finally {
+            saveNotesButton.disabled = false;
+            saveNotesButton.textContent = "Notitie opslaan";
+          }
+        });
+
+        notesSection.appendChild(notesLabel);
+        notesSection.appendChild(notesHelp);
+        notesSection.appendChild(notesField);
+        notesSection.appendChild(requestFeedback);
+        adminControls.appendChild(notesSection);
+
+
+        const archiveButton = document.createElement("button");
+        archiveButton.type = "button";
+        archiveButton.className = request.archived_at
+          ? "secondary"
+          : "archive-button";
+        archiveButton.textContent = request.archived_at
+          ? "Aanvraag terugzetten"
+          : "Aanvraag archiveren";
+        requestActions.appendChild(saveNotesButton);
+
+        archiveButton.addEventListener("click", async () => {
+          const action = request.archived_at ? "restore" : "archive";
+          archiveButton.disabled = true;
+
+          try {
+            await apiRequest(
+              `/api/admin/requests/${request.id}/${action}`,
+              { method: "POST" }
+            );
+
+            await Promise.all([loadStats(), loadAnalytics(), loadRequests()]);
+            dashboardMessage.textContent = request.archived_at
+              ? "Aanvraag teruggezet naar de actieve lijst."
+              : "Aanvraag gearchiveerd.";
+          } catch (error) {
+            dashboardMessage.textContent = error.message;
+            archiveButton.disabled = false;
+          }
+        });
+
+        requestActions.appendChild(archiveButton);
+        adminControls.appendChild(requestActions);
+        card.appendChild(adminControls);
+        requestsContainer.appendChild(card);
+      }
+    }
+
+    document
+      .getElementById("refreshButton")
+      .addEventListener("click", async () => {
+        try {
+          await Promise.all([loadStats(), loadAnalytics(), loadRequests()]);
+        } catch (error) {
+          dashboardMessage.textContent = error.message;
+        }
+      });
+
+    document
+      .getElementById("requestSearch")
+      .addEventListener("input", () => {
+        window.clearTimeout(searchTimer);
+        searchTimer = window.setTimeout(() => {
+          currentPage = 1;
+          loadRequests();
+        }, 250);
+      });
+
+    document
+      .getElementById("statusFilter")
+      .addEventListener("change", () => {
+        currentPage = 1;
+        loadRequests();
+      });
+
+    document
+      .getElementById("previousPageButton")
+      .addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          loadRequests();
+        }
+      });
+
+    document
+      .getElementById("nextPageButton")
+      .addEventListener("click", () => {
+        if (currentPage < requestPagination.pages) {
+          currentPage += 1;
+          loadRequests();
+        }
+      });
+
+    document
+      .getElementById("logoutButton")
+      .addEventListener("click", async () => {
+        try {
+          await apiRequest("/api/admin/logout", { method: "POST" });
+          showLogin();
+          dashboardMessage.textContent = "";
+          requestsContainer.replaceChildren();
+          loginMessage.textContent = "Je bent uitgelogd.";
+        } catch (error) {
+          dashboardMessage.textContent = error.message;
+        }
+      });
+  </script>
+  <script>
+  const uur = new Date().getHours();
+
+  let begroeting;
+  if (uur >= 6 && uur < 12) {
+    begroeting = "Goedemorgen";
+  } else if (uur >= 12 && uur < 18) {
+    begroeting = "Goedemiddag";
+  } else if (uur >= 18 && uur < 24) {
+    begroeting = "Goedenavond";
+  } else {
+    begroeting = "Goedenacht";
+  }
+
+  document.getElementById("adminGreeting").textContent =
+    `${begroeting}!`;
+</script>
+<script>
+(() => {
+  const readStored = (key, fallback) => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || "null");
+      return value === null ? fallback : value;
+    } catch (_) { return fallback; }
+  };
+  const writeStored = (key, value) => {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (_) { return false; }
+  };
+
+  // Keep the selected dashboard tab visually active.
+  const nav = document.querySelector(".admin-nav");
+  if (nav) {
+    const links = [...nav.querySelectorAll('a[href^="#"]')];
+    const updateTab = (hash = window.location.hash) => {
+      const active = links.find((link) => link.getAttribute("href") === hash) || links[0];
+      links.forEach((link) => {
+        const selected = link === active;
+        link.classList.toggle("is-active", selected);
+        if (selected) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+    };
+    nav.addEventListener("click", (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (link) updateTab(link.getAttribute("href"));
+    });
+    window.addEventListener("hashchange", () => updateTab());
+    updateTab();
+  }
+
+  // Save checked internal improvement tasks in this browser.
+  const taskInputs = [...document.querySelectorAll("[data-work-task]")];
+  const taskKey = "orbinex-internal-worklist-v1";
+  const taskState = readStored(taskKey, {});
+  const taskCount = document.getElementById("orbinexWorkCount");
+
+  function updateTaskProgress() {
+    const done = taskInputs.filter((input) => input.checked).length;
+    const total = taskInputs.length;
+    if (taskCount) taskCount.textContent = `${done}/${total}`;
+  }
+
+  taskInputs.forEach((input) => {
+    input.checked = taskState[input.dataset.workTask] === true;
+    input.addEventListener("change", () => {
+      taskState[input.dataset.workTask] = input.checked;
+      writeStored(taskKey, taskState);
+      updateTaskProgress();
+    });
+  });
+  updateTaskProgress();
+
+  // Personal weekly planning. Events are stored locally in this browser.
+  const calendarGrid = document.getElementById("orbinexCalendarGrid");
+  const planningForm = document.getElementById("orbinexCalendarForm");
+  const titleInput = document.getElementById("planningTitle");
+  const dateInput = document.getElementById("planningDate");
+  const timeInput = document.getElementById("planningTime");
+  const rangeLabel = document.getElementById("planningRange");
+  const addButton = document.getElementById("planningAdd");
+  const eventKey = "orbinex-planning-events-v1";
+  let events = readStored(eventKey, []);
+  if (!Array.isArray(events)) events = [];
+  let weekOffset = 0;
+
+  function dateKey(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+  function weekStart() {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() + weekOffset * 7);
+    start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+    return start;
+  }
+  function weekOffsetForDate(value) {
+    const selected = new Date(`${value}T12:00:00`);
+    selected.setDate(selected.getDate() - ((selected.getDay() + 6) % 7));
+    const current = new Date();
+    current.setHours(12, 0, 0, 0);
+    current.setDate(current.getDate() - ((current.getDay() + 6) % 7));
+    const selectedUtc = Date.UTC(selected.getFullYear(), selected.getMonth(), selected.getDate());
+    const currentUtc = Date.UTC(current.getFullYear(), current.getMonth(), current.getDate());
+    return Math.round((selectedUtc - currentUtc) / 86400000 / 7);
+  }
+  function renderPlanning() {
+    if (!calendarGrid || !rangeLabel) return;
+    const start = weekStart();
+    const end = new Date(start);
+    end.setDate(end.getDate() + 5);
+    const format = new Intl.DateTimeFormat("nl-BE", { day: "numeric", month: "short" });
+    rangeLabel.textContent = `${format.format(start)} – ${format.format(end)}`;
+    const first = dateKey(start);
+    const last = dateKey(end);
+    const today = dateKey(new Date());
+    const visibleEvents = events
+      .filter((item) => item && typeof item.title === "string" && item.date >= first && item.date <= last)
+      .sort((a, b) => a.date.localeCompare(b.date) || String(a.time || "09:00").localeCompare(String(b.time || "09:00")) || a.title.localeCompare(b.title));
+
+    calendarGrid.replaceChildren();
+    const headingRow = document.createElement("div");
+    headingRow.className = "orbinex-calendar-row orbinex-calendar-row--heading";
+    headingRow.setAttribute("role", "row");
+    const timeHeading = document.createElement("div");
+    timeHeading.className = "orbinex-calendar-time-label";
+    timeHeading.textContent = "Uur";
+    timeHeading.setAttribute("role", "columnheader");
+    headingRow.append(timeHeading);
+
+    const days = [];
+    for (let offset = 0; offset < 6; offset += 1) {
+      const day = new Date(start);
+      day.setDate(start.getDate() + offset);
+      const dayKey = dateKey(day);
+      days.push({ day, dayKey });
+      const heading = document.createElement("div");
+      heading.className = `orbinex-calendar-weekday${dayKey === today ? " is-today" : ""}`;
+      heading.setAttribute("role", "columnheader");
+      heading.setAttribute("aria-label", new Intl.DateTimeFormat("nl-BE", { weekday: "long", day: "numeric", month: "long" }).format(day));
+      const weekday = document.createElement("span");
+      weekday.textContent = new Intl.DateTimeFormat("nl-BE", { weekday: "short" }).format(day).replace(".", "");
+      const dayNumber = document.createElement("strong");
+      dayNumber.textContent = String(day.getDate());
+      heading.append(weekday, dayNumber);
+      headingRow.append(heading);
+    }
+    calendarGrid.append(headingRow);
+
+    for (let hour = 8; hour < 18; hour += 1) {
+      const row = document.createElement("div");
+      row.className = "orbinex-calendar-row";
+      row.setAttribute("role", "row");
+      const timeLabel = document.createElement("div");
+      timeLabel.className = "orbinex-calendar-time-label";
+      timeLabel.setAttribute("role", "rowheader");
+      timeLabel.textContent = `${String(hour).padStart(2, "0")}:00`;
+      row.append(timeLabel);
+
+      days.forEach(({ dayKey, day }) => {
+        const cell = document.createElement("div");
+        cell.className = `orbinex-calendar-slot${dayKey === today ? " is-today" : ""}`;
+        cell.setAttribute("role", "gridcell");
+        cell.setAttribute("tabindex", "0");
+        const time = `${String(hour).padStart(2, "0")}:00`;
+        const accessibleDay = new Intl.DateTimeFormat("nl-BE", { weekday: "long", day: "numeric", month: "long" }).format(day);
+        cell.setAttribute("aria-label", `Afspraak toevoegen op ${accessibleDay} om ${time}`);
+
+        const openAppointmentForm = () => {
+          if (dateInput) dateInput.value = dayKey;
+          if (timeInput) timeInput.value = time;
+          if (planningForm) planningForm.hidden = false;
+          addButton?.setAttribute("aria-expanded", "true");
+          titleInput?.focus();
+        };
+        cell.addEventListener("click", (event) => {
+          if (event.target.closest("button")) return;
+          openAppointmentForm();
+        });
+        cell.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openAppointmentForm();
+          }
+        });
+
+        visibleEvents
+          .filter((item) => item.date === dayKey && Number(String(item.time || "09:00").slice(0, 2)) === hour)
+          .forEach((item) => {
+            const chip = document.createElement("div");
+            chip.className = "orbinex-event-chip";
+            const text = document.createElement("div");
+            const title = document.createElement("span");
+            title.className = "orbinex-event-title";
+            title.textContent = item.title;
+            const eventTime = document.createElement("span");
+            eventTime.className = "orbinex-event-time";
+            eventTime.textContent = item.time || "09:00";
+            text.append(title, eventTime);
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "secondary orbinex-event-delete";
+            remove.textContent = "×";
+            remove.setAttribute("aria-label", `Verwijder afspraak ${item.title}`);
+            remove.addEventListener("click", (event) => {
+              event.stopPropagation();
+              events = events.filter((savedEvent) => savedEvent.id !== item.id);
+              writeStored(eventKey, events);
+              renderPlanning();
+            });
+            chip.append(text, remove);
+            cell.append(chip);
+          });
+
+        row.append(cell);
+      });
+      calendarGrid.append(row);
+    }
+  }
+
+  document.getElementById("planningPrevious")?.addEventListener("click", () => { weekOffset -= 1; renderPlanning(); });
+  document.getElementById("planningNext")?.addEventListener("click", () => { weekOffset += 1; renderPlanning(); });
+  if (addButton && planningForm) addButton.addEventListener("click", () => {
+    planningForm.hidden = !planningForm.hidden;
+    addButton.setAttribute("aria-expanded", String(!planningForm.hidden));
+    if (!planningForm.hidden) {
+      if (dateInput && !dateInput.value) dateInput.value = dateKey(new Date());
+      if (timeInput && !timeInput.value) timeInput.value = "09:00";
+      titleInput?.focus();
+    }
+  });
+  planningForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = titleInput?.value.trim();
+    const date = dateInput?.value;
+    const time = timeInput?.value || "09:00";
+    if (!title || !date || !time) return;
+    events.push({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, title, date, time });
+    writeStored(eventKey, events);
+    planningForm.reset();
+    planningForm.hidden = true;
+    addButton?.setAttribute("aria-expanded", "false");
+    weekOffset = weekOffsetForDate(date);
+    renderPlanning();
+  });
+  renderPlanning();
+})();
+</script>
+</body>
+</html>
