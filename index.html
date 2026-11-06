@@ -2679,7 +2679,15 @@ h1, h2, h3, h4,
       We respond within one business day.
     </p>
 
-    <form class="contact-form" id="contactForm">
+    <noscript>
+      <p>
+        This form requires JavaScript and is unavailable without it. For enquiries, email
+        <a href="mailto:orbinex.cybersecurity@gmail.com">orbinex.cybersecurity@gmail.com</a>.
+        Do not include passwords or access codes.
+      </p>
+    </noscript>
+
+    <form class="contact-form" id="contactForm" inert>
 
       <div class="form-row">
         <div class="field">
@@ -2738,6 +2746,7 @@ h1, h2, h3, h4,
         type="submit"
         class="btn btn-primary form-submit"
         style="width:100%;justify-content:center;"
+        disabled
       >
         Send Message →
       </button>
@@ -3285,6 +3294,9 @@ I would like to discuss this security assessment.`;
 });
 
 const contactForm = document.getElementById('contactForm');
+contactForm.inert = false;
+const contactSubmitButton = contactForm.querySelector('button[type="submit"]');
+if (contactSubmitButton) contactSubmitButton.disabled = false;
 const formSuccess = document.getElementById('formSuccess');
 
 contactForm.addEventListener('submit', async (event) => {
